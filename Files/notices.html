@@ -150,9 +150,18 @@
     border-radius:99px; border:1px solid rgba(237,232,221,0.2); background:rgba(255,255,255,0.06); color:var(--bone);
     cursor:pointer; transition:all 0.2s ease;
   }
-  .chip-btn.active{background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:700;}
-  .chip-btn:hover{border-color:var(--gold); color:var(--gold);}
-  .chip-btn.active:hover{color:var(--ink);}
+  .chip-btn.active{background:var(--ink); color:var(--bone); border-color:var(--ink);}
+  .chip-btn:hover{border-color:var(--red); color:var(--red);}
+  .chip-btn.active:hover{color:var(--bone);}
+
+  @media (max-width:640px){
+    .search-bar{ flex-direction:column; }
+    .search-bar input{ border-radius:8px 8px 0 0; padding-left:2.4rem; }
+    .search-bar button{ border-radius:0 0 8px 8px; min-height:44px; width:100%; }
+    .bulletin-header-plaque{ text-align:center; padding:1.2rem 1rem; }
+    .pin-card-footer{ flex-direction:column; align-items:stretch; gap:0.6rem; }
+    .pin-card-footer .btn-view-order{ width:100%; justify-content:center; min-height:44px; }
+  }
 
   /* REAL CORK NOTICE BOARD CONTAINER */
   .cork-board-wrapper{
