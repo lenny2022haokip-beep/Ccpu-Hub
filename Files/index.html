@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lamka Hub — Churachandpur Multi-Tribal Community Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171512; --ink-soft:#2a2620;
+    --bone:#EDE8DD; --bone-dim:#DED7C6; --paper:#FAF8F3;
+    --red:#B23A2D; --red-deep:#8C2C21;
+    --green:#3F5C48; --gold:#D9A441; --indigo:#2B3A55;
+    --line: rgba(23,21,18,0.12);
+    --shadow: 0 12px 30px rgba(23,21,18,0.10);
+    --shadow-hover: 0 20px 40px rgba(23,21,18,0.18);
+    --radius: 16px;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Public Sans", -apple-system, Segoe UI, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+  .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;text-align:center;}
+
+  /* Keyframe Animations */
+  @keyframes pulseGlow{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.4; transform:scale(0.92);} }
+  @keyframes floatCard{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+  @keyframes tickerScroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @keyframes shimmerLine{ 0%{background-position:-200% 0;} 100%{background-position:200% 0;} }
+  @keyframes slideInUp{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);} }
+
+  /* Animated Stripe Divider */
+  .stripe{
+    height:8px; width:100%;
+    background:linear-gradient(90deg, var(--ink), var(--red), var(--gold), var(--green), var(--indigo), var(--ink));
+    background-size:200% 100%; animation:shimmerLine 8s linear infinite;
+  }
+
+  /* Live News Ticker */
+  .ticker-bar{background:var(--ink);color:var(--bone);overflow:hidden;position:relative;display:flex;align-items:center;height:42px;}
+  .ticker-label{
+    flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:0 16px;height:100%;
+    background:var(--red);color:var(--bone);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;font-weight:700;z-index:2;
+  }
+  .live-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulseGlow 1.6s ease-in-out infinite;}
+  .ticker-viewport{overflow:hidden;flex:1 1 auto;height:100%;position:relative;mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%);}
+  .ticker-track{display:flex;align-items:center;height:100%;width:max-content;animation:tickerScroll 34s linear infinite;}
+  .ticker-track span{padding:0 2.4rem;font-size:0.84rem;white-space:nowrap;border-right:1px solid rgba(237,232,221,0.2);}
+
+  /* Header & Navigation */
+  .site-header{
+    background:rgba(250,248,243,0.94); backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--bone-dim); padding:0.8rem 1.8rem;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    position:sticky; top:0; z-index:90; box-shadow:0 4px 18px rgba(23,21,18,0.06);
+  }
+  .brand{display:flex;align-items:baseline;gap:0.4rem;font-family:var(--serif);font-weight:700;font-size:1.45rem;flex:0 0 auto;}
+  .brand .mark{color:var(--red);}
+  .brand .tag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--ink-soft);text-transform:uppercase;opacity:0.75;}
+
+  /* Centered Traditionally Crafted Navigation */
+  .main-nav{
+    display:flex; align-items:center; justify-content:center; gap:0.4rem;
+    font-size:0.86rem; font-weight:600; flex:1; max-width:640px; margin:0 auto;
+    background:var(--bone); padding:0.35rem 0.6rem; border-radius:99px;
+    border:1px solid rgba(23,21,18,0.12); box-shadow:inset 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .main-nav a{
+    padding:0.42rem 1rem; border-radius:99px; transition:all 0.25s ease;
+    color:var(--ink-soft); position:relative; white-space:nowrap;
+  }
+  .main-nav a:hover{color:var(--red); background:rgba(178,58,45,0.08); transform:scale(1.04);}
+  .main-nav a.active{
+    color:var(--bone); background:var(--ink); font-weight:700;
+    box-shadow:0 4px 10px rgba(23,21,18,0.25);
+  }
+
+  /* Right Corner Social Icons */
+  .header-socials{display:flex; align-items:center; gap:0.5rem; flex:0 0 auto;}
+  .header-socials a{
+    width:35px; height:35px; border-radius:50%; background:var(--bone);
+    border:1px solid var(--line); color:var(--ink-soft); display:flex;
+    align-items:center; justify-content:center; transition:all 0.25s ease;
+  }
+  .header-socials a:hover{
+    background:var(--red); color:var(--bone); border-color:var(--red);
+    transform:translateY(-3px) scale(1.1); box-shadow:0 6px 14px rgba(178,58,45,0.3);
+  }
+
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;padding:8px;width:36px;height:36px;}
+  .nav-toggle span{width:100%;height:2px;background:var(--ink);display:block;border-radius:2px;transition:transform 0.25s ease, opacity 0.25s ease;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media (max-width:920px){
+    .header-socials{display:none;}
+    .nav-toggle{display:flex;}
+    .main-nav{
+      display:none; position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      flex-direction:column; gap:0; padding:0.4rem 1.5rem 1rem;
+      box-shadow:0 14px 24px rgba(23,21,18,0.10); z-index:20;
+      max-width:100%; border-radius:0; background:var(--paper);
+    }
+    .main-nav.open{display:flex;}
+    .main-nav a{padding:0.8rem 0;border-bottom:1px solid var(--line);border-radius:0;text-align:center;}
+  }
+
+  /* DYNAMIC HERO CAROUSEL */
+  .hero{
+    position:relative; width:100%; min-height:560px;
+    background:var(--ink); overflow:hidden; display:flex; align-items:center;
+    id:home;
+  }
+  .hero-slide{
+    position:absolute; inset:0; width:100%; height:100%;
+    display:flex; align-items:center; padding:3.8rem 1.8rem;
+    opacity:0; visibility:hidden; transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1); z-index:1;
+  }
+  .hero-slide.active{opacity:1; visibility:visible; z-index:2;}
+  .hero-slide::before{
+    content:""; position:absolute; inset:0; opacity:0.14;
+    background-image:repeating-linear-gradient(90deg, var(--gold) 0 2px, transparent 2px 48px);
+  }
+  .hero-slide::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(90deg, rgba(23,21,18,0.94) 0%, rgba(23,21,18,0.72) 50%, rgba(23,21,18,0.88) 100%);
+  }
+
+  .slide-saipikhup { background:linear-gradient(135deg, #8C2C21 0%, #171512 85%); }
+  .slide-thangsuo  { background:linear-gradient(135deg, #2a2620 0%, #8C2C21 60%, #171512 100%); }
+  .slide-puandum   { background:linear-gradient(135deg, #12151B 0%, #2B3A55 60%, #171512 100%); }
+  .slide-hmaram    { background:linear-gradient(135deg, #3F5C48 0%, #8C2C21 60%, #171512 100%); }
+  .slide-khiangte  { background:linear-gradient(135deg, #5c3f4e 0%, #8C2C21 70%, #171512 100%); }
+
+  .hero-shawl-layout{
+    max-width:1200px; margin:0 auto; width:100%;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:2.8rem; align-items:center;
+    position:relative; z-index:3;
+  }
+  @media (max-width:860px){
+    .hero-shawl-layout{grid-template-columns:1fr; text-align:center;}
+    .hero-shawl-layout .hero-content{align-items:center; text-align:center;}
+    .hero-shawl-card{height:220px;}
+  }
+
+  .hero-content{color:var(--bone); display:flex; flex-direction:column; align-items:flex-start; animation:slideInUp 0.8s ease;}
+  .hero-content .eyebrow{color:var(--gold); background:rgba(23,21,18,0.6); padding:0.35rem 0.9rem; border-radius:4px; margin-bottom:0.8rem; text-align:left; border:1px solid rgba(217,164,65,0.3);}
+  .hero-content h1{font-family:var(--serif); font-size:clamp(2.2rem, 4.6vw, 3.6rem); line-height:1.08; margin:0 0 0.6rem; font-weight:600;}
+  .hero-content p{font-size:1.02rem; line-height:1.58; opacity:0.92; margin:0 0 1.6rem; max-width:56ch;}
+  
+  .hero-btn-row{display:flex; gap:0.9rem; align-items:center; flex-wrap:wrap;}
+  .hero-cta{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:var(--gold); color:var(--ink); font-weight:700; font-size:0.92rem;
+    padding:0.8rem 1.5rem; border-radius:8px; border:none; transition:all 0.25s ease;
+    box-shadow:0 6px 16px rgba(217,164,65,0.25);
+  }
+  .hero-cta:hover{background:var(--bone); transform:translateY(-2px); box-shadow:0 10px 22px rgba(237,232,221,0.3);}
+  .hero-secondary-btn{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:rgba(250,248,243,0.12); color:var(--bone); font-weight:600; font-size:0.88rem;
+    padding:0.8rem 1.3rem; border-radius:8px; border:1px solid rgba(250,248,243,0.3); transition:all 0.25s ease;
+  }
+  .hero-secondary-btn:hover{background:rgba(250,248,243,0.25); border-color:var(--bone);}
+
+  /* Dynamic 3D Card Floating Effect */
+  .hero-shawl-card{
+    background:#171512; border-radius:18px; border:1px solid rgba(217,164,65,0.35);
+    overflow:hidden; height:290px; box-shadow:0 20px 45px rgba(0,0,0,0.4); position:relative;
+    animation:floatCard 5s ease-in-out infinite;
+  }
+  .hero-shawl-card svg{width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease;}
+  .hero-shawl-card:hover svg{transform:scale(1.05);}
+
+  /* Carousel Navigation Arrows & Dots */
+  .carousel-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:10;
+    background:rgba(23,21,18,0.7); color:var(--bone); border:1px solid rgba(237,232,221,0.3);
+    width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; transition:all 0.25s ease; backdrop-filter:blur(4px);
+  }
+  .carousel-arrow:hover{background:var(--gold); color:var(--ink); border-color:var(--gold); transform:translateY(-50%) scale(1.1);}
+  .arrow-prev{left:1.2rem;} .arrow-next{right:1.2rem;}
+
+  .carousel-dots{
+    position:absolute; bottom:1.2rem; left:50%; transform:translateX(-50%); z-index:10;
+    display:flex; gap:0.6rem;
+  }
+  .dot{
+    width:10px; height:10px; border-radius:50%; background:rgba(250,248,243,0.35);
+    border:none; cursor:pointer; transition:all 0.3s ease;
+  }
+  .dot.active{background:var(--gold); width:28px; border-radius:99px;}
+
+  /* SECTION HIGHLIGHT CONTAINERS */
+  .highlight-section{padding:4.5rem 1.8rem; max-width:1240px; margin:0 auto; border-bottom:1px solid var(--line);}
+  
+  .section-header{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; margin:0 auto 2.4rem; max-width:780px; gap:1rem;
+  }
+  .section-header-left{text-align:center; display:flex; flex-direction:column; align-items:center;}
+  .section-header-left h2{font-family:var(--serif); font-size:clamp(1.8rem, 3.5vw, 2.6rem); margin:0.3rem 0 0; font-weight:700; line-height:1.18; text-align:center;}
+  .section-header-left p{margin:0.4rem auto 0; font-size:0.96rem; color:var(--ink-soft); max-width:56ch; text-align:center;}
+  
+  .btn-outline-lg{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:transparent; color:var(--ink); border:2px solid var(--ink);
+    padding:0.75rem 1.6rem; border-radius:10px; font-weight:700; font-size:0.88rem;
+    transition:all 0.25s ease; white-space:nowrap;
+  }
+  .btn-outline-lg:hover{background:var(--ink); color:var(--bone); transform:translateY(-2px); box-shadow:var(--shadow);}
+
+  /* Grid Layouts for Highlight Cards */
+  .highlight-grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem;}
+  @media (max-width:1100px){.highlight-grid-4{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:540px){.highlight-grid-4{grid-template-columns:1fr;}}
+
+  .highlight-grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem;}
+  @media (max-width:780px){.highlight-grid-2{grid-template-columns:1fr;}}
+
+  /* Product Card Styling */
+  .product-card{
+    background:#fff; border-radius:var(--radius); overflow:hidden;
+    box-shadow:var(--shadow); display:flex; flex-direction:column; border:1px solid var(--line);
+    transition:transform 0.25s ease, box-shadow 0.25s ease; position:relative;
+  }
+  .product-card:hover{transform:translateY(-6px); box-shadow:var(--shadow-hover);}
+  .product-swatch{height:190px; position:relative; overflow:hidden; background:#171512; cursor:pointer;}
+  .product-swatch svg{width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;}
+  .product-card:hover .product-swatch svg{transform:scale(1.06);}
+
+  .badge-container{position:absolute; top:0.7rem; left:0.7rem; display:flex; gap:0.4rem; flex-wrap:wrap; z-index:3;}
+  .badge{
+    background:rgba(23,21,18,0.85); color:var(--bone); font-family:var(--mono);
+    font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; padding:0.3rem 0.6rem;
+    border-radius:4px; backdrop-filter:blur(6px); font-weight:600;
+  }
+  .badge-kuki{background:var(--red-deep); color:var(--gold);}
+  .badge-paite{background:var(--indigo); color:var(--bone);}
+  .badge-hmar{background:var(--green); color:var(--bone);}
+
+  .story-btn{
+    position:absolute; bottom:0.7rem; right:0.7rem; background:rgba(250,248,243,0.95);
+    color:var(--ink); border:none; padding:0.35rem 0.7rem; border-radius:6px;
+    font-family:var(--mono); font-size:0.64rem; font-weight:700; cursor:pointer; z-index:3;
+  }
+  .story-btn:hover{background:var(--gold); color:var(--ink);}
+
+  .product-info{padding:1.2rem; display:flex; flex-direction:column; gap:0.4rem; flex:1;}
+  .product-info h3{margin:0; font-size:1.1rem; font-family:var(--serif); font-weight:700; line-height:1.25;}
+  .product-info .weaver{font-size:0.82rem; color:var(--ink-soft);}
+  .product-info .price-row{display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:0.9rem;}
+  .price{font-family:var(--mono); font-weight:700; font-size:1.05rem; color:var(--red-deep);}
+
+  /* Directory Highlight Card */
+  .dir-card-hl{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.5rem; display:flex; flex-direction:column; gap:1rem; justify-content:space-between;
+    box-shadow:var(--shadow); transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .dir-card-hl:hover{transform:translateY(-5px); box-shadow:var(--shadow-hover);}
+
+  /* Jobs Highlight Card */
+  .job-card-hl{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.5rem; display:flex; flex-direction:column; gap:1rem;
+    box-shadow:var(--shadow); transition:transform 0.25s ease; position:relative; overflow:hidden;
+  }
+  .job-card-hl:hover{transform:translateY(-5px); box-shadow:var(--shadow-hover);}
+  .job-card-hl::before{content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--red);}
+
+  /* Notices Highlight Card */
+  .notice-card-hl{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.5rem; position:relative; overflow:hidden; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.25s ease;
+  }
+  .notice-card-hl:hover{transform:translateY(-4px); box-shadow:var(--shadow-hover);}
+  .notice-urgency-badge{
+    display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--mono);
+    font-size:0.65rem; font-weight:700; padding:0.3rem 0.65rem; border-radius:4px; text-transform:uppercase;
+  }
+  .urgency-critical{background:rgba(178,58,45,0.14); color:var(--red-deep); border:1px solid rgba(178,58,45,0.3);}
+  .urgency-high{background:rgba(217,164,65,0.2); color:#7d5707; border:1px solid rgba(217,164,65,0.4);}
+  .urgency-routine{background:rgba(43,58,85,0.12); color:var(--indigo); border:1px solid rgba(43,58,85,0.25);}
+  .urgency-cultural{background:rgba(63,92,72,0.12); color:var(--green); border:1px solid rgba(63,92,72,0.25);}
+
+  /* Community Tribal Marquee */
+  .community-marquee{background:var(--ink); color:var(--bone); padding:1.2rem 0; overflow:hidden; border-top:1px solid var(--line);}
+  .marquee-track{display:flex; gap:3rem; width:max-content; animation:tickerScroll 28s linear infinite;}
+  .marquee-item{display:flex; align-items:center; gap:0.8rem; font-family:var(--mono); font-size:0.86rem;}
+  .marquee-item strong{color:var(--gold);}
+
+  /* Modals */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(23,21,18,0.78); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:1.5rem; backdrop-filter:blur(5px);
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    background:var(--paper); border-radius:16px; max-width:540px; width:100%;
+    padding:2.2rem; box-shadow:0 20px 40px rgba(0,0,0,0.28); border:1px solid var(--line);
+    position:relative; max-height:90vh; overflow-y:auto; color:var(--ink);
+  }
+  .modal-close{
+    position:absolute; top:1.2rem; right:1.2rem; background:none; border:none;
+    font-size:1.4rem; cursor:pointer; color:var(--ink-soft); width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center; border-radius:50%;
+  }
+  .modal-close:hover{background:var(--bone); color:var(--ink);}
+
+  /* Footer */
+  .site-footer{background:var(--ink); color:var(--bone-dim); padding:3.5rem 1.5rem 1.5rem; margin-top:2rem;}
+  .footer-grid{
+    max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:2rem; padding-bottom:2rem; border-bottom:1px solid rgba(237,232,221,0.15);
+  }
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.footer-grid{grid-template-columns:1fr; gap:1.6rem;}}
+  .footer-grid h5{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin:0 0 0.8rem;}
+  .footer-grid a,.footer-grid p{display:block; font-size:0.85rem; color:var(--bone-dim); margin-bottom:0.55rem; line-height:1.4;}
+  .footer-grid a:hover{color:var(--bone);}
+  .footer-brand .brand{color:var(--bone);}
+  .footer-brand p{max-width:32ch; opacity:0.75;}
+  .footer-bottom{max-width:1200px; margin:0 auto; padding-top:1.2rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; font-size:0.76rem; color:var(--bone-dim); opacity:0.7;}
+</style>
+</head>
+<body>
+
+  <!-- News Ticker Bar -->
+  <div class="ticker-bar" role="region" aria-label="Local news ticker">
+    <span class="ticker-label"><span class="live-dot"></span> LAMKA HUB</span>
+    <div class="ticker-viewport">
+      <div class="ticker-track">
+        <span>Featured Handloom: Traditional Kuki Saipikhup & Thangsuo Shawls direct from Hiangtam Lamka weavers</span>
+        <span>Celebrating the 9 Handloom Traditions of Churachandpur: Kuki, Paite, Hmar, Vaiphei, Zou, Gangte, Simte, Tedim & Kom</span>
+        <span>District Hospital Churachandpur opens new OPD wing for pediatric care</span>
+        <span>0% Middleman Commission on all direct maker-to-buyer handloom orders this season</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a class="brand" href="#home"><span class="mark">Lamka</span> Hub <span class="tag">Churachandpur</span></a>
+    
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#home" class="active">Home</a>
+      <a href="handloom.html">Handloom Market</a>
+      <a href="directory.html">Directory</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="notices.html">Notices</a>
+      <a href="about.html">About Us</a>
+    </nav>
+
+    <div class="header-socials">
+      <a href="https://x.com" target="_blank" aria-label="X (Twitter)" title="X (Twitter)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://wa.me/919862000000" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- DYNAMIC HERO CAROUSEL -->
+  <section class="hero" id="home">
+    <button class="carousel-arrow arrow-prev" onclick="moveSlide(-1)" aria-label="Previous Slide">&lsaquo;</button>
+    <button class="carousel-arrow arrow-next" onclick="moveSlide(1)" aria-label="Next Slide">&rsaquo;</button>
+
+    <!-- Slide 1: Kuki Saipikhup -->
+    <div class="hero-slide slide-saipikhup active">
+      <div class="hero-shawl-layout">
+        <div class="hero-content">
+          <span class="eyebrow">Handloom Tradition · Kuki Heritage</span>
+          <h1>Kuki Saipikhup Diamond Shawl</h1>
+          <p>Handcrafted by Saipikhup Artisan Circle in Hiangtam Lamka. Woven with 100% natural organic cotton yarn on backstrap loin looms.</p>
+          <div class="hero-btn-row">
+            <a href="handloom.html" class="hero-cta">Explore Handloom Store &rarr;</a>
+            <button class="hero-secondary-btn" onclick="openStoryModal('Kuki Saipikhup Shawl', 'Saipikhup represents the quail-footprint diamond pattern, a revered symbol of agility, resilience, and ancestral honor in Kuki tradition.')">View Motif Story 📜</button>
+          </div>
+        </div>
+        <div class="hero-shawl-card">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#8C2C21"/>
+            <rect y="0" width="400" height="18" fill="#171512"/>
+            <rect y="222" width="400" height="18" fill="#171512"/>
+            <rect y="18" width="400" height="6" fill="#D9A441"/>
+            <rect y="216" width="400" height="6" fill="#D9A441"/>
+            <pattern id="hsaipikhup" width="36" height="36" patternUnits="userSpaceOnUse">
+              <polygon points="18,2 34,18 18,34 2,18" fill="none" stroke="#D9A441" stroke-width="2.2"/>
+              <polygon points="18,8 28,18 18,28 8,18" fill="#171512" stroke="#EDE8DD" stroke-width="1"/>
+              <circle cx="18" cy="18" r="2.5" fill="#D9A441"/>
+            </pattern>
+            <rect y="24" width="400" height="192" fill="url(#hsaipikhup)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Kuki Thangsuo -->
+    <div class="hero-slide slide-thangsuo">
+      <div class="hero-shawl-layout">
+        <div class="hero-content">
+          <span class="eyebrow">Honorific Weave · Kuki Heritage</span>
+          <h1>Kuki Thangsuo Honor Shawl</h1>
+          <p>High-status honorific weave featuring prominent horizontal crimson, yellow, black, and white bands. Handwoven in Tuibong.</p>
+          <div class="hero-btn-row">
+            <a href="handloom.html" class="hero-cta">Explore Handloom Store &rarr;</a>
+            <button class="hero-secondary-btn" onclick="openStoryModal('Kuki Thangsuo Honor Shawl', 'Presented to community leaders, warriors, and elders who have brought honor to the tribe.')">View Motif Story 📜</button>
+          </div>
+        </div>
+        <div class="hero-shawl-card">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#171512"/>
+            <rect y="0" width="400" height="26" fill="#B23A2D"/>
+            <rect y="26" width="400" height="10" fill="#D9A441"/>
+            <rect y="36" width="400" height="20" fill="#FAF8F3"/>
+            <rect y="70" width="400" height="34" fill="#B23A2D"/>
+            <rect y="104" width="400" height="40" fill="#171512"/>
+            <pattern id="hthangsuo" width="28" height="20" patternUnits="userSpaceOnUse">
+              <path d="M0,10 L14,0 L28,10 L14,20 Z" fill="#D9A441" opacity="0.85"/>
+            </pattern>
+            <rect y="104" width="400" height="40" fill="url(#hthangsuo)"/>
+            <rect y="144" width="400" height="34" fill="#B23A2D"/>
+            <rect y="190" width="400" height="20" fill="#FAF8F3"/>
+            <rect y="210" width="400" height="10" fill="#D9A441"/>
+            <rect y="220" width="400" height="20" fill="#B23A2D"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Paite Puandum -->
+    <div class="hero-slide slide-puandum">
+      <div class="hero-shawl-layout">
+        <div class="hero-content">
+          <span class="eyebrow">Ceremonial Drape · Paite Heritage</span>
+          <h1>Paite Puandum Puan</h1>
+          <p>Handwoven vertical bands of crimson red, forest green, and gold on a deep navy canvas. Woven by Guite Weaving Society.</p>
+          <div class="hero-btn-row">
+            <a href="handloom.html" class="hero-cta">Explore Handloom Store &rarr;</a>
+            <button class="hero-secondary-btn" onclick="openStoryModal('Paite Puandum Puan', 'Puandum is an essential ceremonial drape for weddings, festivals, and cultural milestones in Paite tradition.')">View Motif Story 📜</button>
+          </div>
+        </div>
+        <div class="hero-shawl-card">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#12151B"/>
+            <rect x="30" width="22" height="240" fill="#B23A2D"/>
+            <rect x="52" width="8" height="240" fill="#D9A441"/>
+            <rect x="60" width="18" height="240" fill="#3F5C48"/>
+            <rect x="180" width="22" height="240" fill="#B23A2D"/>
+            <rect x="202" width="8" height="240" fill="#D9A441"/>
+            <rect x="210" width="18" height="240" fill="#3F5C48"/>
+            <rect x="330" width="22" height="240" fill="#B23A2D"/>
+            <rect x="352" width="8" height="240" fill="#D9A441"/>
+            <rect x="360" width="18" height="240" fill="#3F5C48"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Hmar Am -->
+    <div class="hero-slide slide-hmaram">
+      <div class="hero-shawl-layout">
+        <div class="hero-content">
+          <span class="eyebrow">Block Motif · Hmar Heritage</span>
+          <h1>Hmar Am Tri-Color Shawl</h1>
+          <p>Bold tri-color rectangular block weave handcrafted in Rengkai by Hmar Artisan Collective using handspun cotton yarn.</p>
+          <div class="hero-btn-row">
+            <a href="handloom.html" class="hero-cta">Explore Handloom Store &rarr;</a>
+            <button class="hero-secondary-btn" onclick="openStoryModal('Hmar Am Shawl', 'The Hmar Am shawl features bold geometric block motifs symbolizing unity, land heritage, and communal strength.')">View Motif Story 📜</button>
+          </div>
+        </div>
+        <div class="hero-shawl-card">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#FAF8F3"/>
+            <pattern id="hhmaram" width="80" height="80" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="#B23A2D"/>
+              <rect x="40" width="40" height="40" fill="#171512"/>
+              <rect y="40" width="40" height="40" fill="#171512"/>
+              <rect x="40" y="40" width="40" height="40" fill="#B23A2D"/>
+            </pattern>
+            <rect width="400" height="240" fill="url(#hhmaram)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Vaiphei Khiangte -->
+    <div class="hero-slide slide-khiangte">
+      <div class="hero-shawl-layout">
+        <div class="hero-content">
+          <span class="eyebrow">Gold Thread Weave · Vaiphei Heritage</span>
+          <h1>Vaiphei Khiangte Puan</h1>
+          <p>Fine gold thread lines woven onto a rich crimson cotton canvas. Handcrafted by Vaiphei Loom Group in Tuibong.</p>
+          <div class="hero-btn-row">
+            <a href="handloom.html" class="hero-cta">Explore Handloom Store &rarr;</a>
+            <button class="hero-secondary-btn" onclick="openStoryModal('Vaiphei Khiangte Puan', 'Khiangte Puan represents royal elegance and delicate craftsmanship in Vaiphei weaving traditions.')">View Motif Story 📜</button>
+          </div>
+        </div>
+        <div class="hero-shawl-card">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#8C2C21"/>
+            <pattern id="hkhiangte" width="24" height="240" patternUnits="userSpaceOnUse">
+              <rect x="0" width="3" height="240" fill="#D9A441"/>
+              <rect x="8" width="2" height="240" fill="#171512"/>
+              <rect x="16" width="3" height="240" fill="#D9A441"/>
+            </pattern>
+            <rect width="400" height="240" fill="url(#hkhiangte)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="carousel-dots">
+      <button class="dot active" onclick="goToSlide(0)"></button>
+      <button class="dot" onclick="goToSlide(1)"></button>
+      <button class="dot" onclick="goToSlide(2)"></button>
+      <button class="dot" onclick="goToSlide(3)"></button>
+      <button class="dot" onclick="goToSlide(4)"></button>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <!-- COMMUNITY TRIBAL MARQUEE -->
+  <div class="community-marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">🧶 <strong>Kuki</strong> Saipikhup & Thangsuo</span>
+      <span class="marquee-item">🧵 <strong>Paite</strong> Puandum & Khamtang</span>
+      <span class="marquee-item">✨ <strong>Hmar</strong> Am Block Weave</span>
+      <span class="marquee-item">🌿 <strong>Vaiphei</strong> Khiangte Gold Lines</span>
+      <span class="marquee-item">🏔 <strong>Zou</strong> Highland Blue Puan</span>
+      <span class="marquee-item">🎉 <strong>Gangte</strong> Puanchei Wrap</span>
+      <span class="marquee-item">🎨 <strong>Simte</strong> Charcoal Gold Weave</span>
+      <span class="marquee-item">💎 <strong>Tedim Chin</strong> Tangcip Diamond</span>
+      <span class="marquee-item">🌊 <strong>Kom</strong> Wave Border Wrap</span>
+      <!-- Loop -->
+      <span class="marquee-item">🧶 <strong>Kuki</strong> Saipikhup & Thangsuo</span>
+      <span class="marquee-item">🧵 <strong>Paite</strong> Puandum & Khamtang</span>
+      <span class="marquee-item">✨ <strong>Hmar</strong> Am Block Weave</span>
+      <span class="marquee-item">🌿 <strong>Vaiphei</strong> Khiangte Gold Lines</span>
+    </div>
+  </div>
+
+  <!-- 1. HANDLOOM SPOTLIGHT SECTION -->
+  <section class="highlight-section" id="handloom">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="eyebrow" style="color:var(--red-deep);">District Artisan Showcase</span>
+        <h2>Indigenous Handloom Market</h2>
+        <p>Direct maker-to-buyer handloom portal celebrating the 9 tribal weaving traditions of Churachandpur with 0% middleman fees.</p>
+      </div>
+      <a href="handloom.html" class="btn-outline-lg">View Full Handloom Store (14 Weaves) &rarr;</a>
+    </div>
+
+    <div class="highlight-grid-4">
+      <!-- Weave 1 -->
+      <div class="product-card">
+        <div class="product-swatch" onclick="openStoryModal('Kuki Saipikhup Shawl', 'The quail-footprint diamond pattern symbol of resilience and ancestral honor in Kuki tradition.')">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#8C2C21"/>
+            <rect y="0" width="400" height="18" fill="#171512"/>
+            <rect y="222" width="400" height="18" fill="#171512"/>
+            <rect y="18" width="400" height="6" fill="#D9A441"/>
+            <pattern id="card1" width="36" height="36" patternUnits="userSpaceOnUse">
+              <polygon points="18,2 34,18 18,34 2,18" fill="none" stroke="#D9A441" stroke-width="2.2"/>
+              <polygon points="18,8 28,18 18,28 8,18" fill="#171512" stroke="#EDE8DD" stroke-width="1"/>
+            </pattern>
+            <rect y="24" width="400" height="192" fill="url(#card1)"/>
+          </svg>
+          <div class="badge-container"><span class="badge badge-kuki">Kuki</span><span class="badge">Shawl</span></div>
+          <button class="story-btn">Motif Legend 📜</button>
+        </div>
+        <div class="product-info">
+          <h3>Kuki Saipikhup Shawl</h3>
+          <div class="weaver">by Saipikhup Artisan Circle · Hiangtam Lamka</div>
+          <div class="price-row">
+            <span class="price">₹3,800</span>
+            <a class="btn-outline-lg" style="padding:0.35rem 0.8rem; font-size:0.78rem;" href="handloom.html">Shop Weave &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weave 2 -->
+      <div class="product-card">
+        <div class="product-swatch" onclick="openStoryModal('Paite Puandum Puan', 'Essential ceremonial drape featuring vertical bands of crimson red, forest green, and gold on deep navy.')">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#12151B"/>
+            <rect x="30" width="22" height="240" fill="#B23A2D"/>
+            <rect x="52" width="8" height="240" fill="#D9A441"/>
+            <rect x="60" width="18" height="240" fill="#3F5C48"/>
+            <rect x="180" width="22" height="240" fill="#B23A2D"/>
+            <rect x="202" width="8" height="240" fill="#D9A441"/>
+          </svg>
+          <div class="badge-container"><span class="badge badge-paite">Paite</span><span class="badge">Puan</span></div>
+          <button class="story-btn">Motif Legend 📜</button>
+        </div>
+        <div class="product-info">
+          <h3>Paite Puandum Puan</h3>
+          <div class="weaver">by Guite Weaving Society · Hiangtam Lamka</div>
+          <div class="price-row">
+            <span class="price">₹3,400</span>
+            <a class="btn-outline-lg" style="padding:0.35rem 0.8rem; font-size:0.78rem;" href="handloom.html">Shop Weave &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weave 3 -->
+      <div class="product-card">
+        <div class="product-swatch" onclick="openStoryModal('Hmar Am Shawl', 'Tri-color rectangular block weave handcrafted with thick cotton threads.')">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#FAF8F3"/>
+            <pattern id="card3" width="80" height="80" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="#B23A2D"/>
+              <rect x="40" width="40" height="40" fill="#171512"/>
+              <rect y="40" width="40" height="40" fill="#171512"/>
+              <rect x="40" y="40" width="40" height="40" fill="#B23A2D"/>
+            </pattern>
+            <rect width="400" height="240" fill="url(#card3)"/>
+          </svg>
+          <div class="badge-container"><span class="badge badge-hmar">Hmar</span><span class="badge">Shawl</span></div>
+          <button class="story-btn">Motif Legend 📜</button>
+        </div>
+        <div class="product-info">
+          <h3>Hmar Am Traditional Shawl</h3>
+          <div class="weaver">by Hmar Artisan Collective · Rengkai</div>
+          <div class="price-row">
+            <span class="price">₹3,650</span>
+            <a class="btn-outline-lg" style="padding:0.35rem 0.8rem; font-size:0.78rem;" href="handloom.html">Shop Weave &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weave 4 -->
+      <div class="product-card">
+        <div class="product-swatch" onclick="openStoryModal('Kuki Thangsuo Honor Shawl', 'High-status honorific weave presented to community leaders.')">
+          <svg viewBox="0 0 400 240" preserveAspectRatio="none">
+            <rect width="400" height="240" fill="#171512"/>
+            <rect y="0" width="400" height="26" fill="#B23A2D"/>
+            <rect y="26" width="400" height="10" fill="#D9A441"/>
+            <rect y="36" width="400" height="20" fill="#FAF8F3"/>
+            <rect y="70" width="400" height="34" fill="#B23A2D"/>
+          </svg>
+          <div class="badge-container"><span class="badge badge-kuki">Kuki</span><span class="badge">Shawl</span></div>
+          <button class="story-btn">Motif Legend 📜</button>
+        </div>
+        <div class="product-info">
+          <h3>Kuki Thangsuo Honor Shawl</h3>
+          <div class="weaver">by Haokip Handloom Co-op · Tuibong</div>
+          <div class="price-row">
+            <span class="price">₹4,200</span>
+            <a class="btn-outline-lg" style="padding:0.35rem 0.8rem; font-size:0.78rem;" href="handloom.html">Shop Weave &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. DISTRICT DIRECTORY SPOTLIGHT SECTION -->
+  <section class="highlight-section" id="directory">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="eyebrow" style="color:var(--indigo);">Verified Public Helplines & Services</span>
+        <h2>Churachandpur District Directory</h2>
+        <p>Direct phone numbers and WhatsApp contacts for weaver cooperatives, hospitals, police control room, clinics, and local services.</p>
+      </div>
+      <a href="directory.html" class="btn-outline-lg">View Full Directory (14 Listings) &rarr;</a>
+    </div>
+
+    <div class="highlight-grid-2">
+      <!-- Directory Card 1: District Hospital -->
+      <div class="dir-card-hl">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="display:flex; gap:0.9rem; align-items:center;">
+              <div style="width:48px; height:48px; border-radius:12px; background:var(--red-deep); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:1.2rem;">DH</div>
+              <div>
+                <h3 style="margin:0; font-family:var(--serif); font-size:1.2rem;">District Hospital Churachandpur</h3>
+                <div style="font-family:var(--mono); font-size:0.72rem; color:var(--red-deep); font-weight:600;">Government Hospital · Emergency & OPD</div>
+              </div>
+            </div>
+            <span style="background:rgba(178,58,45,0.12); color:var(--red-deep); font-family:var(--mono); font-size:0.64rem; font-weight:700; padding:0.25rem 0.55rem; border-radius:4px;">🚨 24/7 Casualty</span>
+          </div>
+          <p style="margin:0.9rem 0 0; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;">Equipped with 24/7 casualty ward, upgraded pediatric OPD wing, maternity delivery unit, ICU, and district emergency ambulance fleet.</p>
+        </div>
+        <div style="background:var(--bone); padding:0.75rem 1rem; border-radius:8px; font-family:var(--mono); font-size:0.78rem; display:flex; flex-direction:column; gap:0.3rem;">
+          <div>📍 <strong>Address:</strong> IB Road, Lamka Sector</div>
+          <div>📞 <strong>Emergency Hotline:</strong> 03874-233855 / 102</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
+          <a class="btn-outline-lg" style="padding:0.4rem 0.9rem; font-size:0.8rem;" href="tel:03874233855">📞 Call Hospital</a>
+          <a class="btn-outline-lg" style="padding:0.4rem 0.9rem; font-size:0.8rem; background:var(--ink); color:var(--bone);" href="directory.html">View Details &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Directory Card 2: Police Station -->
+      <div class="dir-card-hl">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="display:flex; gap:0.9rem; align-items:center;">
+              <div style="width:48px; height:48px; border-radius:12px; background:var(--indigo); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:1.2rem;">PS</div>
+              <div>
+                <h3 style="margin:0; font-family:var(--serif); font-size:1.2rem;">Churachandpur Police Station</h3>
+                <div style="font-family:var(--mono); font-size:0.72rem; color:var(--indigo); font-weight:600;">Public Safety · Police Control Room</div>
+              </div>
+            </div>
+            <span style="background:rgba(43,58,85,0.12); color:var(--indigo); font-family:var(--mono); font-size:0.64rem; font-weight:700; padding:0.25rem 0.55rem; border-radius:4px;">24/7 Control Room</span>
+          </div>
+          <p style="margin:0.9rem 0 0; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;">District police station providing 24/7 law enforcement, emergency public safety assistance, traffic cell regulation, and control desk.</p>
+        </div>
+        <div style="background:var(--bone); padding:0.75rem 1rem; border-radius:8px; font-family:var(--mono); font-size:0.78rem; display:flex; flex-direction:column; gap:0.3rem;">
+          <div>📍 <strong>Address:</strong> Tedim Road, Lamka Main Junction</div>
+          <div>📞 <strong>Control Desk:</strong> 03874-233221 / 112</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
+          <a class="btn-outline-lg" style="padding:0.4rem 0.9rem; font-size:0.8rem;" href="tel:03874233221">📞 Call Police</a>
+          <a class="btn-outline-lg" style="padding:0.4rem 0.9rem; font-size:0.8rem; background:var(--ink); color:var(--bone);" href="directory.html">View Details &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. EMPLOYMENT SPOTLIGHT SECTION -->
+  <section class="highlight-section" id="jobs">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="eyebrow" style="color:var(--green);">Community Economic Empowerment</span>
+        <h2>Jobs & Artisan Skill Opportunities</h2>
+        <p>Verified job opportunities for handloom master weavers, healthcare auxiliary nurses, cultural researchers, and freelance technical gigs.</p>
+      </div>
+      <a href="jobs.html" class="btn-outline-lg">View All Opportunities (12 Roles) &rarr;</a>
+    </div>
+
+    <div class="highlight-grid-2">
+      <!-- Job 1 -->
+      <div class="job-card-hl">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.8rem;">
+          <div>
+            <h3 style="margin:0; font-family:var(--serif); font-size:1.18rem; font-weight:700;">Master Backstrap Weaver & Loom Supervisor</h3>
+            <div style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem;">at <b>Saipikhup Artisan Circle</b> · Hiangtam Lamka</div>
+          </div>
+          <span style="background:rgba(178,58,45,0.12); color:var(--red-deep); font-family:var(--mono); font-size:0.64rem; font-weight:700; padding:0.25rem 0.55rem; border-radius:4px;">Kuki Weave</span>
+        </div>
+        <div style="background:var(--bone); padding:0.7rem 0.9rem; border-radius:8px; font-family:var(--mono); font-size:0.78rem; display:flex; gap:1.2rem; color:var(--ink-soft);">
+          <span style="color:var(--red-deep); font-weight:700;">💰 ₹16,000 – ₹20,000 / mo</span>
+          <span>📍 Hiangtam Lamka</span>
+          <span>⏱ Full-Time</span>
+        </div>
+        <p style="margin:0; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;">Supervise production of traditional Kuki Saipikhup diamond shawls. Quality control of hand-dyed cotton yarn and weaver loom training.</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:0.8rem; margin-top:0.2rem;">
+          <a target="_blank" href="https://wa.me/919862000001?text=Hello!%20Applying%20for%20Master%20Weaver%20role." style="background:#25D366; color:#fff; padding:0.4rem 0.9rem; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none;">💬 WhatsApp Employer</a>
+          <a class="btn-outline-lg" style="padding:0.4rem 0.9rem; font-size:0.8rem; background:var(--ink); color:var(--bone);" href="jobs.html">Quick Apply &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="job-card-hl" style="border-left-color:var(--green);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.8rem;">
+          <div>
+            <h3 style="margin:0; font-family:var(--serif); font-size:1.18rem; font-weight:700;">Community Maternal Health Nurse (ANM / GNM)</h3>
+            <div style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.2rem;">at <b>Sielmat Family Clinic</b> · Sielmat Sector</div>
+          </div>
+          <span style="background:rgba(63,92,72,0.12); color:var(--green); font-family:var(--mono); font-size:0.64rem; font-weight:700; padding:0.25rem 0.55rem; border-radius:4px;">Healthcare</span>
+        </div>
+        <div style="background:var(--bone); padding:0.7rem 0.9rem; border-radius:8px; font-family:var(--mono); font-size:0.78rem; display:flex; gap:1.2rem; color:var(--ink-soft);">
+          <span style="color:var(--red-deep); font-weight:700;">💰 ₹15,000 – ₹19,000 / mo</span>
+          <span>📍 Sielmat Road</span>
+          <span>⏱ Full-Time</span>
+        </div>
+        <p style="margin:0; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;">Provide prenatal checkups, assist outpatient immunization clinics, and conduct community health outreach across Sielmat ward sectors.</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:0.8rem; margin-top:0.2rem;">
+          <a target="_blank" href="https://wa.me/9103874233990?text=Hello!%20Applying%20for%20Maternal%20Health%20Nurse." style="background:#25D366; color:#fff; padding:0.4rem 0.9rem; border-radius:6px; font-size:0.8rem; font-weight:700; text-decoration:none;">💬 WhatsApp Clinic</a>
+          <a class="btn-outline-lg" style="padding:0.4rem 0.9rem; font-size:0.8rem; background:var(--ink); color:var(--bone);" href="jobs.html">Quick Apply &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. DISTRICT NOTICES SPOTLIGHT SECTION -->
+  <section class="highlight-section" id="notices">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="eyebrow" style="color:var(--gold);">District Official Advisories</span>
+        <h2>Town Notice & Bulletin Board</h2>
+        <p>Authentic community bulletin board featuring municipal orders, utility repair alerts, cultural festival dates, and official directives.</p>
+      </div>
+      <a href="notices.html" class="btn-outline-lg">View Full Bulletin Board &rarr;</a>
+    </div>
+
+    <div class="highlight-grid-2">
+      <!-- Notice 1 -->
+      <div class="notice-card-hl">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+            <span class="notice-urgency-badge urgency-critical">🚨 Critical Urgent</span>
+            <span style="font-family:var(--mono); font-size:0.74rem; color:var(--ink-soft);">Ref: CCP/PHED/2026/091</span>
+          </div>
+          <h3 style="font-family:var(--serif); font-size:1.2rem; margin:0 0 0.4rem; font-weight:700;">Emergency Main Water Supply Pipeline Maintenance</h3>
+          <p style="margin:0 0 0.8rem; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;">Public Health Engineering Dept notice regarding emergency repair works on the Tuibong-Hiangtam main feeder line. Water supply interrupted for 24 hours.</p>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:0.8rem; font-family:var(--mono); font-size:0.75rem; color:var(--ink-soft);">
+          <span>Issued by: PHED Churachandpur</span>
+          <a class="btn-outline-lg" style="padding:0.35rem 0.8rem; font-size:0.78rem;" href="notices.html">View Signed Order &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Notice 2 -->
+      <div class="notice-card-hl">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+            <span class="notice-urgency-badge urgency-cultural">🎉 Cultural Special</span>
+            <span style="font-family:var(--mono); font-size:0.74rem; color:var(--ink-soft);">Ref: CCP/KUT/2026/004</span>
+          </div>
+          <h3 style="font-family:var(--serif); font-size:1.2rem; margin:0 0 0.4rem; font-weight:700;">Chavang Kut Autumn Festival Stall Registrations</h3>
+          <p style="margin:0 0 0.8rem; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;">District Cultural Committee opens registration for tribal handloom stalls, indigenous food counters, and artisan crafts at Public Ground Hiangtam Lamka.</p>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--line); padding-top:0.8rem; font-family:var(--mono); font-size:0.75rem; color:var(--ink-soft);">
+          <span>Issued by: District Cultural Committee</span>
+          <a class="btn-outline-lg" style="padding:0.35rem 0.8rem; font-size:0.78rem;" href="notices.html">View Signed Order &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Story Modal -->
+  <div class="modal-overlay" id="storyModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModals()">&times;</button>
+      <span class="eyebrow" style="color:var(--gold);">Ancestral Handloom Motif Legend</span>
+      <h3 id="modalTitle" style="margin:0.4rem 0 0.6rem; font-family:var(--serif); font-size:1.3rem;">Motif Title</h3>
+      <p id="modalBody" style="font-size:0.92rem; color:var(--ink-soft); line-height:1.6; margin:0 0 1.4rem;"></p>
+      <a href="handloom.html" class="hero-cta" style="width:100%; justify-content:center;">Shop This Weave in Handloom Store &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark">Lamka</span> Hub</div>
+        <p>A community platform built for Churachandpur — handloom marketplace, local directory, jobs, and town notices.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="#home">Home</a>
+        <a href="handloom.html">Handloom Market</a>
+        <a href="directory.html">Directory</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="notices.html">Town Notices</a>
+        <a href="about.html">About Us</a>
+      </div>
+      <div>
+        <h5>9 Tribal Traditions</h5>
+        <a href="handloom.html">Kuki Saipikhup & Thangsuo</a>
+        <a href="handloom.html">Paite Puandum Puan</a>
+        <a href="handloom.html">Hmar Am Block Weave</a>
+        <a href="handloom.html">Vaiphei Khiangte Gold Lines</a>
+        <a href="handloom.html">Zou Highland Blue Puan</a>
+      </div>
+      <div>
+        <h5>Emergency Contacts</h5>
+        <p>District Hospital — 03874-233855 / 102</p>
+        <p>Police Control Room — 03874-233221 / 112</p>
+        <p>DC Office, Churachandpur — 03874-233875</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lamka Hub · Built for Churachandpur, by Churachandpur</span>
+      <span>All 9 district tribal handloom traditions celebrated equally</span>
+    </div>
+  </footer>
+
+<script>
+  // Mobile Menu Toggle
+  const toggle = document.getElementById('navToggle');
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      const nav = document.querySelector('.main-nav');
+      if(nav) nav.classList.toggle('open');
+    });
+  }
+
+  // Hero Carousel Logic
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.dot');
+  let carouselTimer;
+
+  function showSlide(index){
+    if(slides.length === 0) return;
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+      if(dots[i]) dots[i].classList.toggle('active', i === index);
+    });
+    currentSlide = index;
+  }
+
+  function moveSlide(dir){
+    let next = (currentSlide + dir + slides.length) % slides.length;
+    showSlide(next);
+    resetTimer();
+  }
+
+  function goToSlide(index){
+    showSlide(index);
+    resetTimer();
+  }
+
+  function resetTimer(){
+    clearInterval(carouselTimer);
+    carouselTimer = setInterval(() => {
+      moveSlide(1);
+    }, 5000);
+  }
+
+  resetTimer();
+
+  // Story Modal
+  function openStoryModal(title, story){
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalBody').innerText = story;
+    document.getElementById('storyModal').classList.add('open');
+  }
+
+  function closeModals(){
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+  }
+</script>
+</body>
+</html>

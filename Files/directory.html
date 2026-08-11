@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>District Directory & Verified Services — Lamka Hub | Churachandpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171512; --ink-soft:#2a2620;
+    --bone:#EDE8DD; --bone-dim:#DED7C6; --paper:#FAF8F3;
+    --red:#B23A2D; --red-deep:#8C2C21;
+    --green:#3F5C48; --gold:#D9A441; --indigo:#2B3A55;
+    --line: rgba(23,21,18,0.12);
+    --shadow: 0 12px 30px rgba(23,21,18,0.10);
+    --radius: 14px;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Public Sans", -apple-system, Segoe UI, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+  .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;text-align:center;}
+
+  /* Stripe divider */
+  .stripe{
+    height:7px; width:100%;
+    background:repeating-linear-gradient(90deg,var(--ink) 0 44px,var(--red) 44px 51px,var(--bone) 51px 58px,var(--gold) 58px 65px,var(--ink) 65px 109px);
+  }
+
+  /* Header Navigation */
+  .site-header{
+    background:var(--paper); border-bottom:2px solid var(--bone-dim); padding:0.8rem 1.8rem;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    position:sticky; top:0; z-index:90; box-shadow:0 4px 16px rgba(23,21,18,0.06);
+    background-image:linear-gradient(to right, rgba(217,164,65,0.06) 0%, transparent 15%, transparent 85%, rgba(217,164,65,0.06) 100%);
+  }
+  .brand{display:flex;align-items:baseline;gap:0.4rem;font-family:var(--serif);font-weight:700;font-size:1.42rem;flex:0 0 auto;}
+  .brand .mark{color:var(--red);}
+  .brand .tag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--ink-soft);text-transform:uppercase;opacity:0.75;}
+  
+  /* Centered Traditionally Crafted Navigation */
+  .main-nav{
+    display:flex; align-items:center; justify-content:center; gap:0.4rem;
+    font-size:0.86rem; font-weight:600; flex:1; max-width:640px; margin:0 auto;
+    background:var(--bone); padding:0.35rem 0.6rem; border-radius:99px;
+    border:1px solid rgba(23,21,18,0.12); box-shadow:inset 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .main-nav a{
+    padding:0.42rem 1rem; border-radius:99px; transition:all 0.25s ease;
+    color:var(--ink-soft); position:relative; white-space:nowrap;
+  }
+  .main-nav a:hover{color:var(--red); background:rgba(178,58,45,0.08);}
+  .main-nav a.active{
+    color:var(--bone); background:var(--ink); font-weight:700;
+    box-shadow:0 3px 8px rgba(23,21,18,0.22);
+  }
+
+  /* Right Corner Social Icons */
+  .header-socials{display:flex; align-items:center; gap:0.5rem; flex:0 0 auto;}
+  .header-socials a{
+    width:34px; height:34px; border-radius:50%; background:var(--bone);
+    border:1px solid var(--line); color:var(--ink-soft); display:flex;
+    align-items:center; justify-content:center; transition:all 0.2s ease;
+  }
+  .header-socials a:hover{
+    background:var(--red); color:var(--bone); border-color:var(--red);
+    transform:translateY(-2px); box-shadow:0 4px 10px rgba(178,58,45,0.25);
+  }
+
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;padding:8px;width:36px;height:36px;}
+  .nav-toggle span{width:100%;height:2px;background:var(--ink);display:block;border-radius:2px;transition:transform 0.25s ease, opacity 0.25s ease;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media (max-width:920px){
+    .header-socials{display:none;}
+    .nav-toggle{display:flex;}
+    .main-nav{
+      display:none; position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      flex-direction:column; gap:0; padding:0.4rem 1.5rem 1rem;
+      box-shadow:0 14px 24px rgba(23,21,18,0.10); z-index:20;
+      max-width:100%; border-radius:0; background:var(--paper);
+    }
+    .main-nav.open{display:flex;}
+    .main-nav a{padding:0.8rem 0;border-bottom:1px solid var(--line);border-radius:0;text-align:center;}
+  }
+
+  /* Page Hero Banner */
+  .page-banner{
+    background:linear-gradient(135deg, var(--indigo) 0%, #151a24 100%);
+    color:var(--bone); padding:3.5rem 1.5rem 2.8rem; text-align:center; position:relative; overflow:hidden;
+  }
+  .page-banner::before{
+    content:""; position:absolute; inset:0; opacity:0.12;
+    background-image:repeating-linear-gradient(90deg, var(--gold) 0 2px, transparent 2px 28px);
+  }
+  .banner-inner{max-width:880px; margin:0 auto; position:relative; z-index:2;}
+  .banner-inner .eyebrow{color:var(--gold); margin-bottom:0.6rem;}
+  .banner-inner h1{font-family:var(--serif); font-size:clamp(2rem, 4vw, 3.2rem); margin:0 0 0.8rem; font-weight:700; line-height:1.15;}
+  .banner-inner p{font-size:1.02rem; opacity:0.92; line-height:1.55; margin:0 0 1.6rem;}
+
+  /* 24/7 Emergency Hotline Ribbon */
+  .emergency-ribbon{
+    display:flex; justify-content:center; align-items:center; gap:1.4rem; flex-wrap:wrap;
+    background:rgba(178,58,45,0.85); border:1px solid rgba(255,255,255,0.2); border-radius:12px;
+    padding:0.9rem 1.4rem; max-width:920px; margin:0 auto; font-family:var(--mono); font-size:0.82rem; color:#fff;
+  }
+  .hotline-btn{
+    background:rgba(250,248,243,0.18); color:#fff; border:1px solid rgba(255,255,255,0.3);
+    padding:0.35rem 0.75rem; border-radius:6px; font-weight:700; transition:all 0.2s ease; display:inline-flex; align-items:center; gap:0.4rem;
+  }
+  .hotline-btn:hover{background:#fff; color:var(--red-deep);}
+
+  /* Search & Filter Container */
+  .app-section{padding:3rem 1.5rem; max-width:1180px; margin:0 auto;}
+  
+  .filter-wrapper{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px;
+    padding:1.4rem; box-shadow:var(--shadow); margin-bottom:2.2rem;
+  }
+  .search-bar{display:flex; position:relative; margin-bottom:1.2rem;}
+  .search-icon{position:absolute; left:1rem; top:50%; transform:translateY(-50%); width:16px; height:16px; stroke:var(--ink-soft); fill:none; stroke-width:2;}
+  .search-bar input{
+    flex:1; min-width:0; border:1px solid var(--line); border-radius:8px 0 0 8px;
+    padding:0.85rem 1rem 0.85rem 2.6rem; font-family:var(--sans); font-size:0.9rem; color:var(--ink); background:#fff;
+  }
+  .search-bar input:focus{outline:none; border-color:var(--red);}
+  .search-bar select{
+    border:1px solid var(--line); border-left:none; background:var(--bone);
+    padding:0 2rem 0 1rem; font-family:var(--sans); font-size:0.83rem; color:var(--ink); cursor:pointer;
+    appearance:none; -webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%232a2620' stroke-width='2.2'><path d='M6 8l4 4 4-4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat; background-position:right 0.8rem center; background-size:12px 12px;
+  }
+  .search-bar button{background:var(--red); color:var(--bone); border:none; border-radius:0 8px 8px 0; padding:0 1.4rem; font-weight:600; font-size:0.86rem; cursor:pointer;}
+  .search-bar button:hover{background:var(--red-deep);}
+
+  .filter-track{display:flex; gap:0.5rem; overflow-x:auto; padding-bottom:0.4rem; scrollbar-width:none; justify-content:center; flex-wrap:wrap;}
+  .chip-btn{
+    display:inline-flex; align-items:center; gap:0.4rem; flex:0 0 auto; white-space:nowrap;
+    min-height:36px; font-size:0.8rem; font-weight:600; padding:0 0.95rem;
+    border-radius:99px; border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+    cursor:pointer; transition:all 0.2s ease;
+  }
+  .chip-btn.active{background:var(--ink); color:var(--bone); border-color:var(--ink);}
+  .chip-btn:hover{border-color:var(--red); color:var(--red);}
+  .chip-btn.active:hover{color:var(--bone);}
+
+  /* DIRECTORY CARDS GRID */
+  .dir-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem;}
+  @media (max-width:820px){.dir-grid{grid-template-columns:1fr;}}
+
+  .dir-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.6rem; display:flex; flex-direction:column; gap:1.1rem; justify-content:space-between;
+    box-shadow:var(--shadow); transition:transform 0.2s ease, box-shadow 0.2s ease; position:relative; overflow:hidden;
+  }
+  .dir-card:hover{transform:translateY(-3px); box-shadow:0 16px 36px rgba(23,21,18,0.14);}
+
+  .dir-header-row{display:flex; align-items:flex-start; justify-content:space-between; gap:0.8rem;}
+  .dir-title-box{display:flex; gap:1rem; align-items:center;}
+  .dir-logo{
+    width:50px; height:50px; border-radius:12px; background:var(--ink); color:var(--bone);
+    display:flex; align-items:center; justify-content:center; font-family:var(--serif);
+    font-weight:700; font-size:1.2rem; flex:0 0 auto;
+  }
+  .dir-title-box h3{margin:0; font-size:1.18rem; font-family:var(--serif); font-weight:700; line-height:1.25;}
+  .dir-title-box .category-tag{font-family:var(--mono); font-size:0.72rem; color:var(--red-deep); font-weight:600; margin-top:0.2rem;}
+
+  .verified-badge{
+    background:rgba(63,92,72,0.12); color:var(--green); font-family:var(--mono); font-size:0.65rem;
+    font-weight:700; padding:0.25rem 0.55rem; border-radius:4px; border:1px solid rgba(63,92,72,0.25); white-space:nowrap;
+  }
+
+  .dir-body-desc{font-size:0.88rem; color:var(--ink-soft); line-height:1.52; margin:0;}
+
+  /* Metadata Block */
+  .dir-info-list{
+    display:flex; flex-direction:column; gap:0.4rem; background:var(--bone);
+    padding:0.85rem 1rem; border-radius:8px; font-family:var(--mono); font-size:0.78rem; color:var(--ink-soft);
+  }
+  .info-row{display:flex; align-items:center; gap:0.5rem;}
+  .info-row strong{color:var(--ink);}
+
+  .dir-action-row{
+    display:flex; align-items:center; justify-content:space-between; gap:0.8rem; flex-wrap:wrap;
+    border-top:1px solid var(--line); padding-top:1rem; margin-top:0.2rem;
+  }
+  .btn-action{
+    background:var(--ink); color:var(--bone); font-size:0.82rem; font-weight:600;
+    min-height:38px; padding:0 1.1rem; border-radius:7px; border:none; cursor:pointer;
+    transition:all 0.2s ease; display:inline-flex; align-items:center; justify-content:center; gap:0.4rem;
+  }
+  .btn-action:hover{background:var(--red);}
+
+  .btn-wa-chat{
+    background:#25D366; color:#fff; font-size:0.82rem; font-weight:600;
+    min-height:38px; padding:0 1rem; border-radius:7px; border:none; cursor:pointer;
+    display:inline-flex; align-items:center; gap:0.4rem; text-decoration:none; transition:all 0.2s ease;
+  }
+  .btn-wa-chat:hover{background:#1da851; color:#fff;}
+
+  .btn-sec-outline{
+    background:transparent; color:var(--ink); border:1px solid var(--line); font-size:0.8rem; font-weight:600;
+    min-height:38px; padding:0 0.9rem; border-radius:7px; cursor:pointer; transition:all 0.2s ease;
+  }
+  .btn-sec-outline:hover{background:var(--bone); border-color:var(--ink);}
+
+  /* Claim / Register CTA Box */
+  .register-listing-cta{
+    background:linear-gradient(135deg, var(--red-deep) 0%, var(--ink) 100%);
+    color:var(--bone); border-radius:16px; padding:2.2rem 1.8rem; margin-top:3.5rem;
+    display:flex; align-items:center; justify-content:space-between; gap:1.8rem; flex-wrap:wrap;
+  }
+  .register-listing-cta h3{font-family:var(--serif); font-size:1.4rem; margin:0 0 0.4rem;}
+  .register-listing-cta p{margin:0; font-size:0.9rem; opacity:0.88; max-width:50ch;}
+  .btn-gold{
+    background:var(--gold); color:var(--ink); font-weight:700; font-size:0.9rem;
+    padding:0.8rem 1.5rem; border-radius:8px; border:none; cursor:pointer; transition:all 0.2s ease;
+  }
+  .btn-gold:hover{background:var(--bone); transform:translateY(-2px);}
+
+  /* Location / Details Modal */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(23,21,18,0.75); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:1.5rem; backdrop-filter:blur(4px);
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    background:var(--paper); border-radius:16px; max-width:540px; width:100%;
+    padding:2.2rem; box-shadow:0 20px 40px rgba(0,0,0,0.25); border:1px solid var(--line);
+    position:relative; max-height:90vh; overflow-y:auto; color:var(--ink);
+  }
+  .modal-close{
+    position:absolute; top:1.2rem; right:1.2rem; background:none; border:none;
+    font-size:1.4rem; cursor:pointer; color:var(--ink-soft); width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center; border-radius:50%;
+  }
+  .modal-close:hover{background:var(--bone); color:var(--ink);}
+
+  /* Footer */
+  .site-footer{background:var(--ink); color:var(--bone-dim); padding:3rem 1.5rem 1.5rem; margin-top:3.5rem;}
+  .footer-grid{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:2rem; padding-bottom:2rem; border-bottom:1px solid rgba(237,232,221,0.15);
+  }
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.footer-grid{grid-template-columns:1fr; gap:1.6rem;}}
+  .footer-grid h5{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin:0 0 0.8rem;}
+  .footer-grid a,.footer-grid p{display:block; font-size:0.85rem; color:var(--bone-dim); margin-bottom:0.55rem; line-height:1.4;}
+  .footer-grid a:hover{color:var(--bone);}
+  .footer-brand .brand{color:var(--bone);}
+  .footer-brand p{max-width:32ch; opacity:0.75;}
+  .footer-bottom{max-width:1180px; margin:0 auto; padding-top:1.2rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; font-size:0.76rem; color:var(--bone-dim); opacity:0.7;}
+</style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="mark">Lamka</span> Hub <span class="tag">Churachandpur</span></a>
+    
+    <nav class="main-nav" aria-label="Primary">
+      <a href="index.html#home">Home</a>
+      <a href="handloom.html">Handloom Market</a>
+      <a href="directory.html" class="active">Directory</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="notices.html">Notices</a>
+      <a href="about.html">About Us</a>
+    </nav>
+
+    <div class="header-socials">
+      <a href="https://x.com" target="_blank" aria-label="X (Twitter)" title="X (Twitter)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://wa.me/919862000000" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+    <div class="banner-inner">
+      <span class="eyebrow">Verified District Listings & Helplines</span>
+      <h1>Churachandpur District Directory</h1>
+      <p>Verified contacts for weaver cooperatives, hospitals, emergency helplines, clinics, artisans, and public institutions across Lamka wards.</p>
+
+      <!-- 24/7 Emergency Ribbon -->
+      <div class="emergency-ribbon">
+        <span>🚨 <strong>24/7 EMERGENCY HOTLINES:</strong></span>
+        <a href="tel:03874233855" class="hotline-btn">🏥 Hospital: 03874-233855</a>
+        <a href="tel:03874233221" class="hotline-btn">🚓 Police: 03874-233221</a>
+        <a href="tel:03874233100" class="hotline-btn">🚒 Fire: 101</a>
+        <a href="tel:03874233875" class="hotline-btn">🏛 DC Office: 03874-233875</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <!-- Directory Main Section -->
+  <main class="app-section">
+    
+    <!-- Filter Wrapper -->
+    <div class="filter-wrapper">
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="dirSearch" placeholder="Search Saipikhup weaver, District Hospital, police, pharmacy, Sielmat, Hiangtam Lamka…">
+        <select id="wardSelect">
+          <option value="all">All Ward Sectors</option>
+          <option value="Hiangtam Lamka">Hiangtam Lamka</option>
+          <option value="Tuibong">Tuibong</option>
+          <option value="Rengkai">Rengkai</option>
+          <option value="New Lamka">New Lamka</option>
+          <option value="Sielmat">Sielmat</option>
+          <option value="Zenhang Lamka">Zenhang Lamka</option>
+          <option value="Kangvai">Kangvai</option>
+        </select>
+        <button id="dirSearchBtn">Search Directory</button>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-track" id="dirFilterTrack">
+        <button class="chip-btn active" data-cat="all">All Listings (14)</button>
+        <button class="chip-btn" data-cat="shg">🧶 Weaver SHGs & Looms (4)</button>
+        <button class="chip-btn" data-cat="health">🏥 Hospitals & Clinics (4)</button>
+        <button class="chip-btn" data-cat="safety">🚨 Emergency & Public Safety (3)</button>
+        <button class="chip-btn" data-cat="business">🛍 Artisans & Local Services (3)</button>
+      </div>
+    </div>
+
+    <!-- Directory Grid -->
+    <div class="dir-grid" id="dirGrid">
+
+      <!-- Listing 1 -->
+      <div class="dir-card" data-cat="shg" data-ward="Hiangtam Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--red);">KS</div>
+              <div>
+                <h3>Saipikhup Artisans & Weavers SHG</h3>
+                <div class="category-tag">Weaver Cooperative · Kuki Handloom</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified SHG</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Cooperative producing authentic Kuki Saipikhup diamond shawls, Thangsuo honor drapes, and custom handloom wear direct from backstrap looms with 0% middleman fees.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Near Public Ground, Hiangtam Lamka</div>
+          <div class="info-row">📞 <strong>Phone:</strong> +91 98620 00001</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 8:30 AM – 5:30 PM</div>
+          <div class="info-row">✨ <strong>Specialty:</strong> Kuki Saipikhup & Thangsuo Diamond Weaves</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Saipikhup Artisans SHG', 'Hiangtam Lamka, near Public Ground', '+91 98620 00001', 'Mon – Sat: 8:30 AM – 5:30 PM', 'Authentic Kuki Saipikhup diamond motif shawls, Thangsuo honor drapes, custom loin loom orders.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000001?text=Hello!%20I%20found%20your%20SHG%20listing%20on%20Lamka%20Hub.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:+919862000001">📞 Direct Call</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listing 2 -->
+      <div class="dir-card" data-cat="shg" data-ward="Hiangtam Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--indigo);">GW</div>
+              <div>
+                <h3>Guite Weaving Society</h3>
+                <div class="category-tag">Weaver Cooperative · Paite Handloom</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified SHG</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Master weavers creating ceremonial Paite Puandum puan, Khamtang drapes, and traditional silk-accented textiles on loin and frame looms.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Guite Veng, Hiangtam Lamka</div>
+          <div class="info-row">📞 <strong>Phone:</strong> +91 98620 00005</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 9:00 AM – 5:00 PM</div>
+          <div class="info-row">✨ <strong>Specialty:</strong> Paite Puandum & Khamtang Ceremonial Puan</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Guite Weaving Society', 'Guite Veng, Hiangtam Lamka', '+91 98620 00005', 'Mon – Sat: 9:00 AM – 5:00 PM', 'Paite Puandum vertical stripe drapes, Khamtang formal wear, vegetable yarn dyeing.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000005?text=Hello!%20I%20am%20enquiring%20about%20Paite%20Puandum%20drapes.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:+919862000005">📞 Direct Call</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listing 3 -->
+      <div class="dir-card" data-cat="health" data-ward="Hiangtam Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--red-deep);">DH</div>
+              <div>
+                <h3>District Hospital Churachandpur</h3>
+                <div class="category-tag">Government Hospital · Emergency & OPD</div>
+              </div>
+            </div>
+            <span class="verified-badge" style="background:rgba(178,58,45,0.12); color:var(--red); border-color:rgba(178,58,45,0.25);">🚨 24/7 Emergency</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Primary district hospital equipped with 24/7 emergency casualty ward, upgraded pediatric OPD, maternity delivery unit, ICU, and district ambulance fleet.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> IB Road, Lamka Sector</div>
+          <div class="info-row">📞 <strong>Emergency Hotline:</strong> 03874-233855 / 102</div>
+          <div class="info-row">🕒 <strong>Service:</strong> 24 Hours Emergency Coverage</div>
+          <div class="info-row">✨ <strong>Facilities:</strong> Pediatric OPD, Maternity, ICU, Ambulance</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('District Hospital Churachandpur', 'IB Road, Lamka Sector', '03874-233855 / 102', '24 Hours Emergency Coverage', '24/7 Emergency Casualty, Pediatric OPD (8 AM - 4 PM), Maternity Ward, Blood Bank, Ambulance fleet.')">📍 Location & Info</button>
+          <a class="btn-action" style="background:var(--red);" href="tel:03874233855">📞 Call Emergency Helpline</a>
+        </div>
+      </div>
+
+      <!-- Listing 4 -->
+      <div class="dir-card" data-cat="health" data-ward="Sielmat">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--gold); color:var(--ink);">SP</div>
+              <div>
+                <h3>Sielmat Family Clinic & Pharmacy</h3>
+                <div class="category-tag">Community Clinic & Diagnostic</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified Clinic</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">General outpatient medical clinic, maternal checkups, diagnostic blood lab, pharmacy, and Saturday community health screening camps.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Sielmat Main Road, Sielmat</div>
+          <div class="info-row">📞 <strong>Phone:</strong> 03874-233990 / +91 98620 11990</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 8:00 AM – 8:00 PM</div>
+          <div class="info-row">✨ <strong>Services:</strong> General Medicine, Lab Diagnostics, Pharmacy</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Sielmat Family Clinic', 'Sielmat Main Road', '03874-233990', 'Mon – Sat: 8:00 AM – 8:00 PM', 'General OPD consultations, Maternal checkups, Blood testing laboratory, Retail pharmacy.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862011990?text=Hello!%20I%20want%20to%20book%20a%20clinic%20appointment.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:03874233990">📞 Call Clinic</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listing 5 -->
+      <div class="dir-card" data-cat="shg" data-ward="Rengkai">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--gold); color:var(--ink);">HA</div>
+              <div>
+                <h3>Hmar Artisan Collective</h3>
+                <div class="category-tag">Weaver Cooperative · Hmar Weaves</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified SHG</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Artisan collective handweaving authentic Hmar Am tri-color block shawls, Hmar Thangsuo honor weaves, and traditional tribal crafts.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Rengkai Main Road, Rengkai</div>
+          <div class="info-row">📞 <strong>Phone:</strong> +91 98620 00007</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 9:00 AM – 5:30 PM</div>
+          <div class="info-row">✨ <strong>Specialty:</strong> Hmar Am Tri-color Block Weaves</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Hmar Artisan Collective', 'Rengkai Main Road', '+91 98620 00007', 'Mon – Sat: 9:00 AM – 5:30 PM', 'Hmar Am tri-color block motif shawls, Hmar Thangsuo honor drapes, indigenous cotton crafts.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000007?text=Hello!%20I%20would%20like%20to%20order%20Hmar%20Am%20shawls.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:+919862000007">📞 Direct Call</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listing 6 -->
+      <div class="dir-card" data-cat="shg" data-ward="New Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--indigo);">TW</div>
+              <div>
+                <h3>Thangzam Weavers' Group</h3>
+                <div class="category-tag">Weaver Unit · Zo & Zomi Weaves</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified Unit</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Traditional handloom weaving unit specializing in Zou highland blue puan, Thangsuo shawls, and festive cultural wear for district events.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Dorcas Veng, New Lamka</div>
+          <div class="info-row">📞 <strong>Phone:</strong> +91 98620 00002</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 8:30 AM – 6:00 PM</div>
+          <div class="info-row">✨ <strong>Specialty:</strong> Zou Highland Blue Puan & Thangsuo</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Thangzam Weavers Group', 'Dorcas Veng, New Lamka', '+91 98620 00002', 'Mon – Sat: 8:30 AM – 6:00 PM', 'Zou highland blue puan, Thangsuo honor shawls, festive cultural wraps.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000002?text=Hello!%20Enquiring%20about%20handloom%20puan%20orders.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:+919862000002">📞 Direct Call</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listing 7 -->
+      <div class="dir-card" data-cat="safety" data-ward="Hiangtam Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--indigo);">PS</div>
+              <div>
+                <h3>Churachandpur Police Station</h3>
+                <div class="category-tag">Public Safety · Police Control Room</div>
+              </div>
+            </div>
+            <span class="verified-badge" style="background:rgba(43,58,85,0.12); color:var(--indigo); border-color:rgba(43,58,85,0.25);">24/7 Station</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">District police station providing 24/7 law enforcement, emergency assistance, traffic regulation, and public safety control room.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Tedim Road, Lamka Main Junction</div>
+          <div class="info-row">📞 <strong>Control Room:</strong> 03874-233221 / 112</div>
+          <div class="info-row">🕒 <strong>Service:</strong> 24 Hours Emergency Assistance</div>
+          <div class="info-row">✨ <strong>Helpline:</strong> Police Control Room & Traffic Cell</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Churachandpur Police Station', 'Tedim Road, Lamka Main Junction', '03874-233221 / 112', '24 Hours Emergency Assistance', 'District Police Headquarters, Control Room 112, Traffic Cell, Emergency Response.')">📍 Location & Info</button>
+          <a class="btn-action" style="background:var(--indigo);" href="tel:03874233221">📞 Call Control Room</a>
+        </div>
+      </div>
+
+      <!-- Listing 8 -->
+      <div class="dir-card" data-cat="safety" data-ward="Tuibong">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--red-deep);">FS</div>
+              <div>
+                <h3>Fire & Emergency Response Station</h3>
+                <div class="category-tag">Emergency Services · Fire Control</div>
+              </div>
+            </div>
+            <span class="verified-badge" style="background:rgba(178,58,45,0.12); color:var(--red); border-color:rgba(178,58,45,0.25);">🚨 24/7 Fire Station</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">District fire station equipped with rapid response fire tenders and disaster rescue personnel for all district wards.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Near Peace Ground, Tuibong Sector</div>
+          <div class="info-row">📞 <strong>Fire Helpline:</strong> 101 / 03874-233100</div>
+          <div class="info-row">🕒 <strong>Service:</strong> 24 Hours Fire & Rescue</div>
+          <div class="info-row">✨ <strong>Fleet:</strong> Fire Tenders, Disaster Response Unit</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Fire & Emergency Response Station', 'Near Peace Ground, Tuibong Sector', '101 / 03874-233100', '24 Hours Fire & Rescue', 'District Fire Tenders, Emergency Rescue Team, Water Supply Tenders.')">📍 Location & Info</button>
+          <a class="btn-action" style="background:var(--red);" href="tel:101">📞 Call Fire Helpline (101)</a>
+        </div>
+      </div>
+
+      <!-- Listing 9 -->
+      <div class="dir-card" data-cat="business" data-ward="Hiangtam Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--ink);">LA</div>
+              <div>
+                <h3>Lamka Artisan Handicraft Emporium</h3>
+                <div class="category-tag">Local Retail · Handloom & Crafts</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified Store</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Central retail outlet displaying authentic handwoven shawls, drapes, cane woodcrafts, and traditional tribal jewelry from local weaver SHGs.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Main Market Road, Lamka</div>
+          <div class="info-row">📞 <strong>Phone:</strong> +91 98620 00099</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 9:30 AM – 6:30 PM</div>
+          <div class="info-row">✨ <strong>Products:</strong> 9 District Weaves, Cane Crafts, Jewelry</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Lamka Artisan Emporium', 'Main Market Road, Lamka', '+91 98620 00099', 'Mon – Sat: 9:30 AM – 6:30 PM', 'Authentic 9 tribal shawls & puan, cane furniture, bamboo basketry, traditional silver jewelry.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000099?text=Hello!%20I%20want%20to%20inquire%20about%20handicraft%20items.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:+919862000099">📞 Call Store</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listing 10 -->
+      <div class="dir-card" data-cat="health" data-ward="Tuibong">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--green);">PH</div>
+              <div>
+                <h3>Tuibong Primary Health Centre (PHC)</h3>
+                <div class="category-tag">Public Health Centre · Community Care</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Government PHC</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Government primary health center offering general OPD consultation, free routine child vaccination, maternal care, and field health outreach.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Tuibong Sector, near Peace Ground</div>
+          <div class="info-row">📞 <strong>Phone:</strong> 03874-233112</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 9:00 AM – 4:00 PM</div>
+          <div class="info-row">✨ <strong>Services:</strong> General OPD, Vaccination, First Aid</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Tuibong Primary Health Centre', 'Tuibong Sector, near Peace Ground', '03874-233112', 'Mon – Sat: 9:00 AM – 4:00 PM', 'Outpatient consultations, routine child vaccination, free essential medicine distribution.')">📍 Location & Info</button>
+          <a class="btn-action" href="tel:03874233112">📞 Call PHC Desk</a>
+        </div>
+      </div>
+
+      <!-- Listing 11 -->
+      <div class="dir-card" data-cat="business" data-ward="Zenhang Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--indigo);">DL</div>
+              <div>
+                <h3>Churachandpur District Library & Archive</h3>
+                <div class="category-tag">Public Library · Cultural Archive</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Public Library</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Public reference library housing historical tribal archives, district literature, quiet study hall, and student digital research facilities.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Zenhang Lamka, near DC Complex</div>
+          <div class="info-row">📞 <strong>Phone:</strong> 03874-233550</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 9:30 AM – 5:00 PM</div>
+          <div class="info-row">✨ <strong>Facilities:</strong> Tribal Heritage Archive, Study Hall</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('District Library & Archive', 'Zenhang Lamka, near DC Complex', '03874-233550', 'Mon – Sat: 9:30 AM – 5:00 PM', 'Tribal historical archives, district literature, reference books, student reading room.')">📍 Location & Info</button>
+          <a class="btn-action" href="tel:03874233550">📞 Call Library</a>
+        </div>
+      </div>
+
+      <!-- Listing 12 -->
+      <div class="dir-card" data-cat="shg" data-ward="New Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--green);">ZL</div>
+              <div>
+                <h3>Zomi Loom Society & Cultural Centre</h3>
+                <div class="category-tag">Handloom Society · Cultural Preservation</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified Society</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Cultural weaving society dedicated to preserving traditional Paite, Zou, and Tedim Chin handloom motifs and training young artisans.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Vengnuam, New Lamka</div>
+          <div class="info-row">📞 <strong>Phone:</strong> +91 98620 00006</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 9:00 AM – 5:00 PM</div>
+          <div class="info-row">✨ <strong>Specialty:</strong> Zomi & Paite Traditional Weaves</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Zomi Loom Society', 'Vengnuam, New Lamka', '+91 98620 00006', 'Mon – Sat: 9:00 AM – 5:00 PM', 'Zomi loom training, traditional drape weaving, motif preservation.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000006?text=Hello!%20Enquiring%20about%20Zomi%20loom%20products.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:+919862000006">📞 Call Society</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listing 13 -->
+      <div class="dir-card" data-cat="business" data-ward="New Lamka">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--red);">RC</div>
+              <div>
+                <h3>Rayburn College & Educational Complex</h3>
+                <div class="category-tag">Higher Education Institution</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Accredited College</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">Premier higher education institution in Churachandpur offering undergraduate degree programs in Arts, Science, Commerce, and Computer Applications.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Gangpimual, New Lamka</div>
+          <div class="info-row">📞 <strong>Phone:</strong> 03874-232110</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Fri: 9:00 AM – 4:00 PM</div>
+          <div class="info-row">✨ <strong>Courses:</strong> BA, BSc, BCom, BCA Programs</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Rayburn College', 'Gangpimual, New Lamka', '03874-232110', 'Mon – Fri: 9:00 AM – 4:00 PM', 'Undergraduate degree programs, computer lab, college library, student career counseling.')">📍 Location & Info</button>
+          <a class="btn-action" href="tel:03874232110">📞 Call Office</a>
+        </div>
+      </div>
+
+      <!-- Listing 14 -->
+      <div class="dir-card" data-cat="business" data-ward="Kangvai">
+        <div>
+          <div class="dir-header-row">
+            <div class="dir-title-box">
+              <div class="dir-logo" style="background:var(--green);">LF</div>
+              <div>
+                <h3>Lamka Farmers Produce Cooperative</h3>
+                <div class="category-tag">Agricultural Cooperative · Local Produce</div>
+              </div>
+            </div>
+            <span class="verified-badge">✔ Verified Farmers Co-op</span>
+          </div>
+
+          <p class="dir-body-desc" style="margin-top:0.8rem;">District agricultural cooperative collecting organic passionfruit, ginger, turmeric, and fresh hill produce from local farmers for town market sales.</p>
+        </div>
+
+        <div class="dir-info-list">
+          <div class="info-row">📍 <strong>Address:</strong> Kangvai Main Sector</div>
+          <div class="info-row">📞 <strong>Phone:</strong> +91 98620 00088</div>
+          <div class="info-row">🕒 <strong>Hours:</strong> Mon – Sat: 7:30 AM – 5:00 PM</div>
+          <div class="info-row">✨ <strong>Products:</strong> Passionfruit, Organic Ginger, Hill Produce</div>
+        </div>
+
+        <div class="dir-action-row">
+          <button class="btn-sec-outline" onclick="openDetailsModal('Lamka Farmers Cooperative', 'Kangvai Main Sector', '+91 98620 00088', 'Mon – Sat: 7:30 AM – 5:00 PM', 'Direct wholesale organic produce, passionfruit juice pulp, ginger supply.')">📍 Location & Info</button>
+          <div style="display:flex; gap:0.5rem;">
+            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000088?text=Hello!%20Inquiring%20about%20organic%20produce%20wholesale.">💬 WhatsApp</a>
+            <a class="btn-action" href="tel:+919862000088">📞 Call Co-op</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- REGISTER LISTING CTA BOX -->
+    <div class="register-listing-cta">
+      <div>
+        <h3>Own a Local Business, Clinic, SHG, or Artisan Emporium?</h3>
+        <p>Register your organization on the official Lamka Hub District Directory for 100% free with direct phone call and WhatsApp customer connectivity.</p>
+      </div>
+      <button class="btn-gold" onclick="alert('To register your business, SHG, or clinic on the Lamka Hub Directory, please WhatsApp our District Coordinator at +91 98620 00000 or email support@lamkahub.org.');">Add Your Listing (Free) →</button>
+    </div>
+  </main>
+
+  <!-- Interactive Details & Location Modal -->
+  <div class="modal-overlay" id="detailsModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModals()">&times;</button>
+      <span class="eyebrow" style="color:var(--green);">✔ Verified Directory Listing</span>
+      <h3 id="modalDirTitle" style="margin:0.4rem 0 0.4rem; font-family:var(--serif);">Organization Name</h3>
+      
+      <div style="background:var(--bone); padding:1rem; border-radius:10px; margin:1rem 0 1.2rem; font-family:var(--mono); font-size:0.8rem; line-height:1.6;">
+        <div>📍 <strong>Address:</strong> <span id="modalDirAddr">Location</span></div>
+        <div>📞 <strong>Phone:</strong> <span id="modalDirPhone">Phone</span></div>
+        <div>🕒 <strong>Hours:</strong> <span id="modalDirHours">Hours</span></div>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <h4 style="margin:0 0 0.4rem; font-family:var(--serif); font-size:1rem;">Services & Facilities:</h4>
+        <p id="modalDirServices" style="font-size:0.88rem; color:var(--ink-soft); line-height:1.5; margin:0;"></p>
+      </div>
+
+      <div style="display:flex; gap:0.8rem;">
+        <a id="modalWaBtn" target="_blank" style="flex:1; background:#25D366; color:#fff; padding:0.75rem; border-radius:8px; text-align:center; font-weight:600; text-decoration:none;">💬 WhatsApp</a>
+        <a id="modalCallBtn" style="flex:1; background:var(--ink); color:var(--bone); padding:0.75rem; border-radius:8px; text-align:center; font-weight:600; text-decoration:none;">📞 Call Direct</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark">Lamka</span> Hub</div>
+        <p>A community platform built for Churachandpur — handloom marketplace, local directory, jobs, and town notices.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="index.html">Home</a>
+        <a href="handloom.html">Handloom Market</a>
+        <a href="directory.html">Directory</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="notices.html">Town Notices</a>
+      </div>
+      <div>
+        <h5>Directory Categories</h5>
+        <a href="directory.html">Weaver Cooperatives & SHGs</a>
+        <a href="directory.html">Hospitals & Health Clinics</a>
+        <a href="directory.html">Police & Fire Emergency Helplines</a>
+        <a href="directory.html">Artisans & Retail Stores</a>
+      </div>
+      <div>
+        <h5>Emergency Contacts</h5>
+        <p>District Hospital — 03874-233855 / 102</p>
+        <p>Police Control Room — 03874-233221 / 112</p>
+        <p>DC Office, Churachandpur — 03874-233875</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lamka Hub · Built for Churachandpur, by Churachandpur</span>
+      <span>All 9 district tribal handloom traditions celebrated equally</span>
+    </div>
+  </footer>
+
+<script>
+  // Mobile Menu Toggle
+  const toggle = document.getElementById('navToggle');
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      const nav = document.querySelector('.main-nav');
+      if(nav) nav.classList.toggle('open');
+    });
+  }
+
+  // Filter Logic by Category & Ward
+  let activeCat = 'all';
+
+  document.querySelectorAll('#dirFilterTrack .chip-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#dirFilterTrack .chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.getAttribute('data-cat');
+      filterDirectory();
+    });
+  });
+
+  const searchInp = document.getElementById('dirSearch');
+  if(searchInp) searchInp.addEventListener('input', filterDirectory);
+
+  const wardSel = document.getElementById('wardSelect');
+  if(wardSel) wardSel.addEventListener('change', filterDirectory);
+
+  const searchBtn = document.getElementById('dirSearchBtn');
+  if(searchBtn) searchBtn.addEventListener('click', filterDirectory);
+
+  function filterDirectory(){
+    const query = searchInp ? searchInp.value.toLowerCase().trim() : '';
+    const selectedWard = wardSel ? wardSel.value : 'all';
+    const cards = document.querySelectorAll('#dirGrid .dir-card');
+
+    cards.forEach(card => {
+      const cat = card.getAttribute('data-cat') || '';
+      const ward = card.getAttribute('data-ward') || '';
+      const text = card.innerText.toLowerCase();
+
+      const matchCat = (activeCat === 'all' || cat === activeCat);
+      const matchWard = (selectedWard === 'all' || ward === selectedWard);
+      const matchQuery = (!query || text.includes(query));
+
+      if(matchCat && matchWard && matchQuery){
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Details Modal
+  function openDetailsModal(title, addr, phone, hours, services){
+    document.getElementById('modalDirTitle').innerText = title;
+    document.getElementById('modalDirAddr').innerText = addr;
+    document.getElementById('modalDirPhone').innerText = phone;
+    document.getElementById('modalDirHours').innerText = hours;
+    document.getElementById('modalDirServices').innerText = services;
+
+    const rawPhone = phone.replace(/[^0-9]/g, '');
+    document.getElementById('modalWaBtn').href = 'https://wa.me/' + (rawPhone.length === 10 ? '91' + rawPhone : rawPhone) + '?text=' + encodeURIComponent('Hello! I found your listing on Lamka Hub Directory.');
+    document.getElementById('modalCallBtn').href = 'tel:' + rawPhone;
+
+    document.getElementById('detailsModal').classList.add('open');
+  }
+
+  function closeModals(){
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+  }
+</script>
+</body>
+</html>

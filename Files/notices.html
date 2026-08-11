@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Official Town Bulletin & Notice Board — Lamka Hub | Churachandpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171512; --ink-soft:#2a2620;
+    --bone:#EDE8DD; --bone-dim:#DED7C6; --paper:#FAF8F3;
+    --red:#B23A2D; --red-deep:#8C2C21;
+    --green:#3F5C48; --gold:#D9A441; --indigo:#2B3A55;
+    --line: rgba(23,21,18,0.12);
+    --shadow: 0 12px 30px rgba(23,21,18,0.10);
+    --radius: 14px;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Public Sans", -apple-system, Segoe UI, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+    /* Notice Urgency Color Palette */
+    --urgency-critical: #D92B2B;
+    --urgency-high: #D9822B;
+    --urgency-routine: #2B578C;
+    --urgency-cultural: #2B7A4B;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:#181512;-webkit-font-smoothing:antialiased;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+  .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;text-align:center;}
+
+  /* Stripe divider */
+  .stripe{
+    height:7px; width:100%;
+    background:repeating-linear-gradient(90deg,var(--ink) 0 44px,var(--red) 44px 51px,var(--bone) 51px 58px,var(--gold) 58px 65px,var(--ink) 65px 109px);
+  }
+  
+  /* Header Navigation */
+  .site-header{
+    background:var(--paper); border-bottom:2px solid var(--bone-dim); padding:0.8rem 1.8rem;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    position:sticky; top:0; z-index:90; box-shadow:0 4px 16px rgba(23,21,18,0.06);
+    background-image:linear-gradient(to right, rgba(217,164,65,0.06) 0%, transparent 15%, transparent 85%, rgba(217,164,65,0.06) 100%);
+  }
+  .brand{display:flex;align-items:baseline;gap:0.4rem;font-family:var(--serif);font-weight:700;font-size:1.42rem;flex:0 0 auto;}
+  .brand .mark{color:var(--red);}
+  .brand .tag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--ink-soft);text-transform:uppercase;opacity:0.75;}
+  
+  /* Centered Traditionally Crafted Navigation */
+  .main-nav{
+    display:flex; align-items:center; justify-content:center; gap:0.4rem;
+    font-size:0.86rem; font-weight:600; flex:1; max-width:640px; margin:0 auto;
+    background:var(--bone); padding:0.35rem 0.6rem; border-radius:99px;
+    border:1px solid rgba(23,21,18,0.12); box-shadow:inset 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .main-nav a{
+    padding:0.42rem 1rem; border-radius:99px; transition:all 0.25s ease;
+    color:var(--ink-soft); position:relative; white-space:nowrap;
+  }
+  .main-nav a:hover{color:var(--red); background:rgba(178,58,45,0.08);}
+  .main-nav a.active{
+    color:var(--bone); background:var(--ink); font-weight:700;
+    box-shadow:0 3px 8px rgba(23,21,18,0.22);
+  }
+
+  /* Right Corner Social Icons */
+  .header-socials{display:flex; align-items:center; gap:0.5rem; flex:0 0 auto;}
+  .header-socials a{
+    width:34px; height:34px; border-radius:50%; background:var(--bone);
+    border:1px solid var(--line); color:var(--ink-soft); display:flex;
+    align-items:center; justify-content:center; transition:all 0.2s ease;
+  }
+  .header-socials a:hover{
+    background:var(--red); color:var(--bone); border-color:var(--red);
+    transform:translateY(-2px); box-shadow:0 4px 10px rgba(178,58,45,0.25);
+  }
+
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;padding:8px;width:36px;height:36px;}
+  .nav-toggle span{width:100%;height:2px;background:var(--ink);display:block;border-radius:2px;transition:transform 0.25s ease, opacity 0.25s ease;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media (max-width:920px){
+    .header-socials{display:none;}
+    .nav-toggle{display:flex;}
+    .main-nav{
+      display:none; position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      flex-direction:column; gap:0; padding:0.4rem 1.5rem 1rem;
+      box-shadow:0 14px 24px rgba(23,21,18,0.10); z-index:20;
+      max-width:100%; border-radius:0; background:var(--paper);
+    }
+    .main-nav.open{display:flex;}
+    .main-nav a{padding:0.8rem 0;border-bottom:1px solid var(--line);border-radius:0;text-align:center;}
+  }
+
+  /* Page Banner */
+  .page-banner{
+    background:linear-gradient(135deg, #1c1815 0%, #2a201a 100%);
+    color:var(--bone); padding:3rem 1.5rem 2.2rem; text-align:center; position:relative; overflow:hidden; border-bottom:1px solid rgba(237,232,221,0.1);
+  }
+  .banner-inner{max-width:860px; margin:0 auto; position:relative; z-index:2;}
+  .banner-inner .eyebrow{color:var(--gold); margin-bottom:0.5rem;}
+  .banner-inner h1{font-family:var(--serif); font-size:clamp(2rem, 4vw, 3.2rem); margin:0 0 0.6rem; font-weight:700; line-height:1.12;}
+  .banner-inner p{font-size:1rem; opacity:0.9; line-height:1.5; margin:0 0 1.5rem;}
+
+  /* Urgency Legend Strip */
+  .urgency-legend-bar{
+    display:flex; justify-content:center; align-items:center; gap:1.2rem; flex-wrap:wrap;
+    background:rgba(23,21,18,0.7); border:1px solid rgba(217,164,65,0.3); border-radius:10px;
+    padding:0.75rem 1.2rem; max-width:820px; margin:0 auto; font-family:var(--mono); font-size:0.75rem;
+  }
+  .legend-item{display:flex; align-items:center; gap:0.4rem;}
+  .legend-dot{width:10px; height:10px; border-radius:50%; display:inline-block;}
+  .legend-dot.critical{background:var(--urgency-critical); box-shadow:0 0 8px var(--urgency-critical); animation:pulse-crit 1.5s infinite;}
+  .legend-dot.high{background:var(--urgency-high);}
+  .legend-dot.routine{background:var(--urgency-routine);}
+  .legend-dot.cultural{background:var(--urgency-cultural);}
+
+  @keyframes pulse-crit{0%,100%{transform:scale(1); opacity:1;}50%{transform:scale(1.25); opacity:0.6;}}
+
+  /* Control Module: Search & Filters */
+  .board-controls{
+    max-width:1180px; margin:2rem auto 1.5rem; padding:0 1.5rem;
+    display:flex; flex-direction:column; gap:1.2rem; align-items:center;
+  }
+  .search-module{
+    background:var(--paper); border-radius:12px; overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); width:100%; max-width:680px;
+  }
+  .search-stripe{height:4px; background:repeating-linear-gradient(90deg,var(--ink) 0 22px,var(--red) 22px 25px,var(--bone) 25px 28px,var(--gold) 28px 31px,var(--ink) 31px 53px);}
+  .search-bar{display:flex; position:relative;}
+  .search-icon{position:absolute; left:1rem; top:50%; transform:translateY(-50%); width:16px; height:16px; stroke:var(--ink-soft); fill:none; stroke-width:2;}
+  .search-bar input{flex:1; min-width:0; border:none; padding:0.85rem 1rem 0.85rem 2.6rem; font-family:var(--sans); font-size:0.9rem; color:var(--ink); background:transparent;}
+  .search-bar input:focus{outline:none;}
+  .search-bar button{background:var(--red); color:var(--bone); border:none; padding:0 1.4rem; font-weight:600; font-size:0.86rem; cursor:pointer;}
+  .search-bar button:hover{background:var(--red-deep);}
+
+  .filter-track{display:flex; gap:0.5rem; overflow-x:auto; padding-bottom:0.6rem; scrollbar-width:none; justify-content:center; flex-wrap:wrap;}
+  .chip-btn{
+    display:inline-flex; align-items:center; gap:0.4rem; flex:0 0 auto; white-space:nowrap;
+    min-height:38px; font-size:0.8rem; font-weight:600; padding:0 1rem;
+    border-radius:99px; border:1px solid rgba(237,232,221,0.2); background:rgba(255,255,255,0.06); color:var(--bone);
+    cursor:pointer; transition:all 0.2s ease;
+  }
+  .chip-btn.active{background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:700;}
+  .chip-btn:hover{border-color:var(--gold); color:var(--gold);}
+  .chip-btn.active:hover{color:var(--ink);}
+
+  /* REAL CORK NOTICE BOARD CONTAINER */
+  .cork-board-wrapper{
+    max-width:1220px; margin:0 auto 4rem; padding:0 1.5rem;
+  }
+  .cork-board{
+    background-color:#2a221a;
+    background-image:
+      radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      radial-gradient(rgba(0, 0, 0, 0.4) 1px, transparent 1px);
+    background-size:12px 12px, 24px 24px;
+    border:14px solid #3d2f25; border-radius:20px;
+    box-shadow:inset 0 0 50px rgba(0,0,0,0.85), 0 20px 60px rgba(0,0,0,0.5);
+    padding:2.5rem 2rem 3rem; position:relative; min-height:600px;
+  }
+
+  /* Wooden Header Plaque */
+  .board-plaque{
+    display:flex; align-items:center; justify-content:space-between;
+    background:linear-gradient(180deg, #4d3a2c 0%, #2e2117 100%);
+    border:2px solid #6b5340; border-radius:10px; padding:0.8rem 1.4rem;
+    margin-bottom:2rem; box-shadow:0 8px 20px rgba(0,0,0,0.5); color:var(--bone);
+  }
+  .board-plaque h2{font-family:var(--serif); font-size:1.25rem; margin:0; font-weight:700; color:var(--gold); letter-spacing:0.04em;}
+  .board-plaque .stamp{font-family:var(--mono); font-size:0.7rem; color:var(--bone-dim); text-transform:uppercase; letter-spacing:0.1em;}
+
+  /* NOTICE CARDS GRID (PINNED PAPERS) */
+  .notice-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:2rem;
+  }
+  @media (max-width:860px){.notice-grid{grid-template-columns:1fr;}}
+
+  /* Authentic Pinned Paper Card */
+  .notice-paper{
+    background:var(--paper); color:var(--ink); border-radius:4px;
+    padding:1.8rem 1.6rem 1.5rem; position:relative; box-shadow:0 12px 30px rgba(0,0,0,0.35);
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+    border-top:4px solid #ccc;
+  }
+  .notice-paper:hover{transform:translateY(-4px) rotate(-0.5deg); box-shadow:0 18px 40px rgba(0,0,0,0.45); z-index:10;}
+
+  /* Urgency Top Borders */
+  .notice-paper[data-urgency="critical"]{border-top-color:var(--urgency-critical);}
+  .notice-paper[data-urgency="high"]{border-top-color:var(--urgency-high);}
+  .notice-paper[data-urgency="routine"]{border-top-color:var(--urgency-routine);}
+  .notice-paper[data-urgency="cultural"]{border-top-color:var(--urgency-cultural);}
+
+  /* 3D Pushpin Icon at top center */
+  .pushpin{
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    width:24px; height:24px; z-index:5; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+  }
+
+  /* Paper Tape / Seal on Top Right */
+  .paper-seal{
+    position:absolute; top:0.8rem; right:0.8rem;
+    font-family:var(--mono); font-size:0.62rem; text-transform:uppercase;
+    padding:0.25rem 0.55rem; border-radius:3px; letter-spacing:0.06em; font-weight:700;
+    opacity:0.85; border:1px dashed currentColor;
+  }
+  .paper-seal.seal-critical{color:var(--urgency-critical); background:rgba(217,43,43,0.08);}
+  .paper-seal.seal-high{color:var(--urgency-high); background:rgba(217,130,43,0.08);}
+  .paper-seal.seal-routine{color:var(--urgency-routine); background:rgba(43,87,140,0.08);}
+  .paper-seal.seal-cultural{color:var(--urgency-cultural); background:rgba(43,122,75,0.08);}
+
+  /* Urgency & Importance Badge Row */
+  .urgency-badge-row{display:flex; align-items:center; gap:0.5rem; margin-bottom:0.7rem; flex-wrap:wrap;}
+  .urgency-tag{
+    font-family:var(--mono); font-size:0.65rem; font-weight:700; text-transform:uppercase;
+    padding:0.25rem 0.65rem; border-radius:4px; letter-spacing:0.06em; color:#fff;
+    display:inline-flex; align-items:center; gap:0.35rem;
+  }
+  .tag-critical{background:var(--urgency-critical); animation:pulse-crit 1.8s infinite;}
+  .tag-high{background:var(--urgency-high);}
+  .tag-routine{background:var(--urgency-routine);}
+  .tag-cultural{background:var(--urgency-cultural);}
+
+  .ref-number{font-family:var(--mono); font-size:0.7rem; color:var(--ink-soft); opacity:0.75;}
+
+  /* Notice Content Typography */
+  .notice-paper h3{
+    font-family:var(--serif); font-size:1.22rem; margin:0.3rem 0 0.5rem; font-weight:700; line-height:1.28; color:var(--ink);
+  }
+  .notice-paper p{
+    font-size:0.88rem; color:var(--ink-soft); line-height:1.52; margin:0 0 1.2rem;
+  }
+
+  /* Notice Metadata Footer */
+  .paper-footer{
+    border-top:1px solid var(--line); padding-top:0.8rem; margin-top:auto;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;
+    font-family:var(--mono); font-size:0.74rem; color:var(--ink-soft);
+  }
+  .issuer-dept{font-weight:600; color:var(--ink);}
+
+  .btn-read-doc{
+    background:var(--ink); color:var(--bone); font-size:0.78rem; font-weight:600;
+    padding:0.45rem 0.9rem; border-radius:6px; border:none; cursor:pointer;
+    transition:all 0.2s ease; display:inline-flex; align-items:center; gap:0.3rem;
+  }
+  .btn-read-doc:hover{background:var(--red); color:#fff;}
+
+  /* Official Notice Modal */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(18,16,14,0.85); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:1.5rem; backdrop-filter:blur(6px);
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    background:var(--paper); border-radius:14px; max-width:640px; width:100%;
+    padding:2.2rem; box-shadow:0 25px 60px rgba(0,0,0,0.5); border:2px solid var(--line);
+    position:relative; max-height:90vh; overflow-y:auto; color:var(--ink);
+  }
+  .modal-close{
+    position:absolute; top:1.2rem; right:1.2rem; background:none; border:none;
+    font-size:1.5rem; cursor:pointer; color:var(--ink-soft); width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center; border-radius:50%;
+  }
+  .modal-close:hover{background:var(--bone); color:var(--ink);}
+
+  .doc-header{border-bottom:2px double var(--ink); padding-bottom:1rem; margin-bottom:1.2rem; text-align:center;}
+  .doc-header .emblem{font-family:var(--serif); font-size:0.85rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--red-deep);}
+  .doc-header h2{font-family:var(--serif); font-size:1.35rem; margin:0.3rem 0; font-weight:700;}
+  .doc-meta-grid{display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; font-family:var(--mono); font-size:0.78rem; background:var(--bone); padding:0.8rem; border-radius:8px; margin-bottom:1.2rem;}
+
+  .doc-body{font-size:0.94rem; line-height:1.65; color:var(--ink-soft); margin-bottom:1.5rem;}
+  .doc-signoff{border-top:1px solid var(--line); padding-top:1rem; display:flex; justify-content:space-between; align-items:flex-end; font-family:var(--mono); font-size:0.78rem;}
+
+  /* Footer */
+  .site-footer{background:#12100e; color:var(--bone-dim); padding:3rem 1.5rem 1.5rem; margin-top:2rem; border-top:1px solid rgba(237,232,221,0.1);}
+  .footer-grid{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:2rem; padding-bottom:2rem; border-bottom:1px solid rgba(237,232,221,0.15);
+  }
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.footer-grid{grid-template-columns:1fr; gap:1.6rem;}}
+  .footer-grid h5{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin:0 0 0.8rem;}
+  .footer-grid a,.footer-grid p{display:block; font-size:0.85rem; color:var(--bone-dim); margin-bottom:0.55rem; line-height:1.4;}
+  .footer-grid a:hover{color:var(--bone);}
+  .footer-brand .brand{color:var(--bone);}
+  .footer-brand p{max-width:32ch; opacity:0.75;}
+  .footer-bottom{max-width:1180px; margin:0 auto; padding-top:1.2rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; font-size:0.76rem; color:var(--bone-dim); opacity:0.7;}
+</style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="mark">Lamka</span> Hub <span class="tag">Churachandpur</span></a>
+    
+    <nav class="main-nav" aria-label="Primary">
+      <a href="index.html#home">Home</a>
+      <a href="handloom.html">Handloom Market</a>
+      <a href="directory.html">Directory</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="notices.html" class="active">Notices</a>
+      <a href="about.html">About Us</a>
+    </nav>
+
+    <div class="header-socials">
+      <a href="https://x.com" target="_blank" aria-label="X (Twitter)" title="X (Twitter)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://wa.me/919862000000" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="page-banner">
+    <div class="banner-inner">
+      <span class="eyebrow">Public Directives & Civic Announcements</span>
+      <h1>Churachandpur District Bulletin Board</h1>
+      <p>Official public notices classified by urgency, importance, and issuing authorities across all Lamka wards.</p>
+      
+      <!-- Urgency Legend Strip -->
+      <div class="urgency-legend-bar">
+        <span class="legend-item"><span class="legend-dot critical"></span> <strong>CRITICAL / URGENT</strong> (Red Alert)</span>
+        <span class="legend-item"><span class="legend-dot high"></span> <strong>HIGH IMPORTANCE</strong> (Amber Notice)</span>
+        <span class="legend-item"><span class="legend-dot routine"></span> <strong>ROUTINE / GENERAL</strong> (Navy Info)</span>
+        <span class="legend-item"><span class="legend-dot cultural"></span> <strong>COMMUNITY & CULTURAL</strong> (Forest Special)</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <!-- Search & Filter Controls -->
+  <div class="board-controls">
+    <div class="search-module">
+      <div class="search-stripe"></div>
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="noticeSearch" placeholder="Search PHED water, hospital alert, Kut festival, ref number, department…">
+        <button id="noticeSearchBtn">Search Board</button>
+      </div>
+    </div>
+
+    <!-- Urgency & Importance Filter Tabs -->
+    <div class="filter-track" id="noticeFilterTrack">
+      <button class="chip-btn active" data-urgency="all">All Notices (8)</button>
+      <button class="chip-btn" data-urgency="critical">🚨 Critical & Urgent (2)</button>
+      <button class="chip-btn" data-urgency="high">⚡ High Importance (2)</button>
+      <button class="chip-btn" data-urgency="routine">📢 Routine & General (2)</button>
+      <button class="chip-btn" data-urgency="cultural">🎉 Community & Cultural (2)</button>
+    </div>
+  </div>
+
+  <!-- REAL CORK BOARD CANVAS -->
+  <main class="cork-board-wrapper">
+    <div class="cork-board">
+      
+      <!-- Wooden Header Plaque -->
+      <div class="board-plaque">
+        <h2>📌 OFFICIAL DISTRICT BULLETIN BOARD — CHURACHANDPUR</h2>
+        <span class="stamp">PUBLIC DIRECTIVES & NOTICES</span>
+      </div>
+
+      <!-- Pinned Notice Cards Grid -->
+      <div class="notice-grid" id="noticeGrid">
+        
+        <!-- Notice 1: Critical Emergency PHED Water Line -->
+        <div class="notice-paper" data-urgency="critical" data-dept="phed">
+          <!-- 3D Pushpin Icon -->
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#D92B2B"/><circle cx="10" cy="10" r="3" fill="#FF8888"/><path d="M12 20v3" stroke="#880000" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-critical">OFFICIAL SEAL · PHED</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-critical">🚨 CRITICAL URGENT</span>
+              <span class="ref-number">Ref: CCP/PHED/2026/091</span>
+            </div>
+            <h3>Emergency Main Water Pipeline Rupture — Tuibong Sector</h3>
+            <p>Main transmission pipeline burst near Peace Ground. Water supply suspended immediately for emergency welding & pressure repairs until Wednesday 4:00 PM. Emergency water tankers deployed.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">PHED Sub-Division Ccpur</span><br>
+              <span style="opacity:0.75;">Issued: Today, 6:30 AM</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('Emergency Main Water Pipeline Rupture', 'CCP/PHED/2026/091', 'PHED Sub-Division Churachandpur', '🚨 CRITICAL URGENT', 'Today, 6:30 AM', 'A major 12-inch transmission pipeline rupture occurred near Tuibong Peace Ground early this morning. Water supply to Tuibong, Peace Ground, and adjacent wards is temporarily shut down for emergency excavation and pipe replacement.\n\nWork Schedule: Repairs under way continuously; normal supply expected to resume by Wednesday evening.\n\nEmergency Relief: PHED Mobile Water Tankers are stationed at (1) Tuibong Junction, (2) Peace Ground Gate, and (3) Sielmat Bridge.\n\nHelpline for Tanker Request: 03874-233400 / +91 98620 11223.')">View Signed Order →</button>
+          </div>
+        </div>
+
+        <!-- Notice 2: Critical Weather & Highway Traffic Advisory -->
+        <div class="notice-paper" data-urgency="critical" data-dept="traffic">
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#D92B2B"/><circle cx="10" cy="10" r="3" fill="#FF8888"/><path d="M12 20v3" stroke="#880000" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-critical">TRAFFIC CELL · POLICE</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-critical">🚨 CRITICAL ADVISORY</span>
+              <span class="ref-number">Ref: CCP/TRF/2026/014</span>
+            </div>
+            <h3>Landslide Traffic Diversion — Guite Road / Highway 102B</h3>
+            <p>Heavy rainfall induced minor landslide near km 14 on Guite Road. All heavy goods vehicles diverted via Tedim Road Bypass. Light passenger vehicles restricted to single-lane passage.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">District Traffic Control</span><br>
+              <span style="opacity:0.75;">Issued: Yesterday, 9:15 PM</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('Landslide Traffic Diversion Advisory', 'CCP/TRF/2026/014', 'District Traffic Control & Police Headquarter', '🚨 CRITICAL ADVISORY', 'Yesterday, 9:15 PM', 'Following continuous heavy rainfall in the hilly terrain, a mudslide occurred near Km 14 along Guite Road. Clearance teams are active on site.\n\nTraffic Diversions:\n1. Heavy Trucks & Freight Vehicles: Diverted via Tedim Road Bypass.\n2. Light Motor Vehicles: Permitted single-lane passage under police signal regulation.\n3. Speed Limit: Restricted to 20 km/h in affected sector.\n\nHelpline: Police Control Room 03874-233221 / 112.')">View Signed Order →</button>
+          </div>
+        </div>
+
+        <!-- Notice 3: High Importance Chavang Kut Allotment -->
+        <div class="notice-paper" data-urgency="high" data-dept="kut">
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#D9822B"/><circle cx="10" cy="10" r="3" fill="#FFE0B2"/><path d="M12 20v3" stroke="#774400" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-high">SEALED · KUT COMMITTEE</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-high">⚡ HIGH IMPORTANCE</span>
+              <span class="ref-number">Ref: CCP/KUT/2026/042</span>
+            </div>
+            <h3>Chavang Kut Handloom Exhibition Stall Allotment & Deadline</h3>
+            <p>Applications open for weaver SHGs and district artisans to exhibit Saipikhup, Thangsuo, and traditional weaves at Peace Ground Tuibong. Registration closes on the 25th of this month.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">Chavang Kut State Committee</span><br>
+              <span style="opacity:0.75;">Issued: 2 days ago</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('Chavang Kut Handloom Exhibition Stall Allotment', 'CCP/KUT/2026/042', 'Chavang Kut Central Committee', '⚡ HIGH IMPORTANCE', '2 days ago', 'The State Chavang Kut Organizing Committee invites applications from registered Handloom Cooperatives, Self Help Groups (SHGs), and Master Weavers of Churachandpur for stall allotment at the Grand Handloom & Cultural Expo.\n\nDetails:\n- Venue: Main Pavilion, Peace Ground Tuibong.\n- Stall Allocation: 40 stalls reserved for 9 District Tribal Weaves.\n- Registration Fee: Exempted for verified local SHGs.\n- Application Deadline: 25th of this month at 4:00 PM.\n\nForm Submission: Office of the Kut Committee, District Sports Complex, Lamka.')">View Signed Order →</button>
+          </div>
+        </div>
+
+        <!-- Notice 4: High Importance Municipal Waste Order -->
+        <div class="notice-paper" data-urgency="high" data-dept="municipal">
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#D9822B"/><circle cx="10" cy="10" r="3" fill="#FFE0B2"/><path d="M12 20v3" stroke="#774400" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-high">TOWN MUNICIPAL COUNCIL</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-high">⚡ HIGH IMPORTANCE</span>
+              <span class="ref-number">Ref: CCP/TMC/2026/108</span>
+            </div>
+            <h3>Municipal Waste Segregation Directive — Main Market & Wards</h3>
+            <p>Mandatory segregation of organic wet waste and dry recyclable waste for commercial establishments and household wards. Compliance inspections commence next Monday.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">Town Municipal Council</span><br>
+              <span style="opacity:0.75;">Issued: 3 days ago</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('Municipal Waste Segregation Directive', 'CCP/TMC/2026/108', 'Town Municipal Council Ccpur', '⚡ HIGH IMPORTANCE', '3 days ago', 'To improve urban sanitation and ward cleanliness, the Town Municipal Council issues the following mandatory directives under the Solid Waste Bye-laws 2026:\n\n1. Commercial Shops & Emporiums: Must maintain color-coded bins (Green for organic/food waste, Blue for plastic/dry packaging).\n2. Household Collection: Ward sanitation vehicles will collect wet waste on Mon/Wed/Fri and dry waste on Tue/Thu/Sat.\n3. Litter Penalty: Dumping waste in open drains along IB Road or Main Market attracts a fine of ₹500.\n\nEnforcement Officer: Sanitation Inspector, TMC Office.')">View Signed Order →</button>
+          </div>
+        </div>
+
+        <!-- Notice 5: Routine Pediatric OPD & Health Drive -->
+        <div class="notice-paper" data-urgency="routine" data-dept="health">
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#2B578C"/><circle cx="10" cy="10" r="3" fill="#B2D1FF"/><path d="M12 20v3" stroke="#002255" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-routine">HEALTH DEPT · HOSPITAL</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-routine">📢 ROUTINE GENERAL</span>
+              <span class="ref-number">Ref: CCP/HOSP/2026/055</span>
+            </div>
+            <h3>Upgraded Pediatric OPD & Saturday Child Immunization Drive</h3>
+            <p>District Hospital Churachandpur opens extended Pediatric OPD hours (8:00 AM – 4:00 PM daily). Free routine child vaccination and growth monitoring camp every Saturday.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">District Hospital Administration</span><br>
+              <span style="opacity:0.75;">Issued: 3 days ago</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('Upgraded Pediatric OPD & Vaccination Drive', 'CCP/HOSP/2026/055', 'Office of Medical Superintendent, District Hospital', '📢 ROUTINE GENERAL', '3 days ago', 'District Hospital Churachandpur announces the full operationalization of its newly expanded Pediatric OPD Wing located in Block B.\n\nKey Services:\n- Daily OPD Timings: 8:00 AM to 4:00 PM (Monday through Saturday).\n- Special Saturday Camp: Free routine immunization (BCG, OPV, Pentavalent, MMR) and child nutrition checkup from 9:00 AM to 1:00 PM.\n- Pediatric Emergency: 24/7 coverage in Emergency Ward.\n\nParents are requested to carry child MCP booklets.')">View Signed Order →</button>
+          </div>
+        </div>
+
+        <!-- Notice 6: Routine DIC Weaver Skill Workshop -->
+        <div class="notice-paper" data-urgency="routine" data-dept="industry">
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#2B578C"/><circle cx="10" cy="10" r="3" fill="#B2D1FF"/><path d="M12 20v3" stroke="#002255" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-routine">DISTRICT INDUSTRY CENTRE</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-routine">📢 ROUTINE GENERAL</span>
+              <span class="ref-number">Ref: CCP/DIC/2026/033</span>
+            </div>
+            <h3>Handloom Weaver Skill Upgrade & Natural Dyeing Workshop</h3>
+            <p>District Industry Centre (DIC) hosting a 5-day free skill workshop on organic cotton dyeing techniques and loin loom motif perfection for local women weavers in Hiangtam Lamka.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">DIC Churachandpur</span><br>
+              <span style="opacity:0.75;">Issued: 4 days ago</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('Handloom Weaver Skill Upgrade Workshop', 'CCP/DIC/2026/033', 'District Industry Centre Ccpur', '📢 ROUTINE GENERAL', '4 days ago', 'The District Industry Centre (DIC) in collaboration with Handloom Export Promotion Council organizes a 5-Day Practical Skill Workshop for district weavers.\n\nTopics Covered:\n1. Preparation of natural vegetable dyes (indigo, madder root, turmeric).\n2. Diamond pattern precision for Saipikhup and Puandum weaves.\n3. Finishing, ironing, and quality certification.\n\nBatch Size: 30 participants per batch. Free toolkit provided upon completion.\nVenue: Handloom Training Center, Hiangtam Lamka.')">View Signed Order →</button>
+          </div>
+        </div>
+
+        <!-- Notice 7: Cultural Tribal Heritage Competition -->
+        <div class="notice-paper" data-urgency="cultural" data-dept="culture">
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#2B7A4B"/><circle cx="10" cy="10" r="3" fill="#B2E6C4"/><path d="M12 20v3" stroke="#004415" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-cultural">CULTURAL AFFAIRS CELL</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-cultural">🎉 CULTURAL SPECIAL</span>
+              <span class="ref-number">Ref: CCP/CULT/2026/007</span>
+            </div>
+            <h3>9 District Tribal Weaving Heritage Showcase & Award</h3>
+            <p>Annual cultural weaving competition celebrating authentic patterns of Kuki, Paite, Hmar, Vaiphei, Zou, Gangte, Simte, Tedim Chin, and Kom traditions. Cash prizes & artisan grants awarded.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">Cultural Heritage Board</span><br>
+              <span style="opacity:0.75;">Issued: 5 days ago</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('9 District Tribal Weaving Heritage Competition', 'CCP/CULT/2026/007', 'District Cultural Heritage Board', '🎉 CULTURAL SPECIAL', '5 days ago', 'To preserve and promote the rich handloom heritage of Churachandpur, the Cultural Heritage Board announces the 2026 Tribal Weaving Excellence Awards.\n\nCategories:\n1. Master Weaver Award (Traditional Saipikhup & Puandum).\n2. Youth Weaver Talent (Under 25 years).\n3. Innovation in Natural Color Blending.\n\nAwards: Cash prizes up to ₹25,000 + DIC Equipment Grants.\nSubmission Deadline: End of this month. Display at Lamka Art Gallery.')">View Signed Order →</button>
+          </div>
+        </div>
+
+        <!-- Notice 8: Cultural Youth Sports Tournament -->
+        <div class="notice-paper" data-urgency="cultural" data-dept="sports">
+          <svg class="pushpin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#2B7A4B"/><circle cx="10" cy="10" r="3" fill="#B2E6C4"/><path d="M12 20v3" stroke="#004415" stroke-width="2.5"/></svg>
+          <span class="paper-seal seal-cultural">DISTRICT SPORTS OFFICER</span>
+          <div>
+            <div class="urgency-badge-row">
+              <span class="urgency-tag tag-cultural">🎉 COMMUNITY SPORTS</span>
+              <span class="ref-number">Ref: CCP/SPT/2026/019</span>
+            </div>
+            <h3>District Inter-Ward Youth Football & Athletic Meet</h3>
+            <p>Registration opens for the District Inter-Ward Championship at Public Ground Hiangtam Lamka. Men's & Women's football, volleyball, and traditional indigenous games.</p>
+          </div>
+          <div class="paper-footer">
+            <div>
+              <span class="issuer-dept">District Sports Office</span><br>
+              <span style="opacity:0.75;">Issued: 6 days ago</span>
+            </div>
+            <button class="btn-read-doc" onclick="openDocModal('District Inter-Ward Youth Sports Meet', 'CCP/SPT/2026/019', 'Office of District Sports Officer', '🎉 COMMUNITY SPORTS', '6 days ago', 'The District Sports Office invites entries from Ward Youth Clubs across Lamka for the Annual Inter-Ward Championship.\n\nEvents:\n- Inter-Ward Football (Men & Women)\n- Volleyball Tournament\n- Indigenous High Jump & Tug-of-War\n\nVenue: Public Ground Hiangtam Lamka & Lamka Stadium.\nTeam Entry Deadline: 28th of this month. Registration forms available at DSO Office, District Sports Complex.')">View Signed Order →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Interactive Signed Document Modal -->
+  <div class="modal-overlay" id="docModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModals()">&times;</button>
+      <div class="doc-header">
+        <div class="emblem">GOVERNMENT OF MANIPUR · DISTRICT ADMINISTRATION</div>
+        <h2 id="modalDocTitle">Official Notice Document</h2>
+        <div style="font-family:var(--mono); font-size:0.78rem; color:var(--red-deep);" id="modalDocRef">Ref: CCP/2026/000</div>
+      </div>
+      
+      <div class="doc-meta-grid">
+        <div><strong>Issuing Authority:</strong> <span id="modalDocIssuer">Department</span></div>
+        <div><strong>Classification:</strong> <span id="modalDocClass" style="font-weight:700;">Urgency</span></div>
+        <div><strong>Date Issued:</strong> <span id="modalDocDate">Date</span></div>
+        <div><strong>Location:</strong> Churachandpur District</div>
+      </div>
+
+      <div class="doc-body" id="modalDocBody">
+        Official notice body content...
+      </div>
+
+      <div class="doc-signoff">
+        <div>
+          <span>Verified & Sealed</span><br>
+          <strong style="color:var(--ink);">District Bulletin Secretariat</strong>
+        </div>
+        <button class="btn-read-doc" style="background:var(--red);" onclick="alert('Printing document directive...');">🖨 Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark">Lamka</span> Hub</div>
+        <p>A community platform built for Churachandpur — handloom marketplace, local directory, jobs, and town notices.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="index.html">Home</a>
+        <a href="handloom.html">Handloom Market</a>
+        <a href="directory.html">Directory</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="notices.html">Town Notices</a>
+      </div>
+      <div>
+        <h5>Urgency Classifications</h5>
+        <a href="notices.html">🚨 Critical & Emergency Directives</a>
+        <a href="notices.html">⚡ High Importance Orders</a>
+        <a href="notices.html">📢 Routine Department Notices</a>
+        <a href="notices.html">🎉 Community & Cultural Events</a>
+      </div>
+      <div>
+        <h5>Emergency Contacts</h5>
+        <p>District Hospital — 03874-233855 / 102</p>
+        <p>Police Control Room — 03874-233221 / 112</p>
+        <p>DC Office, Churachandpur — 03874-233875</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lamka Hub · Built for Churachandpur, by Churachandpur</span>
+      <span>All 9 district tribal handloom traditions celebrated equally</span>
+    </div>
+  </footer>
+
+<script>
+  // Mobile Menu Toggle
+  const toggle = document.getElementById('navToggle');
+  if(toggle){
+    toggle.addEventListener('click', () => {
+      const nav = document.querySelector('.main-nav');
+      if(nav) nav.classList.toggle('open');
+    });
+  }
+
+  // Filter Logic by Urgency & Importance
+  let activeUrgency = 'all';
+
+  document.querySelectorAll('#noticeFilterTrack .chip-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#noticeFilterTrack .chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeUrgency = btn.getAttribute('data-urgency');
+      filterNotices();
+    });
+  });
+
+  const searchInp = document.getElementById('noticeSearch');
+  if(searchInp) searchInp.addEventListener('input', filterNotices);
+
+  const searchBtn = document.getElementById('noticeSearchBtn');
+  if(searchBtn) searchBtn.addEventListener('click', filterNotices);
+
+  function filterNotices(){
+    const query = searchInp ? searchInp.value.toLowerCase().trim() : '';
+    const cards = document.querySelectorAll('#noticeGrid .notice-paper');
+
+    cards.forEach(card => {
+      const urgency = card.getAttribute('data-urgency');
+      const text = card.innerText.toLowerCase();
+
+      const matchUrgency = (activeUrgency === 'all' || urgency === activeUrgency);
+      const matchQuery = (!query || text.includes(query));
+
+      if(matchUrgency && matchQuery){
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Modal Doc Popup
+  function openDocModal(title, ref, issuer, classification, date, body){
+    document.getElementById('modalDocTitle').innerText = title;
+    document.getElementById('modalDocRef').innerText = 'Ref: ' + ref;
+    document.getElementById('modalDocIssuer').innerText = issuer;
+    document.getElementById('modalDocClass').innerText = classification;
+    document.getElementById('modalDocDate').innerText = date;
+    document.getElementById('modalDocBody').innerText = body;
+    document.getElementById('docModal').classList.add('open');
+  }
+
+  function closeModals(){
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+  }
+</script>
+</body>
+</html>
