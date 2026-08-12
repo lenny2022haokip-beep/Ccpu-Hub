@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LAMKA HUB — ULTRA-CLEAN MODERN MOBILE WEBAPP STYLESHEET
+   LAMKA HUB — HORIZONTAL SCROLLING CATEGORIES & MOBILE WEBAPP STYLESHEET
    Targets: Mobile Viewports (<= 768px & <= 480px) and Tablets (<= 1024px)
    Desktop layout (width > 1024px) remains 100% UNTOUCHED and pristine.
    ========================================================================== */
@@ -33,7 +33,7 @@ input, select, textarea {
     left: 0;
     right: 0;
     height: 56px;
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid rgba(23, 21, 18, 0.1);
@@ -122,11 +122,11 @@ input, select, textarea {
 }
 
 /* --------------------------------------------------------------------------
-   2. ULTRA-CLEAN MODERN MOBILE WEBAPP OVERHAUL (<= 768px)
+   2. HORIZONTAL CATEGORY SCROLLING & MOBILE WEBAPP OVERHAUL (<= 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
 
-  /* CLEAN STICKY APP HEADER */
+  /* STICKY APP HEADER */
   .site-header {
     padding: 0.55rem 0.9rem !important;
     position: sticky;
@@ -211,7 +211,7 @@ input, select, textarea {
     padding: 0 0.8rem !important;
   }
 
-  /* STREAMLINED MOBILE HERO BANNER (1 SLIDE AT A TIME, NO CLUTTER) */
+  /* HERO BANNER */
   .hero {
     position: relative !important;
     width: 100% !important;
@@ -304,25 +304,77 @@ input, select, textarea {
     margin-bottom: 0.8rem !important;
   }
 
-  .guarantee-bar {
+  /* --------------------------------------------------------------------------
+     CRITICAL: HORIZONTAL ONE-AT-A-TIME CATEGORY SCROLL TRACK (FOR ALL PAGES)
+     -------------------------------------------------------------------------- */
+  .filter-track, 
+  .tribe-chips-track, 
+  .filter-selects, 
+  .guarantee-bar,
+  .emergency-ribbon {
     display: flex !important;
-    flex-direction: column !important;
-    gap: 0.4rem !important;
-    padding: 0.75rem !important;
-    border-radius: 10px !important;
-    align-items: flex-start !important;
-    background: rgba(255,255,255,0.7) !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 0.55rem !important;
+    padding: 0.5rem 0.4rem 0.7rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important; /* Firefox */
   }
 
-  .guarantee-item {
-    font-size: 0.78rem !important;
+  .filter-track::-webkit-scrollbar,
+  .tribe-chips-track::-webkit-scrollbar,
+  .filter-selects::-webkit-scrollbar,
+  .guarantee-bar::-webkit-scrollbar,
+  .emergency-ribbon::-webkit-scrollbar {
+    display: none !important; /* Chrome / Safari */
   }
 
-  /* SEARCH & CATEGORY FILTERS (SLEEK HORIZONTAL TRACK) */
-  .search-module, .filter-panel {
+  /* CATEGORY CHIP & OPTION PILLS */
+  .chip-btn, 
+  .select-box, 
+  .guarantee-item,
+  .hotline-btn {
+    scroll-snap-align: start !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    min-height: 40px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    padding: 0 1rem !important;
+    border-radius: 99px !important;
+    border: 1px solid rgba(23, 21, 18, 0.15) !important;
+    background: #ffffff !important;
+    color: var(--ink) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .chip-btn.active {
+    background: var(--ink) !important;
+    color: var(--bone) !important;
+    border-color: var(--ink) !important;
+    box-shadow: 0 4px 12px rgba(23, 21, 18, 0.25) !important;
+  }
+
+  .tribe-chips-label {
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    margin: 0.8rem 0 0.4rem !important;
+    color: var(--ink-soft) !important;
+    display: block !important;
+  }
+
+  /* SEARCH BAR MOBILE */
+  .search-module, .filter-panel, .filter-wrapper {
     width: 100% !important;
     padding: 0.75rem !important;
-    border-radius: 12px !important;
+    border-radius: 14px !important;
     margin-bottom: 0.9rem !important;
     background: #ffffff !important;
     border: 1px solid var(--line, rgba(23,21,18,0.1)) !important;
@@ -330,6 +382,7 @@ input, select, textarea {
   }
 
   .search-bar, .search-row {
+    display: flex !important;
     flex-direction: column !important;
     gap: 0.5rem !important;
     width: 100% !important;
@@ -342,67 +395,14 @@ input, select, textarea {
     padding: 0.6rem 0.9rem 0.6rem 2.2rem !important;
     border-radius: 99px !important;
     border: 1px solid rgba(23,21,18,0.15) !important;
-  }
-
-  .filter-selects {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-    width: 100% !important;
-    border: none !important;
-    padding: 0 !important;
-  }
-
-  .select-box {
-    width: 100% !important;
-    min-height: 44px !important;
-    font-size: 16px !important;
-    padding: 0.5rem 0.8rem !important;
-    border-radius: 10px !important;
-  }
-
-  .tribe-chips-label {
-    font-size: 0.74rem !important;
-    margin: 0.7rem 0 0.4rem !important;
-    color: var(--ink-soft) !important;
-  }
-
-  .tribe-chips-track, .filter-track {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    gap: 0.4rem !important;
-    padding-bottom: 0.4rem !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .tribe-chips-track::-webkit-scrollbar, .filter-track::-webkit-scrollbar {
-    display: none;
-  }
-
-  .chip-btn {
-    white-space: nowrap !important;
-    flex: 0 0 auto !important;
-    min-height: 36px !important;
-    font-size: 0.78rem !important;
-    padding: 0 0.85rem !important;
-    border-radius: 99px !important;
-    border: 1px solid rgba(23,21,18,0.15) !important;
-  }
-
-  .chip-btn.active {
-    background: var(--ink) !important;
-    color: var(--bone) !important;
-    border-color: var(--ink) !important;
+    background: #FFFDF9 !important;
   }
 
   /* --------------------------------------------------------------------------
-     CLEAN 1-COLUMN MOBILE CARDS FEED (ELEGANT, UNCLUTTERED & READABLE)
+     CLEAN 1-COLUMN MOBILE CARDS FEED
      -------------------------------------------------------------------------- */
 
-  .highlight-section, .store-section {
+  .highlight-section, .store-section, .app-section {
     padding: 1.4rem 0.8rem !important;
   }
 
@@ -415,7 +415,7 @@ input, select, textarea {
     font-size: 0.82rem !important;
   }
 
-  /* 1. HANDLOOM PRODUCT CARDS (CLEAN MINIMALIST FEED) */
+  /* 1. HANDLOOM PRODUCT CARDS */
   .product-grid, .catalog-grid, .handloom-grid, .highlight-grid-4 {
     display: flex !important;
     flex-direction: column !important;
@@ -519,7 +519,7 @@ input, select, textarea {
     text-decoration: none !important;
   }
 
-  /* 2. DIRECTORY LISTING CARDS (CLEAN MOBILE CARDS) */
+  /* 2. DIRECTORY LISTING CARDS */
   .dir-grid, .highlight-grid-2 {
     display: flex !important;
     flex-direction: column !important;
@@ -569,7 +569,6 @@ input, select, textarea {
     margin: 0.4rem 0 !important;
   }
 
-  /* CLEAN ADDRESS & META BOX (NO HORIZONTAL OVERFLOW, UNCLUTTERED) */
   .dir-meta, .dir-details-box {
     width: 100% !important;
     background: var(--paper, #FAF8F3) !important;
@@ -620,19 +619,20 @@ input, select, textarea {
 
   .emergency-ribbon {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
     gap: 0.5rem !important;
-    padding: 0.8rem !important;
+    padding: 0.6rem !important;
     border-radius: 12px !important;
   }
 
   .hotline-btn {
-    width: 100% !important;
-    min-height: 42px !important;
-    font-size: 0.84rem !important;
-    justify-content: center !important;
-    text-align: center !important;
-    border-radius: 8px !important;
+    width: auto !important;
+    min-height: 40px !important;
+    font-size: 0.82rem !important;
+    padding: 0 0.9rem !important;
+    white-space: nowrap !important;
   }
 
   /* 3. TOWN NOTICES BULLETIN CARDS */
