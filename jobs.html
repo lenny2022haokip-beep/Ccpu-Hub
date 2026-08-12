@@ -6,7 +6,7 @@
 <title>Community Job & Skill Opportunities — Lamka Hub | Churachandpur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#171512; --ink-soft:#2a2620;
@@ -30,7 +30,6 @@
   :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
   .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;text-align:center;}
 
-  /* Stripe divider */
   .stripe{
     height:7px; width:100%;
     background:repeating-linear-gradient(90deg,var(--ink) 0 44px,var(--red) 44px 51px,var(--bone) 51px 58px,var(--gold) 58px 65px,var(--ink) 65px 109px);
@@ -38,14 +37,61 @@
 
   /* Header Navigation */
   .site-header{
-    background:var(--paper); border-bottom:2px solid var(--bone-dim); padding:0.8rem 1.8rem;
+    background:rgba(250,248,243,0.94); backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--bone-dim); padding:0.8rem 1.8rem;
     display:flex; align-items:center; justify-content:space-between; gap:1rem;
     position:sticky; top:0; z-index:90; box-shadow:0 4px 16px rgba(23,21,18,0.06);
-    background-image:linear-gradient(to right, rgba(217,164,65,0.06) 0%, transparent 15%, transparent 85%, rgba(217,164,65,0.06) 100%);
   }
-  .brand{display:flex;align-items:baseline;gap:0.4rem;font-family:var(--serif);font-weight:700;font-size:1.42rem;flex:0 0 auto;}
-  .brand .mark{color:var(--red);}
-  .brand .tag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--ink-soft);text-transform:uppercase;opacity:0.75;}
+
+  /* REDESIGNED ENLARGED TRIBAL LOGO & BIBLICAL BROTHERHOOD SLOGAN */
+  .brand-logo{
+    display:flex; align-items:center; gap:0.85rem; text-decoration:none; flex:0 0 auto;
+    transition:transform 0.25s ease;
+  }
+  .brand-logo:hover{transform:translateY(-1px);}
+
+  .logo-emblem{
+    width:52px; height:52px; flex:0 0 52px; border-radius:50%;
+    box-shadow:0 4px 14px rgba(178,58,45,0.25);
+    transition:transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .brand-logo:hover .logo-emblem{
+    transform:rotate(45deg) scale(1.08);
+    box-shadow:0 6px 20px rgba(217,164,65,0.45);
+  }
+
+  .logo-text-block{display:flex; flex-direction:column; justify-content:center;}
+  
+  .brand-title{
+    font-family:'Cinzel', 'Newsreader', Georgia, serif;
+    font-size:1.65rem; font-weight:800; letter-spacing:0.06em; line-height:1.05;
+    display:flex; align-items:baseline; gap:0.2rem;
+  }
+  .brand-title .mark-red{
+    color:var(--red); text-shadow:0 1px 2px rgba(178,58,45,0.15);
+  }
+  .brand-title .mark-ink{
+    color:var(--ink);
+  }
+  .brand-title .brand-sub{
+    font-family:var(--mono); font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); background:var(--ink); padding:0.18rem 0.45rem; border-radius:4px;
+    font-weight:700; margin-left:0.3rem; vertical-align:middle;
+  }
+
+  .biblical-slogan{
+    font-family:var(--serif); font-style:italic; font-size:0.75rem; color:var(--red-deep);
+    font-weight:600; margin-top:0.2rem; letter-spacing:0.01em; display:flex; align-items:center; gap:0.35rem;
+    white-space:nowrap;
+  }
+  .slogan-cross{color:var(--gold); font-style:normal; font-size:0.7rem; font-weight:700;}
+
+  @media (max-width:600px){
+    .logo-emblem{ width:40px; height:40px; flex:0 0 40px; }
+    .logo-emblem svg{ width:40px; height:40px; }
+    .brand-title{ font-size:1.3rem; }
+    .biblical-slogan{ font-size:0.62rem; }
+  }
   
   /* Centered Traditionally Crafted Navigation */
   .main-nav{
@@ -313,7 +359,29 @@
 
   <!-- Header Navigation -->
   <header class="site-header">
-    <a class="brand" href="index.html"><span class="mark">Lamka</span> Hub <span class="tag">Churachandpur</span></a>
+    <a class="brand-logo" href="index.html" title="Lamka Hub — Churachandpur Multi-Tribal Community Platform">
+      <div class="logo-emblem">
+        <svg width="52" height="52" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" fill="#171512" stroke="#D9A441" stroke-width="3"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#B23A2D" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <path d="M50 8 L92 50 L50 92 L8 50 Z" fill="none" stroke="#D9A441" stroke-width="3"/>
+          <path d="M50 16 L84 50 L50 84 L16 50 Z" fill="none" stroke="#B23A2D" stroke-width="2.5"/>
+          <polygon points="50,24 64,38 76,50 64,62 50,76 36,62 24,50 36,38" fill="#B23A2D" opacity="0.9"/>
+          <polygon points="50,30 59,40 68,50 59,60 50,70 41,60 32,50 41,40" fill="#D9A441"/>
+          <polygon points="50,37 54,44 60,50 54,56 50,63 46,56 40,50 46,44" fill="#FAF8F3"/>
+          <path d="M50 42 V58 M42 50 H58" stroke="#171512" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text-block">
+        <div class="brand-title">
+          <span class="mark-red">LAMKA</span><span class="mark-ink">HUB</span>
+          <span class="brand-sub">CHURACHANDPUR</span>
+        </div>
+        <div class="biblical-slogan">
+          <span class="slogan-cross">✝</span> "Dwelling Together in Unity" — Psalm 133:1
+        </div>
+      </div>
+    </a>
     
     <nav class="main-nav" aria-label="Primary">
       <a href="index.html#home">Home</a>
@@ -909,8 +977,27 @@
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="brand"><span class="mark">Lamka</span> Hub</div>
-        <p>A community platform built for Churachandpur — handloom marketplace, local directory, jobs, and town notices.</p>
+        <a class="brand-logo" href="index.html" style="margin-bottom:0.8rem;">
+          <div class="logo-emblem" style="box-shadow:none;">
+            <svg width="46" height="46" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="46" fill="#EDE8DD" stroke="#D9A441" stroke-width="3"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#B23A2D" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <path d="M50 8 L92 50 L50 92 L8 50 Z" fill="none" stroke="#D9A441" stroke-width="3"/>
+              <polygon points="50,24 64,38 76,50 64,62 50,76 36,62 24,50 36,38" fill="#B23A2D"/>
+              <polygon points="50,30 59,40 68,50 59,60 50,70 41,60 32,50 41,40" fill="#D9A441"/>
+              <path d="M50 42 V58 M42 50 H58" stroke="#171512" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="logo-text-block">
+            <div class="brand-title" style="color:var(--bone);">
+              <span class="mark-red">LAMKA</span><span style="color:var(--bone);">HUB</span>
+            </div>
+            <div class="biblical-slogan" style="color:var(--gold);">
+              <span class="slogan-cross">✝</span> "Dwelling Together in Unity" — Psalm 133:1
+            </div>
+          </div>
+        </a>
+        <p>A community platform built for Churachandpur — handloom marketplace, local directory, jobs, town notices, and custom web services.</p>
       </div>
       <div>
         <h5>Explore</h5>
