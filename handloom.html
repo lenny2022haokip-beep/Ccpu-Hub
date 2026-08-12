@@ -147,12 +147,20 @@
     background-repeat:no-repeat; background-position:right 0.8rem center; background-size:12px 12px;
   }
 
+  html, body{overflow-x:hidden; width:100%;}
+  input, select, textarea{font-size:16px !important;}
+
   /* 9 Tribal Community Chips Filter */
   .tribe-chips-label{font-family:var(--mono); font-size:0.7rem; uppercase; color:var(--ink-soft); margin-bottom:0.5rem; letter-spacing:0.08em;}
-  .tribe-chips-track{display:flex; gap:0.45rem; overflow-x:auto; padding-bottom:0.3rem; scrollbar-width:none; flex-wrap:wrap;}
+  .tribe-chips-track{
+    display:flex; gap:0.45rem; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    padding-bottom:0.5rem; scrollbar-width:none; flex-wrap:nowrap; width:100%;
+  }
+  .tribe-chips-track::-webkit-scrollbar{display:none;}
+
   .chip-btn{
     display:inline-flex; align-items:center; gap:0.4rem; flex:0 0 auto; white-space:nowrap;
-    min-height:36px; font-size:0.8rem; font-weight:600; padding:0 0.9rem;
+    min-height:38px; font-size:0.8rem; font-weight:600; padding:0 0.9rem;
     border-radius:99px; border:1px solid var(--line); background:#fff; color:var(--ink-soft);
     cursor:pointer; transition:all 0.2s ease;
   }
@@ -160,14 +168,37 @@
   .chip-btn:hover{border-color:var(--red); color:var(--red);}
   .chip-btn.active:hover{color:var(--bone);}
 
+  @media (max-width:920px){
+    .site-header{padding:0.75rem 1rem;}
+    .header-socials{display:none;}
+    .nav-toggle{display:flex;}
+    .main-nav{
+      display:none; position:absolute; top:100%; left:0; right:0;
+      background:rgba(250,248,243,0.98); backdrop-filter:blur(14px);
+      border-bottom:2px solid var(--bone-dim); flex-direction:column;
+      gap:0; padding:0.4rem 1.2rem 1.2rem; box-shadow:0 16px 32px rgba(23,21,18,0.16);
+      z-index:99; max-width:100%; border-radius:0;
+    }
+    .main-nav.open{display:flex;}
+    .main-nav a{padding:0.85rem 0; border-bottom:1px solid var(--line); border-radius:0; text-align:center; font-size:0.98rem; font-weight:700;}
+    .main-nav a:last-child{border-bottom:none;}
+  }
+
   @media (max-width:640px){
-    .filter-selects{ width:100%; flex-direction:column; }
-    .select-box{ width:100%; min-height:44px; }
-    .search-bar{ width:100%; min-width:100%; }
-    .btn-order-wa, .btn-view-spec{ min-height:44px; }
-    .spec-grid{ grid-template-columns:1fr; }
-    .store-hero{ padding:2.8rem 1rem 2.2rem; }
-    .guarantee-bar{ flex-direction:column; align-items:center; gap:0.6rem; text-align:center; }
+    .store-hero{padding:2.8rem 1rem 2.2rem;}
+    .store-section{padding:2rem 1rem;}
+    .filter-panel{padding:1.1rem 0.9rem;}
+    .search-row{margin-bottom:0.8rem;}
+    .filter-selects{width:100%; flex-direction:column; gap:0.5rem;}
+    .select-box{width:100%; min-height:46px;}
+    .search-bar{width:100%; min-width:100%;}
+    .product-grid{grid-template-columns:1fr; gap:1.2rem;}
+    .product-card{border-radius:14px;}
+    .swatch-container{height:180px;}
+    .btn-order-wa, .btn-view-spec{min-height:46px;}
+    .spec-grid{grid-template-columns:1fr;}
+    .modal-card{width:95%; max-height:88vh; padding:1.4rem 1rem;}
+    .guarantee-bar{flex-direction:column; align-items:center; gap:0.6rem; text-align:center;}
   }
 
   /* Store Summary & Sorting Bar */
@@ -980,12 +1011,19 @@
   </footer>
 
 <script>
-  // Mobile Menu Toggle
+  // Mobile Menu Toggle & Auto-Close
   const toggle = document.getElementById('navToggle');
-  if(toggle){
+  const mainNav = document.querySelector('.main-nav');
+  if(toggle && mainNav){
     toggle.addEventListener('click', () => {
-      const nav = document.querySelector('.main-nav');
-      if(nav) nav.classList.toggle('open');
+      const isOpen = mainNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('.main-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 

@@ -143,7 +143,14 @@
   .search-bar button{background:var(--red); color:var(--bone); border:none; padding:0 1.4rem; font-weight:600; font-size:0.86rem; cursor:pointer;}
   .search-bar button:hover{background:var(--red-deep);}
 
-  .filter-track{display:flex; gap:0.5rem; overflow-x:auto; padding-bottom:0.6rem; scrollbar-width:none; justify-content:center; flex-wrap:wrap;}
+  html, body{overflow-x:hidden; width:100%;}
+  input, select, textarea{font-size:16px !important;}
+
+  .filter-track{
+    display:flex; gap:0.5rem; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    padding-bottom:0.5rem; scrollbar-width:none; justify-content:flex-start; flex-wrap:nowrap; width:100%;
+  }
+  .filter-track::-webkit-scrollbar{display:none;}
   .chip-btn{
     display:inline-flex; align-items:center; gap:0.4rem; flex:0 0 auto; white-space:nowrap;
     min-height:38px; font-size:0.8rem; font-weight:600; padding:0 1rem;
@@ -154,13 +161,35 @@
   .chip-btn:hover{border-color:var(--red); color:var(--red);}
   .chip-btn.active:hover{color:var(--bone);}
 
+  @media (max-width:920px){
+    .site-header{padding:0.75rem 1rem;}
+    .header-socials{display:none;}
+    .nav-toggle{display:flex;}
+    .main-nav{
+      display:none; position:absolute; top:100%; left:0; right:0;
+      background:rgba(250,248,243,0.98); backdrop-filter:blur(14px);
+      border-bottom:2px solid var(--bone-dim); flex-direction:column;
+      gap:0; padding:0.4rem 1.2rem 1.2rem; box-shadow:0 16px 32px rgba(23,21,18,0.16);
+      z-index:99; max-width:100%; border-radius:0;
+    }
+    .main-nav.open{display:flex;}
+    .main-nav a{padding:0.85rem 0; border-bottom:1px solid var(--line); border-radius:0; text-align:center; font-size:0.98rem; font-weight:700; color:var(--ink);}
+    .main-nav a:last-child{border-bottom:none;}
+  }
+
   @media (max-width:640px){
-    .search-bar{ flex-direction:column; }
-    .search-bar input{ border-radius:8px 8px 0 0; padding-left:2.4rem; }
-    .search-bar button{ border-radius:0 0 8px 8px; min-height:44px; width:100%; }
-    .bulletin-header-plaque{ text-align:center; padding:1.2rem 1rem; }
+    .notice-hero{padding:2.8rem 1rem 2.2rem;}
+    .cork-board-wrapper{padding:0 0.8rem; margin-bottom:2.5rem;}
+    .cork-board{border-width:8px; padding:1.4rem 0.8rem 2rem; border-radius:14px; min-height:400px;}
+    .search-bar{ flex-direction:column; gap:0.4rem; }
+    .search-bar input{ border-radius:8px; padding-left:2.4rem; min-height:46px; }
+    .search-bar button{ border-radius:8px; min-height:46px; width:100%; }
+    .bulletin-header-plaque{ text-align:center; padding:1.2rem 1rem; border-radius:12px; }
+    .notice-grid{ grid-template-columns:1fr; gap:1.2rem; }
+    .pin-card{ padding:1.2rem 1rem; border-radius:14px; }
     .pin-card-footer{ flex-direction:column; align-items:stretch; gap:0.6rem; }
-    .pin-card-footer .btn-view-order{ width:100%; justify-content:center; min-height:44px; }
+    .pin-card-footer .btn-view-order{ width:100%; justify-content:center; min-height:46px; }
+    .modal-card{ width:95%; max-height:88vh; padding:1.4rem 1rem; color:var(--ink); }
   }
 
   /* REAL CORK NOTICE BOARD CONTAINER */
@@ -634,12 +663,19 @@
   </footer>
 
 <script>
-  // Mobile Menu Toggle
+  // Mobile Menu Toggle & Auto-Close
   const toggle = document.getElementById('navToggle');
-  if(toggle){
+  const mainNav = document.querySelector('.main-nav');
+  if(toggle && mainNav){
     toggle.addEventListener('click', () => {
-      const nav = document.querySelector('.main-nav');
-      if(nav) nav.classList.toggle('open');
+      const isOpen = mainNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('.main-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 
