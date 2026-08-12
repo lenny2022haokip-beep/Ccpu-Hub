@@ -447,11 +447,12 @@
     
     <nav class="main-nav" aria-label="Primary">
       <a href="#home" class="active">Home</a>
-      <a href="handloom.html">Handloom Market</a>
-      <a href="directory.html">Directory</a>
-      <a href="jobs.html">Jobs</a>
-      <a href="notices.html">Notices</a>
+      <a href="#handloom">Handloom Market</a>
+      <a href="#directory">Directory</a>
+      <a href="#jobs">Jobs</a>
+      <a href="#notices">Notices</a>
       <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
     </nav>
 
     <div class="header-socials">
@@ -1007,6 +1008,11 @@
   </footer>
 
 <script>
+  // Disable default browser scroll restoration so reloads initialize cleanly
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
   // Mobile Menu Toggle & Auto-Close
   const toggle = document.getElementById('navToggle');
   const mainNav = document.querySelector('.main-nav');
@@ -1027,7 +1033,7 @@
   let currentSlide = 0;
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.dot');
-  let carouselTimer;
+  let carouselTimer = null;
 
   function showSlide(index){
     if(slides.length === 0) return;
@@ -1050,13 +1056,11 @@
   }
 
   function resetTimer(){
-    clearInterval(carouselTimer);
+    if(carouselTimer) clearInterval(carouselTimer);
     carouselTimer = setInterval(() => {
       moveSlide(1);
     }, 5000);
   }
-
-  resetTimer();
 
   // Story Modal
   function openStoryModal(title, story){
@@ -1068,6 +1072,59 @@
   function closeModals(){
     document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
   }
+
+  // Active ScrollSpy for Home Page Sections
+  const sections = document.querySelectorAll('section[id], div[id="home"]');
+  const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+
+  function updateActiveNav(){
+    let scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    let currentSectionId = 'home';
+
+    sections.forEach(sec => {
+      const sectionTop = sec.offsetTop - 120;
+      const sectionHeight = sec.offsetHeight;
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        currentSectionId = sec.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === '#' + currentSectionId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+  // Page Load Alignment & Clean Reset on Reload
+  function initPagePosition(){
+    closeModals();
+    showSlide(0);
+    resetTimer();
+
+    const hash = window.location.hash;
+    if (hash && hash !== '#home') {
+      const targetSec = document.querySelector(hash);
+      if (targetSec) {
+        setTimeout(() => {
+          targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          updateActiveNav();
+        }, 150);
+        return;
+      }
+    }
+    // If no hash or #home, scroll to top 0,0 cleanly
+    window.scrollTo(0, 0);
+    updateActiveNav();
+  }
+
+  window.addEventListener('load', initPagePosition);
+  window.addEventListener('pageshow', initPagePosition);
 </script>
 </body>
 </html>

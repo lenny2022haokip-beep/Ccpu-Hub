@@ -1,6 +1,6 @@
 /**
  * Lamka Hub — Frontend API Client
- * Connects the web UI to the Node.js Express + Supabase + WhatsApp OTP Backend.
+ * Connects the web UI to the Node.js Express + Supabase + Razorpay + WhatsApp OTP Backend.
  */
 
 const API_BASE_URL = window.location.origin.includes('localhost')
@@ -34,6 +34,42 @@ const LamkaAPI = {
     } catch (err) {
       console.warn('API Offline, using local fallback for Handloom');
       return null;
+    }
+  },
+
+  /**
+   * Create Razorpay Payment Order (Server-side price verification)
+   */
+  async createPaymentOrder(productId, customAmount = null) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/payment/create-order`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, customAmount }),
+      });
+      return await res.json();
+    } catch (err) {
+      return { success: false, message: 'Backend server offline for payment processing' };
+    }
+  },
+
+  /**
+   * Verify Razorpay Signature on Backend (HMAC SHA-256)
+   */
+  async verifyPaymentSignature(orderId, paymentId, signature) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/payment/verify-payment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          razorpay_order_id: orderId,
+          razorpay_payment_id: paymentId,
+          razorpay_signature: signature,
+        }),
+      });
+      return await res.json();
+    } catch (err) {
+      return { success: false, message: 'Server verification failed' };
     }
   },
 
