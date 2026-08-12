@@ -1,0 +1,578 @@
+/* ==========================================================================
+   LAMKA HUB — MOBILE & TABLET RESPONSIVE OPTIMIZATION STYLESHEET
+   Targets: Tablets (<= 1024px), Mobile Devices (<= 768px & <= 480px)
+   Desktop layout (width > 1024px) remains 100% untouched.
+   ========================================================================== */
+
+/* Prevent horizontal overflow on mobile body */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   1. TABLET OPTIMIZATIONS (<= 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .site-header {
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .app-section, .store-section {
+    padding: 2.5rem 1.2rem;
+  }
+
+  .handloom-grid, .catalog-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  .dir-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .notice-grid, .notice-board-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.8rem !important;
+  }
+
+  .hero-shawl-layout, .dev-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    text-align: center;
+  }
+
+  .hero-content, .dev-hero-text {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .dev-stats-grid, .jobs-hero-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  .mission-grid, .tribes-showcase-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  .tech-stack-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.8rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. MOBILE & PHONE OPTIMIZATIONS (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  
+  /* Touch target sizes & typography scaling */
+  button, .btn-action, .chip-btn, .hero-cta, a.btn-action, .hotline-btn, .btn-read-doc {
+    min-height: 44px;
+    font-size: 0.88rem;
+  }
+
+  /* Header Bar Optimization */
+  .site-header {
+    padding: 0.7rem 1rem !important;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+  }
+
+  .brand {
+    font-size: 1.25rem !important;
+  }
+
+  .brand .tag {
+    font-size: 0.55rem !important;
+  }
+
+  .header-socials {
+    display: none !important;
+  }
+
+  /* Mobile Navigation Drawer */
+  .nav-toggle {
+    display: flex !important;
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper, #FAF8F3) !important;
+    border-bottom: 2px solid var(--line, rgba(23,21,18,0.12)) !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0.5rem 1rem 1.2rem !important;
+    box-shadow: 0 16px 30px rgba(23,21,18,0.15) !important;
+    z-index: 95;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  .main-nav.open {
+    display: flex !important;
+  }
+
+  .main-nav a {
+    width: 100%;
+    padding: 0.85rem 1rem !important;
+    border-bottom: 1px solid var(--line, rgba(23,21,18,0.12));
+    border-radius: 8px !important;
+    text-align: center !important;
+    font-size: 0.95rem !important;
+  }
+
+  .main-nav a.active {
+    background: var(--ink, #171512) !important;
+    color: var(--bone, #EDE8DD) !important;
+  }
+
+  /* News Ticker Bar */
+  .ticker-bar {
+    height: 36px !important;
+  }
+  .ticker-label {
+    font-size: 0.62rem !important;
+    padding: 0 10px !important;
+  }
+  .ticker-track span {
+    font-size: 0.76rem !important;
+    padding: 0 1.2rem !important;
+  }
+
+  /* Hero Section Mobile Overhaul */
+  .hero {
+    min-height: auto !important;
+    padding: 2rem 0 !important;
+  }
+
+  .hero-slide {
+    position: relative !important;
+    inset: auto !important;
+    height: auto !important;
+    padding: 1.5rem 1rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: none;
+  }
+
+  .hero-slide.active {
+    display: flex !important;
+  }
+
+  .hero-content-center h1, .hero-content h1, .store-hero h1, .page-banner h1, .dev-hero-text h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .hero-content-center p, .hero-content p, .store-hero p, .page-banner p, .dev-hero-text p {
+    font-size: 0.88rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-cta {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.75rem 1.2rem !important;
+    font-size: 0.92rem !important;
+  }
+
+  /* Hero Weave Showcase Swipe Track on Mobile */
+  .hero-weave-showcase {
+    gap: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+    margin-top: 0.8rem !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .hero-weave-item {
+    width: 125px !important;
+    padding: 0.45rem !important;
+    scroll-snap-align: start;
+  }
+
+  .hw-swatch {
+    height: 65px !important;
+  }
+
+  .hw-title {
+    font-size: 0.76rem !important;
+  }
+
+  .hw-tribe {
+    font-size: 0.58rem !important;
+  }
+
+  .hero-dots {
+    bottom: 0.6rem !important;
+    right: 50% !important;
+    transform: translateX(50%) !important;
+  }
+
+  /* Guarantee Ribbon Bar on Handloom Store Page */
+  .guarantee-bar {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    align-items: flex-start !important;
+    padding: 0.8rem 1rem !important;
+  }
+
+  .guarantee-item {
+    font-size: 0.78rem !important;
+  }
+
+  /* Marquee Strip */
+  .spotlight-wrap {
+    padding: 1rem 0 !important;
+  }
+
+  .promo-card {
+    width: 220px !important;
+    padding: 0.8rem !important;
+  }
+
+  .promo-card h3 {
+    font-size: 0.84rem !important;
+  }
+
+  .promo-card p {
+    font-size: 0.72rem !important;
+  }
+
+  /* Section Spacing & Headings */
+  .app-section, .store-section {
+    padding: 1.8rem 1rem !important;
+  }
+
+  .section-head h2 {
+    font-size: 1.45rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .section-head p {
+    font-size: 0.86rem !important;
+  }
+
+  /* Search & Filter Modules */
+  .search-module, .filter-panel {
+    margin-bottom: 1rem !important;
+    border-radius: 10px !important;
+    padding: 0.8rem !important;
+  }
+
+  .search-bar, .search-row {
+    flex-direction: column !important;
+    gap: 0.6rem !important;
+  }
+
+  .search-bar input, .search-row input {
+    padding: 0.8rem 1rem 0.8rem 2.4rem !important;
+    font-size: 0.88rem !important;
+    width: 100% !important;
+  }
+
+  .search-bar select, .filter-selects {
+    border-left: none !important;
+    border-top: 1px solid var(--line, rgba(23,21,18,0.12)) !important;
+    padding: 0.75rem 0.6rem !important;
+    font-size: 0.82rem !important;
+    width: 100% !important;
+    flex-direction: column !important;
+  }
+
+  .select-box {
+    width: 100% !important;
+    min-height: 42px !important;
+  }
+
+  .search-bar button {
+    width: 100% !important;
+    padding: 0.75rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  /* Filter Track (Tribe chips, category chips) */
+  .filter-track, .tribe-chips-track {
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    padding-bottom: 0.5rem !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filter-track::-webkit-scrollbar, .tribe-chips-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip-btn {
+    min-height: 38px !important;
+    font-size: 0.78rem !important;
+    padding: 0 0.8rem !important;
+  }
+
+  /* Marketplace Product Cards Mobile */
+  .handloom-grid, .catalog-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    margin-top: 1.2rem !important;
+  }
+
+  .product-card {
+    border-radius: 12px !important;
+  }
+
+  .product-swatch {
+    height: 160px !important;
+  }
+
+  .product-info {
+    padding: 0.85rem 0.95rem 1rem !important;
+  }
+
+  .product-info h3 {
+    font-size: 0.98rem !important;
+  }
+
+  .product-info .weaver {
+    font-size: 0.75rem !important;
+  }
+
+  .price-row {
+    padding-top: 0.6rem !important;
+  }
+
+  .price {
+    font-size: 0.92rem !important;
+  }
+
+  .btn-action {
+    padding: 0 0.85rem !important;
+    font-size: 0.76rem !important;
+    min-height: 38px !important;
+  }
+
+  /* Directory Section Mobile */
+  .dir-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.9rem !important;
+    margin-top: 1.2rem !important;
+  }
+
+  .dir-card {
+    flex-direction: column !important;
+    padding: 1rem !important;
+    gap: 0.75rem !important;
+  }
+
+  .dir-logo {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 0.98rem !important;
+  }
+
+  .dir-body h3 {
+    font-size: 0.98rem !important;
+  }
+
+  .dir-body p {
+    font-size: 0.8rem !important;
+  }
+
+  .dir-meta {
+    flex-direction: column !important;
+    gap: 0.3rem !important;
+    font-size: 0.74rem !important;
+  }
+
+  .dir-btn-group {
+    width: 100% !important;
+    margin-top: 0.6rem !important;
+  }
+
+  .dir-btn-group button, .dir-btn-group a {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  /* Emergency Hotline Ribbon Mobile */
+  .emergency-ribbon {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5rem !important;
+    padding: 0.8rem !important;
+  }
+
+  .hotline-btn {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 0.6rem 0.8rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Jobs Section Mobile */
+  .job-list {
+    gap: 0.8rem !important;
+    margin-top: 1.2rem !important;
+  }
+
+  .job-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 1rem !important;
+    gap: 0.9rem !important;
+  }
+
+  .job-main h3 {
+    font-size: 1rem !important;
+  }
+
+  .job-main p {
+    font-size: 0.82rem !important;
+  }
+
+  .job-card .btn-action {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .jobs-hero-stats {
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important;
+  }
+
+  /* Town Notices Section Mobile */
+  .notice-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.9rem !important;
+    margin-top: 1.2rem !important;
+  }
+
+  .notice-card {
+    padding: 1.1rem !important;
+    border-radius: 12px !important;
+  }
+
+  .notice-card h3 {
+    font-size: 1rem !important;
+  }
+
+  .notice-card p {
+    font-size: 0.82rem !important;
+  }
+
+  /* Cork Board Notice Paper Mobile */
+  .notice-board-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+  }
+
+  .notice-paper {
+    padding: 1.2rem 1rem !important;
+  }
+
+  /* About Us Page Mobile */
+  .dev-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.8rem !important;
+  }
+
+  .mission-grid, .tribes-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .tech-stack-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.6rem !important;
+  }
+
+  /* Mobile Sheet Modal Overlays */
+  .modal-overlay {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+
+  .modal-card {
+    max-width: 100% !important;
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 85vh !important;
+    padding: 1.5rem 1.2rem 1.8rem !important;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .modal-close {
+    top: 0.8rem !important;
+    right: 0.8rem !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* Footer Mobile */
+  .site-footer {
+    padding: 2rem 1rem 1.2rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 0.4rem !important;
+    text-align: center !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. SMALL MOBILE SCREENS (<= 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .hero-content-center h1, .hero-content h1, .store-hero h1, .page-banner h1, .dev-hero-text h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  .section-head h2 {
+    font-size: 1.3rem !important;
+  }
+
+  .hw-swatch {
+    height: 55px !important;
+  }
+
+  .hero-weave-item {
+    width: 110px !important;
+  }
+}
