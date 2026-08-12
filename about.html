@@ -319,6 +319,52 @@
   }
   .btn-dev-contact-page:hover{background:var(--red); color:#fff; transform:translateY(-3px);}
 
+  /* Embedded Contact & Consultation Section */
+  .contact-section-container{
+    max-width:1180px; margin:3.5rem auto 0; padding:0 1.5rem;
+  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1.2fr; gap:2.5rem; align-items:start;}
+  @media (max-width:860px){.contact-grid{grid-template-columns:1fr; gap:2rem;}}
+
+  .contact-info-col{display:flex; flex-direction:column; gap:1.4rem;}
+  .info-card{
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:1.6rem; box-shadow:var(--shadow); display:flex; gap:1.2rem; align-items:flex-start;
+  }
+  .info-icon{
+    width:48px; height:48px; border-radius:12px; background:var(--ink); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex:0 0 auto;
+  }
+  .info-card h3{margin:0 0 0.35rem; font-family:var(--serif); font-size:1.2rem; font-weight:700; color:var(--ink);}
+  .info-card p{margin:0 0 0.6rem; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;}
+  .info-link{
+    font-family:var(--mono); font-size:0.82rem; font-weight:700; color:var(--red-deep);
+    display:inline-flex; align-items:center; gap:0.4rem;
+  }
+
+  .contact-form-card{
+    background:#fff; border:1px solid var(--line); border-radius:22px;
+    padding:2.2rem; box-shadow:var(--shadow);
+  }
+  .contact-form-card h2{font-family:var(--serif); font-size:1.75rem; margin:0 0 0.4rem; font-weight:700; color:var(--ink);}
+  .contact-form-card p{font-size:0.9rem; color:var(--ink-soft); margin:0 0 1.5rem; line-height:1.5;}
+
+  .form-group{margin-bottom:1.2rem;}
+  .form-group label{display:block; font-family:var(--mono); font-size:0.75rem; text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.4rem; font-weight:600;}
+  .form-group input, .form-group select, .form-group textarea{
+    width:100%; border:1px solid var(--line); border-radius:8px; padding:0.78rem 0.95rem;
+    font-family:var(--sans); font-size:0.92rem; color:var(--ink); background:#fff;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus{
+    outline:none; border-color:var(--red); box-shadow:0 0 0 3px rgba(178,58,45,0.12);
+  }
+  .btn-submit{
+    width:100%; min-height:48px; background:var(--ink); color:var(--bone);
+    font-weight:700; font-size:0.95rem; border:none; border-radius:10px; cursor:pointer;
+    transition:all 0.25s ease; box-shadow:0 6px 16px rgba(23,21,18,0.2);
+  }
+  .btn-submit:hover{background:var(--red); transform:translateY(-2px);}
+
   /* Footer */
   .site-footer{background:var(--ink); color:var(--bone-dim); padding:3.5rem 1.5rem 1.5rem; margin-top:4rem;}
   .footer-grid{
@@ -370,7 +416,6 @@
       <a href="jobs.html">Jobs</a>
       <a href="notices.html">Notices</a>
       <a href="about.html" class="active">About Us</a>
-      <a href="contact.html">Contact Us</a>
     </nav>
 
     <div class="header-socials">
@@ -637,6 +682,83 @@
       </div>
     </section>
 
+    <!-- 4. EMBEDDED CONSULTATION & CONTACT FORM SECTION -->
+    <section class="contact-section-container" id="contact-form">
+      <div class="contact-grid">
+        
+        <!-- Left Column: Direct Contacts -->
+        <div class="contact-info-col">
+          
+          <div class="info-card">
+            <div class="info-icon">💬</div>
+            <div>
+              <h3>WhatsApp Direct Desk</h3>
+              <p>Connect instantly with our developer team for web design consultations or directory updates.</p>
+              <a class="info-link" target="_blank" href="https://wa.me/919862000000?text=Hello!%20I%20have%20an%20inquiry%20regarding%20Lamka%20Hub.">Chat on WhatsApp (+91 98620 00000) &rarr;</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">📞</div>
+            <div>
+              <h3>Phone Helpline</h3>
+              <p>Mon – Sat, 9:00 AM – 6:00 PM IST. Direct phone consultation for local businesses and weavers.</p>
+              <a class="info-link" href="tel:+919862000000">Call +91 98620 00000 &rarr;</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <div>
+              <h3>District Office Location</h3>
+              <p>Lamka Hub Community Desk, Tedim Road, Near Tuibong Junction, Churachandpur, Manipur — 795128.</p>
+              <span class="info-link" style="color:var(--ink-soft);">Churachandpur District</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Consultation Form -->
+        <div class="contact-form-card">
+          <h2>Send Us a Message</h2>
+          <p>Fill in your details below to request a free web development estimate or general inquiry.</p>
+
+          <form id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent. Our team will contact you shortly on WhatsApp/Phone.'); this.reset();">
+            
+            <div class="form-group">
+              <label for="fullName">Your Full Name</label>
+              <input type="text" id="fullName" placeholder="e.g. Mangkim Vaiphei" required>
+            </div>
+
+            <div class="form-group">
+              <label for="phoneNum">Phone / WhatsApp Number</label>
+              <input type="tel" id="phoneNum" placeholder="+91 98620 00000" required>
+            </div>
+
+            <div class="form-group">
+              <label for="inquiryType">Inquiry Category</label>
+              <select id="inquiryType" required>
+                <option value="web-dev">Build Custom Website / Online Store</option>
+                <option value="handloom">Handloom Order / Weaver Listing</option>
+                <option value="directory">Add Directory Listing / Hospital Desk</option>
+                <option value="job">Post a Job Opening</option>
+                <option value="other">General Feedback / Support</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="msgContent">Message Details</label>
+              <textarea id="msgContent" rows="4" placeholder="Tell us about your project or inquiry..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Message & Request Free Estimate &rarr;</button>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
@@ -679,7 +801,7 @@
         <a href="about.html#build-platform">E-Commerce Stores</a>
         <a href="about.html#build-platform">Business Websites</a>
         <a href="about.html#build-platform">Church & NGO Sites</a>
-        <a href="about.html#build-platform">Affordable Pricing</a>
+        <a href="about.html#contact-form">Send Us a Message / Get Estimate</a>
       </div>
       <div>
         <h5>Emergency Contacts</h5>
