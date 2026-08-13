@@ -414,12 +414,12 @@
       <h1>Churachandpur District Directory</h1>
       <p>Verified contacts for weaver cooperatives, hospitals, emergency helplines, clinics, artisans, and public institutions across Lamka wards.</p>
 
-      <!-- 24/7 Emergency Ribbon -->
+      <!-- Modern 24/7 Emergency Hotline Ribbon -->
       <div class="emergency-ribbon">
-        <span>🚨 <strong>24/7 EMERGENCY HOTLINES:</strong></span>
+        <span class="emergency-tag"><span class="live-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#fff; margin-right:4px; animation:pulseGlow 1.6s ease-in-out infinite;"></span> 🚨 24/7 EMERGENCY HOTLINES</span>
         <a href="tel:03874233855" class="hotline-btn">🏥 Hospital: 03874-233855</a>
         <a href="tel:03874233221" class="hotline-btn">🚓 Police: 03874-233221</a>
-        <a href="tel:03874233100" class="hotline-btn">🚒 Fire: 101</a>
+        <a href="tel:101" class="hotline-btn">🚒 Fire: 101</a>
         <a href="tel:03874233875" class="hotline-btn">🏛 DC Office: 03874-233875</a>
       </div>
     </div>
@@ -430,13 +430,13 @@
   <!-- Directory Main Section -->
   <main class="app-section">
     
-    <!-- Filter Wrapper -->
+    <!-- Modern Search & Filter Controls -->
     <div class="filter-wrapper">
       <div class="search-bar">
         <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         <input type="text" id="dirSearch" placeholder="Search Saipikhup weaver, District Hospital, police, pharmacy, Sielmat, Hiangtam Lamka…">
         <select id="wardSelect">
-          <option value="all">All Ward Sectors</option>
+          <option value="all">📍 All Ward Sectors</option>
           <option value="Hiangtam Lamka">Hiangtam Lamka</option>
           <option value="Tuibong">Tuibong</option>
           <option value="Rengkai">Rengkai</option>
@@ -448,13 +448,27 @@
         <button id="dirSearchBtn">Search Directory</button>
       </div>
 
-      <!-- Category Filter Tabs -->
+      <!-- Category Filter Pills Track -->
+      <div style="font-family:var(--mono); font-size:0.72rem; font-weight:700; color:var(--ink-soft); margin-bottom:0.35rem; text-transform:uppercase; letter-spacing:0.08em;">Categories</div>
       <div class="filter-track" id="dirFilterTrack">
-        <button class="chip-btn active" data-cat="all">All Listings (14)</button>
+        <button class="chip-btn active" data-cat="all">✨ All Listings (14)</button>
         <button class="chip-btn" data-cat="shg">🧶 Weaver SHGs & Looms (4)</button>
         <button class="chip-btn" data-cat="health">🏥 Hospitals & Clinics (4)</button>
         <button class="chip-btn" data-cat="safety">🚨 Emergency & Public Safety (3)</button>
         <button class="chip-btn" data-cat="business">🛍 Artisans & Local Services (3)</button>
+      </div>
+
+      <!-- Quick Ward Sector Pills Track -->
+      <div style="font-family:var(--mono); font-size:0.72rem; font-weight:700; color:var(--ink-soft); margin:0.6rem 0 0.35rem; text-transform:uppercase; letter-spacing:0.08em;">Ward Sectors</div>
+      <div class="filter-track" id="wardFilterTrack">
+        <button class="chip-btn active" data-ward="all">📍 All Sectors</button>
+        <button class="chip-btn" data-ward="Hiangtam Lamka">Hiangtam Lamka</button>
+        <button class="chip-btn" data-ward="Tuibong">Tuibong</button>
+        <button class="chip-btn" data-ward="Rengkai">Rengkai</button>
+        <button class="chip-btn" data-ward="New Lamka">New Lamka</button>
+        <button class="chip-btn" data-ward="Sielmat">Sielmat</button>
+        <button class="chip-btn" data-ward="Zenhang Lamka">Zenhang Lamka</button>
+        <button class="chip-btn" data-ward="Kangvai">Kangvai</button>
       </div>
     </div>
 
@@ -1050,8 +1064,9 @@
     });
   }
 
-  // Filter Logic by Category & Ward
+  // Filter Logic by Category & Ward Sector
   let activeCat = 'all';
+  let activeWard = 'all';
 
   document.querySelectorAll('#dirFilterTrack .chip-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1062,18 +1077,37 @@
     });
   });
 
+  document.querySelectorAll('#wardFilterTrack .chip-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#wardFilterTrack .chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeWard = btn.getAttribute('data-ward');
+      const wardSel = document.getElementById('wardSelect');
+      if (wardSel) wardSel.value = activeWard;
+      filterDirectory();
+    });
+  });
+
   const searchInp = document.getElementById('dirSearch');
   if(searchInp) searchInp.addEventListener('input', filterDirectory);
 
   const wardSel = document.getElementById('wardSelect');
-  if(wardSel) wardSel.addEventListener('change', filterDirectory);
+  if(wardSel) {
+    wardSel.addEventListener('change', () => {
+      activeWard = wardSel.value;
+      document.querySelectorAll('#wardFilterTrack .chip-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-ward') === activeWard);
+      });
+      filterDirectory();
+    });
+  }
 
   const searchBtn = document.getElementById('dirSearchBtn');
   if(searchBtn) searchBtn.addEventListener('click', filterDirectory);
 
   function filterDirectory(){
     const query = searchInp ? searchInp.value.toLowerCase().trim() : '';
-    const selectedWard = wardSel ? wardSel.value : 'all';
+    const selectedWard = activeWard;
     const cards = document.querySelectorAll('#dirGrid .dir-card');
     let visibleCount = 0;
 
@@ -1102,10 +1136,14 @@
 
   function resetDirFilters(){
     if(searchInp) searchInp.value = '';
-    if(wardSel) wardSel.value = 'all';
     activeCat = 'all';
+    activeWard = 'all';
+    if(wardSel) wardSel.value = 'all';
     document.querySelectorAll('#dirFilterTrack .chip-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-cat') === 'all');
+    });
+    document.querySelectorAll('#wardFilterTrack .chip-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-ward') === 'all');
     });
     filterDirectory();
     showToast('All directory filters reset', 'info');
