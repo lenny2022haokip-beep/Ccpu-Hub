@@ -548,6 +548,14 @@
     <!-- Luxury Product Grid (Side-by-Side Image & Description Layout) -->
     <div class="product-grid" id="productGrid">
       
+      <!-- Empty State Card -->
+      <div class="empty-state-card" id="emptyState" style="display:none; text-align:center; padding:3rem 1.5rem; background:var(--paper); border:1.5px dashed var(--line); border-radius:18px; margin:1rem auto; max-width:600px; grid-column:1 / -1;">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">🧶</div>
+        <h3 style="font-family:var(--serif); font-size:1.3rem; margin:0 0 0.4rem; font-weight:700;">No Matching Weaves Found</h3>
+        <p style="font-size:0.9rem; color:var(--ink-soft); margin:0 0 1.2rem;">Try adjusting your search query or clearing your tribe and fabric category filters to view all 14 handloom weaves.</p>
+        <button class="btn-action" onclick="resetFilters()" style="background:var(--ink); color:var(--bone); border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer;">Reset All Filters 🔄</button>
+      </div>
+
       <!-- Weave 1: Kuki Saipikhup -->
       <div class="product-card" data-tribe="Kuki" data-type="Shawl" data-price="3800" data-name="Kuki Saipikhup Shawl">
         <div class="swatch-container" onclick="openSpecModal('Kuki Saipikhup Shawl', 'Saipikhup Artisan Circle', 'Hiangtam Lamka', '₹3,800', '+919862000001', 'Kuki Traditional Weave', '100% Organic Cotton & Gold Thread', 'Backstrap Loin Loom', '18 Days', 'The iconic Saipikhup shawl represents the quail-footprint diamond pattern, a revered symbol of resilience, agility, and ancestral honor in Kuki tradition.')">
@@ -1391,6 +1399,11 @@
 
     document.getElementById('visibleCount').innerText = visibleCount;
 
+    const emptyState = document.getElementById('emptyState');
+    if(emptyState) {
+      emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
     // Sorting
     if(selectedSort !== 'featured'){
       cards.sort((a, b) => {
@@ -1408,6 +1421,19 @@
     }
   }
 
+  function resetFilters(){
+    if(searchInp) searchInp.value = '';
+    if(typeSel) typeSel.value = 'all';
+    if(priceSel) priceSel.value = 'all';
+    if(sortSel) sortSel.value = 'featured';
+    activeTribe = 'all';
+    document.querySelectorAll('.chip-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-tribe') === 'all');
+    });
+    filterAndSortStore();
+    showToast('All handloom filters reset', 'info');
+  }
+
   // Modal Spec Viewer
   function openSpecModal(title, weaver, location, price, phone, tribe, yarn, loom, time, story){
     document.getElementById('modalItemTitle').innerText = title;
@@ -1423,10 +1449,36 @@
     document.getElementById('modalWaBtn').href = 'https://wa.me/' + (rawPhone.length === 10 ? '91' + rawPhone : rawPhone) + '?text=' + encodeURIComponent('Hello! I would like to order "' + title + '" (' + price + ') from Lamka Hub Handloom Store.');
 
     document.getElementById('specModal').classList.add('open');
+    showToast('Loaded weave specifications for ' + title, 'info');
   }
 
   function closeModals(){
     document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+  }
+
+  // Toast Notification System
+  function showToast(message, type = 'success') {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.style.cssText = 'position:fixed; bottom:75px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:8px; pointer-events:none;';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'app-toast ' + type;
+    toast.style.cssText = 'background:#171512; color:#FAF8F3; border:1.5px solid #D9A441; padding:0.75rem 1.2rem; border-radius:12px; font-family:var(--sans); font-size:0.85rem; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px; opacity:0; transform:translateY(15px); transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1); pointer-events:auto;';
+    toast.innerHTML = (type === 'success' ? '✨ ' : 'ℹ️ ') + message;
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(15px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
   }
 </script>
 </body>

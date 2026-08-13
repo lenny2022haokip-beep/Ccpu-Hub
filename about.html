@@ -731,7 +731,7 @@
         </div>
 
         <!-- Welcoming Interactive Form -->
-        <form id="contactForm" onsubmit="event.preventDefault(); alert('Thank you for reaching out! Your message has been received with warmth. Our Lamka Hub team will contact you shortly via WhatsApp or Phone.'); this.reset();">
+        <form id="contactForm" onsubmit="handleContactSubmit(event)">
           
           <div class="warm-form-grid">
             
@@ -872,6 +872,38 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+  }
+
+  function handleContactSubmit(e){
+    e.preventDefault();
+    const name = document.getElementById('fullName').value;
+    document.getElementById('contactForm').reset();
+    showToast('Thank you, ' + name + '! Your message has been received with warmth. Our team will contact you shortly via WhatsApp / Phone.', 'success');
+  }
+
+  // Toast Notification System
+  function showToast(message, type = 'success') {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.style.cssText = 'position:fixed; bottom:75px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:8px; pointer-events:none;';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'app-toast ' + type;
+    toast.style.cssText = 'background:#171512; color:#FAF8F3; border:1.5px solid #D9A441; padding:0.75rem 1.2rem; border-radius:12px; font-family:var(--sans); font-size:0.85rem; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px; opacity:0; transform:translateY(15px); transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1); pointer-events:auto;';
+    toast.innerHTML = (type === 'success' ? '✨ ' : 'ℹ️ ') + message;
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(15px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
   }
 </script>
 </body>

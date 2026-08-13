@@ -462,6 +462,14 @@
     <!-- Job Cards List -->
     <div class="job-list" id="jobList">
 
+      <!-- Empty State Card -->
+      <div class="empty-state-card" id="emptyState" style="display:none; text-align:center; padding:3rem 1.5rem; background:var(--paper); border:1.5px dashed var(--line); border-radius:18px; margin:1rem auto; max-width:600px; grid-column:1 / -1; width:100%;">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">💼</div>
+        <h3 style="font-family:var(--serif); font-size:1.3rem; margin:0 0 0.4rem; font-weight:700;">No Matching Opportunities Found</h3>
+        <p style="font-size:0.9rem; color:var(--ink-soft); margin:0 0 1.2rem;">Try adjusting your search terms or clearing your sector and location filters to view all district job postings.</p>
+        <button class="btn-action" onclick="resetJobFilters()" style="background:var(--ink); color:var(--bone); border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer;">Reset All Filters 🔄</button>
+      </div>
+
       <!-- Job 1 -->
       <div class="job-card" data-sector="handloom" data-location="Hiangtam Lamka">
         <div class="job-header-row">
@@ -1099,6 +1107,7 @@
     const query = searchInp ? searchInp.value.toLowerCase().trim() : '';
     const selectedLoc = locSel ? locSel.value : 'all';
     const cards = document.querySelectorAll('#jobList .job-card');
+    let visibleCount = 0;
 
     cards.forEach(card => {
       const sector = card.getAttribute('data-sector') || '';
@@ -1111,10 +1120,27 @@
 
       if(matchSector && matchLoc && matchQuery){
         card.style.display = 'flex';
+        visibleCount++;
       } else {
         card.style.display = 'none';
       }
     });
+
+    const emptyState = document.getElementById('emptyState');
+    if(emptyState) {
+      emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+  }
+
+  function resetJobFilters(){
+    if(searchInp) searchInp.value = '';
+    if(locSel) locSel.value = 'all';
+    activeSector = 'all';
+    document.querySelectorAll('#sectorFilterTrack .chip-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-sector') === 'all');
+    });
+    filterJobs();
+    showToast('All job filters reset', 'info');
   }
 
   // Application Modal
@@ -1122,6 +1148,7 @@
     document.getElementById('modalJobTitle').innerText = role;
     document.getElementById('modalJobMeta').innerText = 'at ' + company + ' · ' + location;
     document.getElementById('applyModal').classList.add('open');
+    showToast('Opening application for ' + role, 'info');
   }
 
   function closeModals(){
@@ -1131,8 +1158,33 @@
   function handleApplicationSubmit(e){
     e.preventDefault();
     const name = document.getElementById('appFullName').value;
-    alert('Thank you, ' + name + '! Your application has been submitted directly to the employer on Lamka Hub. They will contact you shortly via WhatsApp / Phone.');
     closeModals();
+    showToast('Application submitted successfully for ' + name + '!', 'success');
+  }
+
+  // Toast Notification System
+  function showToast(message, type = 'success') {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.style.cssText = 'position:fixed; bottom:75px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:8px; pointer-events:none;';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'app-toast ' + type;
+    toast.style.cssText = 'background:#171512; color:#FAF8F3; border:1.5px solid #D9A441; padding:0.75rem 1.2rem; border-radius:12px; font-family:var(--sans); font-size:0.85rem; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px; opacity:0; transform:translateY(15px); transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1); pointer-events:auto;';
+    toast.innerHTML = (type === 'success' ? '✨ ' : 'ℹ️ ') + message;
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(15px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
   }
 </script>
 </body>

@@ -491,6 +491,14 @@
       <!-- Pinned Notice Cards Grid -->
       <div class="notice-grid" id="noticeGrid">
         
+        <!-- Empty State Card -->
+        <div class="empty-state-card" id="emptyState" style="display:none; text-align:center; padding:3rem 1.5rem; background:var(--paper); border:1.5px dashed var(--line); border-radius:18px; margin:1rem auto; max-width:600px; grid-column:1 / -1; width:100%;">
+          <div style="font-size:2.5rem; margin-bottom:0.5rem;">📢</div>
+          <h3 style="font-family:var(--serif); font-size:1.3rem; margin:0 0 0.4rem; font-weight:700;">No Town Notices Found</h3>
+          <p style="font-size:0.9rem; color:var(--ink-soft); margin:0 0 1.2rem;">Try adjusting your search query or clearing your urgency level and department filters to view all official directives.</p>
+          <button class="btn-action" onclick="resetNoticeFilters()" style="background:var(--ink); color:var(--bone); border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer;">Reset All Filters 🔄</button>
+        </div>
+
         <!-- Notice 1: Critical Emergency PHED Water Line -->
         <div class="notice-paper" data-urgency="critical" data-dept="phed">
           <!-- 3D Pushpin Icon -->
@@ -816,6 +824,7 @@
   function filterNotices(){
     const query = searchInp ? searchInp.value.toLowerCase().trim() : '';
     const cards = document.querySelectorAll('#noticeGrid .notice-paper');
+    let visibleCount = 0;
 
     cards.forEach(card => {
       const urgency = card.getAttribute('data-urgency');
@@ -826,10 +835,26 @@
 
       if(matchUrgency && matchQuery){
         card.style.display = 'flex';
+        visibleCount++;
       } else {
         card.style.display = 'none';
       }
     });
+
+    const emptyState = document.getElementById('emptyState');
+    if(emptyState) {
+      emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+  }
+
+  function resetNoticeFilters(){
+    if(searchInp) searchInp.value = '';
+    activeUrgency = 'all';
+    document.querySelectorAll('#noticeFilterTrack .chip-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-urgency') === 'all');
+    });
+    filterNotices();
+    showToast('All notice board filters reset', 'info');
   }
 
   // Modal Doc Popup
@@ -841,10 +866,36 @@
     document.getElementById('modalDocDate').innerText = date;
     document.getElementById('modalDocBody').innerText = body;
     document.getElementById('docModal').classList.add('open');
+    showToast('Opened official signed document: ' + ref, 'info');
   }
 
   function closeModals(){
     document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+  }
+
+  // Toast Notification System
+  function showToast(message, type = 'success') {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.style.cssText = 'position:fixed; bottom:75px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:8px; pointer-events:none;';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'app-toast ' + type;
+    toast.style.cssText = 'background:#171512; color:#FAF8F3; border:1.5px solid #D9A441; padding:0.75rem 1.2rem; border-radius:12px; font-family:var(--sans); font-size:0.85rem; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,0.3); display:flex; align-items:center; gap:8px; opacity:0; transform:translateY(15px); transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1); pointer-events:auto;';
+    toast.innerHTML = (type === 'success' ? '✨ ' : 'ℹ️ ') + message;
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    });
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(15px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
   }
 </script>
 </body>
