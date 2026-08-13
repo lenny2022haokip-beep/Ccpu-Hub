@@ -9,16 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0F172A; --ink-soft:#475569; --ink-muted:#64748B;
+    --ink:#0F172A; --ink-soft:#334155; --ink-muted:#64748B;
     --bone:#EDE8DD; --bone-dim:#DED7C6; --paper:#FAF8F3;
     --red:#B23A2D; --red-deep:#8C2C21;
-    --green:#3F5C48; --gold:#D9A441; --indigo:#2B3A55;
+    --green:#10B981; --gold:#D9A441; --indigo:#1E1B4B;
     --blue-accent:#2563EB; --blue-deep:#1D4ED8; --blue-soft:#EFF6FF; --blue-border:#BFDBFE;
     --card-bg:#FFFFFF; --card-border:#E2E8F0;
-    --shadow-sm: 0 2px 8px rgba(15,23,42,0.04);
-    --shadow-md: 0 8px 24px rgba(15,23,42,0.06);
-    --shadow-hover: 0 16px 36px rgba(37,99,235,0.12);
-    --radius: 20px;
+    --shadow-sm: 0 4px 12px rgba(15,23,42,0.03);
+    --shadow-md: 0 10px 30px rgba(15,23,42,0.06);
+    --shadow-hover: 0 20px 40px rgba(37,99,235,0.14);
+    --radius: 24px;
     --serif: "Newsreader", Georgia, serif;
     --sans: "Public Sans", -apple-system, Segoe UI, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -33,17 +33,12 @@
   :focus-visible{outline:3px solid var(--blue-accent);outline-offset:3px;}
   .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;}
 
-  .stripe{
-    height:6px; width:100%;
-    background:repeating-linear-gradient(90deg,var(--ink) 0 44px,var(--red) 44px 51px,var(--bone) 51px 58px,var(--gold) 58px 65px,var(--ink) 65px 109px);
-  }
-
   /* Header Navigation */
   .site-header{
-    background:rgba(255,255,255,0.96); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    background:rgba(255,255,255,0.95); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
     border-bottom:1px solid var(--card-border); padding:0.8rem 1.8rem;
     display:flex; align-items:center; justify-content:space-between; gap:1rem;
-    position:fixed; top:0; left:0; right:0; width:100%; z-index:1000; box-shadow:0 2px 12px rgba(15,23,42,0.03);
+    position:fixed; top:0; left:0; right:0; width:100%; z-index:1000; box-shadow:0 2px 14px rgba(15,23,42,0.04);
   }
 
   /* BRAND LOGO */
@@ -54,7 +49,7 @@
   .brand-logo:hover{transform:translateY(-1px);}
 
   .logo-emblem{
-    width:48px; height:48px; flex:0 0 48px; border-radius:50%;
+    width:46px; height:46px; flex:0 0 46px; border-radius:50%;
     box-shadow:0 4px 14px rgba(178,58,45,0.2);
     transition:transform 0.4s ease;
   }
@@ -117,68 +112,98 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
   .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-  /* TOP TALENTLY-STYLE SEARCH HERO & POPULAR SEARCHES */
+  /* MODERN TECH HERO SECTION WITH DARK MESH GRADIENT */
   .search-hero-container{
-    background:#ffffff; border-bottom:1px solid var(--card-border);
-    padding:5.8rem 1.5rem 1.6rem; box-shadow:0 4px 20px rgba(15,23,42,0.02);
+    background:radial-gradient(120% 120% at 50% 0%, #1E293B 0%, #0F172A 100%);
+    color:#F8FAFC; padding:6.2rem 1.5rem 2.8rem; position:relative; overflow:hidden;
+    box-shadow:0 10px 30px rgba(15,23,42,0.12);
   }
-  .search-hero-inner{max-width:1240px; margin:0 auto;}
+  .search-hero-container::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 30% 20%, rgba(37,99,235,0.18) 0%, transparent 50%),
+               radial-gradient(circle at 70% 80%, rgba(217,164,65,0.12) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .search-hero-inner{max-width:1240px; margin:0 auto; position:relative; z-index:2;}
 
+  .hero-headline-block{text-align:center; max-width:680px; margin:0 auto 1.8rem;}
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:0.4rem; background:rgba(217,164,65,0.15);
+    color:#F59E0B; border:1px solid rgba(217,164,65,0.3); padding:0.35rem 0.85rem;
+    border-radius:99px; font-family:var(--mono); font-size:0.74rem; font-weight:700;
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.8rem;
+  }
+  .hero-headline-block h1{
+    font-family:var(--serif); font-size:2.2rem; font-weight:700; margin:0 0 0.5rem;
+    line-height:1.2; letter-spacing:-0.01em; color:#FFFFFF;
+  }
+  .hero-headline-block p{
+    font-size:0.95rem; color:#94A3B8; margin:0; line-height:1.5; font-weight:400;
+  }
+
+  /* FLOATING GLASSMORPHIC SEARCH BAR CONSOLE */
   .talently-search-bar{
-    display:flex; align-items:center; gap:0.6rem; background:#ffffff;
-    border:1.5px solid #CBD5E1; border-radius:16px; padding:0.4rem 0.5rem;
-    box-shadow:0 4px 20px rgba(15,23,42,0.05); transition:border-color 0.2s ease, box-shadow 0.2s ease;
+    display:flex; align-items:center; gap:0.6rem; background:rgba(255,255,255,0.98);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1.5px solid rgba(255,255,255,0.2); border-radius:20px; padding:0.45rem 0.6rem;
+    box-shadow:0 20px 50px rgba(0,0,0,0.3); transition:all 0.25s ease;
   }
   .talently-search-bar:focus-within{
-    border-color:var(--blue-accent); box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+    border-color:var(--blue-accent); box-shadow:0 0 0 4px rgba(37,99,235,0.25), 0 20px 50px rgba(0,0,0,0.3);
   }
   
   .search-input-group{
     display:flex; align-items:center; gap:0.6rem; flex:1; min-width:180px;
-    padding:0.4rem 0.8rem; border-right:1px solid #E2E8F0;
+    padding:0.45rem 0.85rem; border-right:1px solid #E2E8F0;
   }
   .search-input-group:last-of-type{border-right:none;}
 
   .search-input-group svg{width:18px; height:18px; stroke:var(--ink-muted); fill:none; stroke-width:2; flex:0 0 18px;}
   .search-input-group input, .search-input-group select{
     width:100%; border:none; background:transparent; font-family:var(--sans);
-    font-size:0.92rem; color:var(--ink); padding:0.2rem 0; font-weight:500;
+    font-size:0.92rem; color:var(--ink); padding:0.2rem 0; font-weight:600;
   }
-  .search-input-group input::placeholder{color:var(--ink-muted); opacity:0.75;}
+  .search-input-group input::placeholder{color:var(--ink-muted); opacity:0.75; font-weight:500;}
   .search-input-group input:focus, .search-input-group select:focus{outline:none;}
   
   .btn-search-primary{
     background:linear-gradient(135deg, var(--blue-accent) 0%, var(--blue-deep) 100%);
     color:#ffffff; font-family:var(--sans); font-weight:700; font-size:0.92rem;
-    padding:0.75rem 1.8rem; border-radius:12px; border:none; cursor:pointer;
+    padding:0.8rem 2rem; border-radius:14px; border:none; cursor:pointer;
     transition:all 0.22s ease; display:inline-flex; align-items:center; gap:0.5rem;
-    box-shadow:0 4px 14px rgba(37,99,235,0.3); flex:0 0 auto;
+    box-shadow:0 4px 16px rgba(37,99,235,0.35); flex:0 0 auto;
   }
-  .btn-search-primary:hover{background:linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%); transform:translateY(-1px); box-shadow:0 6px 18px rgba(37,99,235,0.38);}
+  .btn-search-primary:hover{
+    background:linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);
+    transform:translateY(-2px); box-shadow:0 8px 24px rgba(37,99,235,0.45);
+  }
 
   /* Popular Searches Chips Row */
   .popular-searches-row{
-    display:flex; align-items:center; gap:0.6rem; margin-top:1.1rem; flex-wrap:wrap;
-    font-size:0.82rem; color:var(--ink-soft);
+    display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-top:1.4rem; flex-wrap:wrap;
+    font-size:0.84rem; color:#94A3B8;
   }
-  .popular-lbl{font-weight:700; color:var(--ink); font-family:var(--mono); font-size:0.76rem;}
+  .popular-lbl{font-weight:700; color:#E2E8F0; font-family:var(--mono); font-size:0.76rem;}
   .pop-chip{
-    background:#F1F5F9; color:var(--ink-soft); font-size:0.78rem; font-weight:600;
-    padding:0.32rem 0.8rem; border-radius:8px; border:1px solid #E2E8F0;
-    cursor:pointer; transition:all 0.2s ease;
+    background:rgba(255,255,255,0.08); color:#CBD5E1; font-size:0.78rem; font-weight:600;
+    padding:0.35rem 0.85rem; border-radius:99px; border:1px solid rgba(255,255,255,0.12);
+    cursor:pointer; transition:all 0.2s ease; backdrop-filter:blur(4px);
   }
-  .pop-chip:hover, .pop-chip.active{background:var(--blue-accent); color:#ffffff; border-color:var(--blue-accent);}
+  .pop-chip:hover, .pop-chip.active{
+    background:var(--blue-accent); color:#ffffff; border-color:var(--blue-accent);
+    box-shadow:0 4px 12px rgba(37,99,235,0.3);
+  }
 
   /* 2-COLUMN MASTER LAYOUT */
   .portal-container{
-    max-width:1240px; margin:0 auto; padding:2rem 1.5rem 4rem;
+    max-width:1240px; margin:0 auto; padding:2.2rem 1.5rem 4rem;
     display:grid; grid-template-columns:260px 1fr; gap:1.8rem; align-items:start;
   }
 
   /* LEFT SIDEBAR FILTER PANEL */
   .filter-sidebar{
     background:#ffffff; border:1px solid var(--card-border); border-radius:var(--radius);
-    padding:1.5rem; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:1.4rem;
+    padding:1.6rem; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:1.5rem;
     position:sticky; top:90px;
   }
 
@@ -209,28 +234,33 @@
   }
 
   .filter-select{
-    width:100%; border:1px solid #CBD5E1; border-radius:8px;
-    padding:0.6rem 0.75rem; font-family:var(--sans); font-size:0.83rem; color:var(--ink); background:#fff; font-weight:500;
+    width:100%; border:1px solid #CBD5E1; border-radius:10px;
+    padding:0.65rem 0.75rem; font-family:var(--sans); font-size:0.83rem; color:var(--ink); background:#fff; font-weight:600;
   }
   .filter-select:focus{outline:none; border-color:var(--blue-accent);}
 
-  /* AI SMART MATCH WIDGET (TALENTLY MATCH ME BOX) */
+  /* AI SMART MATCH WIDGET (DARK FUTURISTIC CONSOLE BOX) */
   .ai-match-widget{
-    background:linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
-    border:1.5px solid var(--blue-border); border-radius:16px; padding:1.2rem 1.1rem;
-    display:flex; flex-direction:column; gap:0.65rem; box-shadow:0 4px 12px rgba(37,99,235,0.06);
+    background:linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    border:1px solid #334155; border-radius:18px; padding:1.3rem 1.1rem;
+    display:flex; flex-direction:column; gap:0.75rem; color:#F8FAFC;
+    box-shadow:0 8px 24px rgba(15,23,42,0.15); position:relative; overflow:hidden;
+  }
+  .ai-match-widget::before{
+    content:""; position:absolute; top:-20px; right:-20px; width:80px; height:80px;
+    background:rgba(37,99,235,0.25); filter:blur(20px); border-radius:50%; pointer-events:none;
   }
   .ai-match-title{
     display:flex; align-items:center; gap:0.4rem; font-family:var(--sans);
-    font-size:0.9rem; font-weight:800; color:var(--blue-accent);
+    font-size:0.92rem; font-weight:800; color:#60A5FA;
   }
-  .ai-match-widget p{margin:0; font-size:0.79rem; color:#1E40AF; line-height:1.45; font-weight:500;}
+  .ai-match-widget p{margin:0; font-size:0.79rem; color:#94A3B8; line-height:1.45; font-weight:400;}
   .btn-match-me{
-    background:linear-gradient(135deg, var(--blue-accent) 0%, var(--blue-deep) 100%);
-    color:#ffffff; font-weight:700; font-size:0.84rem; padding:0.6rem; border-radius:9px; border:none; width:100%;
-    cursor:pointer; transition:all 0.22s ease; box-shadow:0 4px 12px rgba(37,99,235,0.25);
+    background:linear-gradient(135deg, var(--gold) 0%, #B45309 100%);
+    color:#0F172A; font-weight:800; font-size:0.84rem; padding:0.65rem; border-radius:10px; border:none; width:100%;
+    cursor:pointer; transition:all 0.22s ease; box-shadow:0 4px 14px rgba(217,164,65,0.25);
   }
-  .btn-match-me:hover{background:linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%); transform:translateY(-1px);}
+  .btn-match-me:hover{background:#ffffff; transform:translateY(-1px); color:var(--ink);}
 
   /* RIGHT MAIN CONTENT AREA */
   .jobs-main-area{display:flex; flex-direction:column; gap:1.2rem;}
@@ -239,51 +269,51 @@
     display:flex; align-items:center; justify-content:space-between;
     padding-bottom:0.4rem; border-bottom:1px solid #E2E8F0;
   }
-  .jobs-count-text{font-size:0.98rem; font-weight:800; color:var(--ink);}
+  .jobs-count-text{font-size:1.05rem; font-weight:800; color:var(--ink);}
   .jobs-count-text span{color:var(--ink-muted); font-weight:500;}
 
-  /* TALENTLY STYLE JOB CARDS GRID */
+  /* TALENTLY CARDS GRID */
   .job-cards-grid{
     display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2rem;
   }
   @media (max-width:1150px){.job-cards-grid{grid-template-columns:repeat(2, 1fr);}}
   @media (max-width:680px){.job-cards-grid{grid-template-columns:1fr;}}
 
-  /* TALENTLY JOB CARD DESIGN SYSTEM */
+  /* NEXT-GEN JOB CARD DESIGN SYSTEM */
   .t-job-card{
-    background:#ffffff; border:1px solid var(--card-border); border-radius:20px;
-    padding:1.35rem; display:flex; flex-direction:column; justify-content:space-between; gap:1rem;
-    box-shadow:var(--shadow-sm); transition:transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-    position:relative; cursor:pointer;
+    background:#ffffff; border:1px solid var(--card-border); border-radius:var(--radius);
+    padding:1.4rem; display:flex; flex-direction:column; justify-content:space-between; gap:1rem;
+    box-shadow:var(--shadow-sm); transition:all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    position:relative; cursor:pointer; overflow:hidden;
   }
   .t-job-card:hover{
-    transform:translateY(-4px); box-shadow:var(--shadow-hover); border-color:#93C5FD;
+    transform:translateY(-5px) scale(1.005); box-shadow:var(--shadow-hover); border-color:#3B82F6;
   }
 
   .t-card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:0.6rem;}
-  .t-employer-badge{display:flex; align-items:center; gap:0.7rem;}
+  .t-employer-badge{display:flex; align-items:center; gap:0.75rem;}
   .t-logo-icon{
-    width:44px; height:44px; border-radius:12px; background:var(--ink); color:#ffffff;
-    display:flex; align-items:center; justify-content:center; font-family:var(--serif);
-    font-weight:800; font-size:1.05rem; flex:0 0 44px; box-shadow:0 3px 8px rgba(15,23,42,0.1);
+    width:46px; height:46px; border-radius:14px; background:linear-gradient(135deg, var(--blue-accent) 0%, #7C3AED 100%); color:#ffffff;
+    display:flex; align-items:center; justify-content:center; font-family:var(--sans);
+    font-weight:800; font-size:1.05rem; flex:0 0 46px; box-shadow:0 4px 12px rgba(37,99,235,0.25);
   }
   .t-title-block h3{
-    margin:0 0 0.15rem; font-size:1.02rem; font-family:var(--sans); font-weight:800;
+    margin:0 0 0.15rem; font-size:1.05rem; font-family:var(--sans); font-weight:800;
     line-height:1.25; color:var(--ink); display:flex; align-items:center; gap:0.35rem;
   }
   .t-title-block h3 .verified-check{color:var(--blue-accent); font-size:0.85rem;}
   .t-company-name{font-size:0.82rem; color:var(--ink-muted); font-weight:500;}
   
   .btn-bookmark{
-    background:#F8FAFC; border:1px solid #E2E8F0; width:34px; height:34px;
-    border-radius:10px; display:flex; align-items:center; justify-content:center;
-    color:var(--ink-muted); transition:all 0.2s ease; flex:0 0 34px; cursor:pointer;
+    background:#F8FAFC; border:1px solid #E2E8F0; width:36px; height:36px;
+    border-radius:11px; display:flex; align-items:center; justify-content:center;
+    color:var(--ink-muted); transition:all 0.2s ease; flex:0 0 36px; cursor:pointer;
   }
   .btn-bookmark:hover{background:var(--blue-soft); color:var(--blue-accent); border-color:var(--blue-border);}
 
-  .t-meta-pills{display:flex; align-items:center; gap:0.5rem; font-size:0.78rem; color:var(--ink-soft); font-weight:600;}
+  .t-meta-pills{display:flex; align-items:center; gap:0.45rem; font-size:0.78rem; color:var(--ink-soft); font-weight:600; flex-wrap:wrap;}
   .t-meta-pill{
-    background:#F1F5F9; padding:0.25rem 0.6rem; border-radius:6px; border:1px solid #E2E8F0;
+    background:#F1F5F9; padding:0.28rem 0.65rem; border-radius:8px; border:1px solid #E2E8F0;
     display:inline-flex; align-items:center; gap:0.3rem;
   }
 
@@ -294,41 +324,42 @@
 
   .t-salary-row{
     display:flex; align-items:center; justify-content:space-between; gap:0.4rem;
-    padding-top:0.65rem; border-top:1px solid #F1F5F9; font-size:0.86rem;
+    padding-top:0.7rem; border-top:1px solid #F1F5F9; font-size:0.86rem;
   }
-  .t-salary-val{font-weight:800; color:var(--ink); font-family:var(--sans); font-size:0.96rem;}
+  .t-salary-val{font-weight:800; color:var(--ink); font-family:var(--sans); font-size:0.98rem;}
   .t-time-val{font-family:var(--mono); font-size:0.72rem; color:var(--ink-muted); font-weight:600;}
 
-  .t-match-pill{
-    background:var(--blue-soft); color:var(--blue-accent); border:1px solid var(--blue-border);
-    font-family:var(--sans); font-size:0.78rem; font-weight:700; padding:0.45rem 0.65rem;
-    border-radius:10px; text-align:center; display:flex; align-items:center; justify-content:center; gap:0.35rem;
-  }
+  /* Match Meter Indicator Bar */
+  .match-meter-box{display:flex; flex-direction:column; gap:0.3rem; margin-top:0.6rem;}
+  .match-meter-label{display:flex; justify-content:space-between; font-size:0.74rem; font-weight:700; color:var(--blue-accent);}
+  .match-bar-track{height:6px; background:#EFF6FF; border-radius:99px; overflow:hidden; border:1px solid var(--blue-border);}
+  .match-bar-fill{height:100%; background:linear-gradient(90deg, #3B82F6 0%, #2563EB 100%); border-radius:99px;}
 
   /* EMPLOYER POST JOB CTA BOX */
   .post-job-cta{
-    background:linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-    color:var(--bone); border-radius:20px; padding:2.2rem 1.8rem; margin-top:2.5rem;
+    background:radial-gradient(100% 100% at 50% 0%, #1E293B 0%, #0F172A 100%);
+    color:var(--bone); border-radius:var(--radius); padding:2.4rem 2rem; margin-top:2.5rem;
     display:flex; align-items:center; justify-content:space-between; gap:1.6rem; flex-wrap:wrap;
-    box-shadow:0 12px 32px rgba(15,23,42,0.15);
+    box-shadow:0 16px 40px rgba(15,23,42,0.18); position:relative; overflow:hidden;
   }
-  .post-job-cta h3{font-family:var(--serif); font-size:1.4rem; margin:0 0 0.35rem; color:#ffffff;}
-  .post-job-cta p{margin:0; font-size:0.9rem; opacity:0.88; max-width:48ch; color:var(--bone-dim);}
+  .post-job-cta h3{font-family:var(--serif); font-size:1.45rem; margin:0 0 0.35rem; color:#ffffff;}
+  .post-job-cta p{margin:0; font-size:0.9rem; opacity:0.88; max-width:48ch; color:#94A3B8;}
   .btn-gold{
     background:var(--gold); color:var(--ink); font-weight:800; font-size:0.9rem;
-    padding:0.8rem 1.6rem; border-radius:10px; border:none; cursor:pointer; transition:all 0.2s ease;
+    padding:0.85rem 1.8rem; border-radius:12px; border:none; cursor:pointer; transition:all 0.22s ease;
+    box-shadow:0 4px 16px rgba(217,164,65,0.3);
   }
-  .btn-gold:hover{background:#ffffff; transform:translateY(-2px); box-shadow:0 6px 16px rgba(255,255,255,0.2);}
+  .btn-gold:hover{background:#ffffff; transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,255,255,0.25);}
 
   /* APPLICATION MODAL */
   .modal-overlay{
     position:fixed; inset:0; background:rgba(15,23,42,0.75); display:none;
-    align-items:center; justify-content:center; z-index:1100; padding:1.5rem; backdrop-filter:blur(4px);
+    align-items:center; justify-content:center; z-index:1100; padding:1.5rem; backdrop-filter:blur(6px);
   }
   .modal-overlay.open{display:flex;}
   .modal-card{
-    background:#ffffff; border-radius:24px; max-width:520px; width:100%;
-    padding:2.2rem; box-shadow:0 24px 48px rgba(0,0,0,0.25); border:1px solid var(--card-border);
+    background:#ffffff; border-radius:28px; max-width:520px; width:100%;
+    padding:2.2rem; box-shadow:0 24px 50px rgba(0,0,0,0.3); border:1px solid var(--card-border);
     position:relative; max-height:90vh; overflow-y:auto;
   }
   .modal-close{
@@ -360,7 +391,7 @@
   <header class="site-header">
     <a class="brand-logo" href="index.html" title="Lamka Hub — Churachandpur Multi-Tribal Community Platform">
       <div class="logo-emblem">
-        <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="46" height="46" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="46" fill="#171512" stroke="#D9A441" stroke-width="3"/>
           <circle cx="50" cy="50" r="42" fill="none" stroke="#B23A2D" stroke-width="1.5" stroke-dasharray="4 3"/>
           <path d="M50 8 L92 50 L50 92 L8 50 Z" fill="none" stroke="#D9A441" stroke-width="3"/>
@@ -409,10 +440,17 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
 
-  <!-- TOP TALENTLY-STYLE SEARCH HERO & POPULAR SEARCHES -->
+  <!-- MODERN TECH HERO SECTION WITH DARK MESH GRADIENT -->
   <section class="search-hero-container">
     <div class="search-hero-inner">
       
+      <div class="hero-headline-block">
+        <div class="hero-badge">⚡ 100% Verified District Opportunities</div>
+        <h1>Find Your Next Role or Artisan Opportunity</h1>
+        <p>Connecting Churachandpur's master weavers, healthcare professionals, and skilled talent with local cooperatives and clinics.</p>
+      </div>
+
+      <!-- FLOATING GLASSMORPHIC CONSOLE -->
       <div class="talently-search-bar">
         
         <!-- Field 1: Title / Keyword -->
@@ -456,7 +494,7 @@
 
         <!-- Action Button -->
         <button class="btn-search-primary" id="jobSearchBtn">
-          Search
+          Search Roles
         </button>
 
       </div>
@@ -481,7 +519,7 @@
     <aside class="filter-sidebar">
       
       <div class="sidebar-head">
-        <h3>Filter</h3>
+        <h3>Filter Console</h3>
         <button class="btn-clear-filter" onclick="resetJobFilters()">Clear filter</button>
       </div>
 
@@ -543,13 +581,13 @@
         </select>
       </div>
 
-      <!-- AI SMART MATCH CARD WIDGET (TALENTLY MATCH ME BOX) -->
+      <!-- AI SMART MATCH CONSOLE WIDGET (DARK FUTURISTIC BOX) -->
       <div class="ai-match-widget">
         <div class="ai-match-title">
-          <span style="font-size:1.1rem;">⚡</span> Use Skill Match
+          <span style="font-size:1.1rem;">⚡</span> Skill Match AI
         </div>
         <p>Let Lamka Hub match your artisan skills & experience with verified district opportunities.</p>
-        <button class="btn-match-me" onclick="showToast('Skill Match AI: Analyzing your profile & skills...', 'info')">Match Me</button>
+        <button class="btn-match-me" onclick="showToast('Skill Match AI: Analyzing your profile & skills...', 'info')">Match My Profile</button>
       </div>
 
     </aside>
@@ -566,7 +604,7 @@
       <div class="job-cards-grid" id="jobList">
         
         <!-- Empty State Card -->
-        <div class="empty-state-card" id="emptyState" style="display:none; text-align:center; padding:3rem 1.5rem; background:#ffffff; border:1.5px dashed var(--card-border); border-radius:20px; margin:1rem auto; max-width:600px; grid-column:1 / -1; width:100%;">
+        <div class="empty-state-card" id="emptyState" style="display:none; text-align:center; padding:3rem 1.5rem; background:#ffffff; border:1.5px dashed var(--card-border); border-radius:24px; margin:1rem auto; max-width:600px; grid-column:1 / -1; width:100%;">
           <div style="font-size:2.5rem; margin-bottom:0.5rem;">💼</div>
           <h3 style="font-family:var(--sans); font-size:1.2rem; margin:0 0 0.4rem; font-weight:800; color:var(--ink);">No Matching Opportunities Found</h3>
           <p style="font-size:0.86rem; color:var(--ink-soft); margin:0 0 1.2rem;">Try adjusting your search terms or clearing your sidebar filters to view all district job postings.</p>
@@ -578,7 +616,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--red);">KS</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #B23A2D 0%, #8C2C21 100%);">KS</div>
                 <div class="t-title-block">
                   <h3>Saipikhup Circle <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Saipikhup Artisan Guild</div>
@@ -587,7 +625,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Master Backstrap Weaver</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Master Backstrap Weaver</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -603,8 +641,14 @@
               <div class="t-time-val">2d ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 94% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>94%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 94%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -614,7 +658,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--indigo);">GW</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);">GW</div>
                 <div class="t-title-block">
                   <h3>Guite Weavers <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Guite Weaving Society</div>
@@ -623,7 +667,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
 
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Paite Dye Specialist</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Paite Dye Specialist</div>
             
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -639,8 +683,14 @@
               <div class="t-time-val">4d ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 88% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>88%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 88%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -650,7 +700,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--gold); color:var(--ink);">HA</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #D9A441 0%, #B45309 100%);">HA</div>
                 <div class="t-title-block">
                   <h3>Hmar Collective <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Hmar Artisan Guild</div>
@@ -659,7 +709,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Craft Coordinator</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Craft Coordinator</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -675,8 +725,14 @@
               <div class="t-time-val">5d ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 91% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>91%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 91%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -686,7 +742,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--indigo);">TW</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);">TW</div>
                 <div class="t-title-block">
                   <h3>Thangzam Weavers <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Thangzam Weavers Group</div>
@@ -695,7 +751,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Catalog Photographer</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Catalog Photographer</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Freelance</span>
@@ -711,8 +767,14 @@
               <div class="t-time-val">6d ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 85% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>85%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 85%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -722,7 +784,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--red-deep);">SP</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #059669 0%, #047857 100%);">SP</div>
                 <div class="t-title-block">
                   <h3>Sielmat Clinic <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Sielmat Health Project</div>
@@ -731,7 +793,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Maternal Health Nurse</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Maternal Health Nurse</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -747,8 +809,14 @@
               <div class="t-time-val">1wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 96% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>96%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 96%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -758,7 +826,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--green);">VL</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);">VL</div>
                 <div class="t-title-block">
                   <h3>DIC & Vaiphei Unit <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">District Industry Centre</div>
@@ -767,7 +835,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Weave Instructor</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Weave Instructor</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Contract</span>
@@ -783,8 +851,14 @@
               <div class="t-time-val">1wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 90% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>90%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 90%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -794,7 +868,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--ink);">LA</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #0F172A 0%, #334155 100%);">LA</div>
                 <div class="t-title-block">
                   <h3>Artisan Emporium <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Lamka Artisan Emporium</div>
@@ -803,7 +877,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Catalog Coordinator</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Catalog Coordinator</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -819,8 +893,14 @@
               <div class="t-time-val">1wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 83% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>83%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 83%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -830,7 +910,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--indigo);">HP</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);">HP</div>
                 <div class="t-title-block">
                   <h3>Heritage Project <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Churachandpur Heritage Board</div>
@@ -839,7 +919,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Cultural Researcher</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Cultural Researcher</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Fellowship</span>
@@ -855,8 +935,14 @@
               <div class="t-time-val">2wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 95% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>95%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 95%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -866,7 +952,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--red-deep);">DH</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #DC2626 0%, #991B1B 100%);">DH</div>
                 <div class="t-title-block">
                   <h3>District Hospital <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">District Hospital Administration</div>
@@ -875,7 +961,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Pediatric OPD Assistant</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Pediatric OPD Assistant</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -891,8 +977,14 @@
               <div class="t-time-val">2wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 89% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>89%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 89%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -902,7 +994,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--gold); color:var(--ink);">CS</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #D9A441 0%, #B45309 100%);">CS</div>
                 <div class="t-title-block">
                   <h3>Crafts SHG <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Ccpur Crafts SHG</div>
@@ -911,7 +1003,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Cane Craft Artisan</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Cane Craft Artisan</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -927,8 +1019,14 @@
               <div class="t-time-val">3wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 87% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>87%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 87%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -938,7 +1036,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--green);">FC</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #059669 0%, #047857 100%);">FC</div>
                 <div class="t-title-block">
                   <h3>Farmers Co-op <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">Lamka Farmers Co-op</div>
@@ -947,7 +1045,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Produce Coordinator</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Produce Coordinator</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Full-Time</span>
@@ -963,8 +1061,14 @@
               <div class="t-time-val">3wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 82% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>82%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 82%;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -974,7 +1078,7 @@
           <div>
             <div class="t-card-top">
               <div class="t-employer-badge">
-                <div class="t-logo-icon" style="background:var(--indigo);">SA</div>
+                <div class="t-logo-icon" style="background:linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);">SA</div>
                 <div class="t-title-block">
                   <h3>Sports Association <span class="verified-check" title="Verified Employer">✔</span></h3>
                   <div class="t-company-name">District Sports Association</div>
@@ -983,7 +1087,7 @@
               <button class="btn-bookmark" onclick="event.stopPropagation(); toggleBookmark(this);" title="Save Job">🔖</button>
             </div>
             
-            <div style="margin:0.4rem 0 0.2rem; font-size:1.02rem; font-weight:800; color:var(--ink);">Youth Football Coach</div>
+            <div style="margin:0.5rem 0 0.2rem; font-size:1.05rem; font-weight:800; color:var(--ink);">Youth Football Coach</div>
 
             <div class="t-meta-pills" style="margin:0.5rem 0;">
               <span class="t-meta-pill">💼 Part-Time</span>
@@ -999,8 +1103,14 @@
               <div class="t-time-val">4wk ago</div>
             </div>
 
-            <div class="t-match-pill" style="margin-top:0.6rem;">
-              ⚡ Skill Match: 97% Match
+            <div class="match-meter-box">
+              <div class="match-meter-label">
+                <span>⚡ Skill Match</span>
+                <span>97%</span>
+              </div>
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 97%;"></div>
+              </div>
             </div>
           </div>
         </div>
