@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Community Job & Skill Opportunities — Lamka Hub | Churachandpur</title>
+<title>Community Jobs & Skill Portal — Lamka Hub | Churachandpur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -13,9 +13,11 @@
     --bone:#EDE8DD; --bone-dim:#DED7C6; --paper:#FAF8F3;
     --red:#B23A2D; --red-deep:#8C2C21;
     --green:#3F5C48; --gold:#D9A441; --indigo:#2B3A55;
-    --line: rgba(23,21,18,0.12);
-    --shadow: 0 12px 30px rgba(23,21,18,0.10);
-    --radius: 14px;
+    --blue-accent:#2563EB; --blue-soft:#EFF6FF; --blue-border:#BFDBFE;
+    --line: rgba(23,21,18,0.10);
+    --shadow: 0 8px 24px rgba(23,21,18,0.06);
+    --shadow-hover: 0 16px 36px rgba(23,21,18,0.12);
+    --radius: 16px;
     --serif: "Newsreader", Georgia, serif;
     --sans: "Public Sans", -apple-system, Segoe UI, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -23,12 +25,12 @@
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:#F8FAFC;-webkit-font-smoothing:antialiased;}
   img,svg{display:block;max-width:100%;}
   a{color:inherit;text-decoration:none;}
   button{font-family:inherit;cursor:pointer;}
   :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
-  .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;text-align:center;}
+  .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;}
 
   .stripe{
     height:7px; width:100%;
@@ -37,13 +39,13 @@
 
   /* Header Navigation */
   .site-header{
-    background:rgba(250,248,243,0.94); backdrop-filter:blur(10px);
-    border-bottom:2px solid var(--bone-dim); padding:0.8rem 1.8rem;
+    background:rgba(255,255,255,0.96); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line); padding:0.8rem 1.8rem;
     display:flex; align-items:center; justify-content:space-between; gap:1rem;
-    position:sticky; top:0; z-index:90; box-shadow:0 4px 16px rgba(23,21,18,0.06);
+    position:fixed; top:0; left:0; right:0; width:100%; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.04);
   }
 
-  /* REDESIGNED ENLARGED TRIBAL LOGO & BIBLICAL BROTHERHOOD SLOGAN */
+  /* BRAND LOGO */
   .brand-logo{
     display:flex; align-items:center; gap:0.85rem; text-decoration:none; flex:0 0 auto;
     transition:transform 0.25s ease;
@@ -51,57 +53,43 @@
   .brand-logo:hover{transform:translateY(-1px);}
 
   .logo-emblem{
-    width:52px; height:52px; flex:0 0 52px; border-radius:50%;
-    box-shadow:0 4px 14px rgba(178,58,45,0.25);
-    transition:transform 0.4s ease, box-shadow 0.4s ease;
+    width:48px; height:48px; flex:0 0 48px; border-radius:50%;
+    box-shadow:0 4px 14px rgba(178,58,45,0.2);
+    transition:transform 0.4s ease;
   }
-  .brand-logo:hover .logo-emblem{
-    transform:rotate(45deg) scale(1.08);
-    box-shadow:0 6px 20px rgba(217,164,65,0.45);
-  }
+  .brand-logo:hover .logo-emblem{transform:rotate(45deg) scale(1.08);}
 
   .logo-text-block{display:flex; flex-direction:column; justify-content:center;}
   
   .brand-title{
     font-family:'Cinzel', 'Newsreader', Georgia, serif;
-    font-size:1.65rem; font-weight:800; letter-spacing:0.06em; line-height:1.05;
+    font-size:1.55rem; font-weight:800; letter-spacing:0.06em; line-height:1.05;
     display:flex; align-items:baseline; gap:0.2rem;
   }
-  .brand-title .mark-red{
-    color:var(--red); text-shadow:0 1px 2px rgba(178,58,45,0.15);
-  }
-  .brand-title .mark-ink{
-    color:var(--ink);
-  }
+  .brand-title .mark-red{color:var(--red);}
+  .brand-title .mark-ink{color:var(--ink);}
   .brand-title .brand-sub{
-    font-family:var(--mono); font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--gold); background:var(--ink); padding:0.18rem 0.45rem; border-radius:4px;
+    font-family:var(--mono); font-size:0.54rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); background:var(--ink); padding:0.16rem 0.4rem; border-radius:4px;
     font-weight:700; margin-left:0.3rem; vertical-align:middle;
   }
 
   .biblical-slogan{
-    font-family:var(--serif); font-style:italic; font-size:0.75rem; color:var(--red-deep);
-    font-weight:600; margin-top:0.2rem; letter-spacing:0.01em; display:flex; align-items:center; gap:0.35rem;
+    font-family:var(--serif); font-style:italic; font-size:0.73rem; color:var(--red-deep);
+    font-weight:600; margin-top:0.15rem; letter-spacing:0.01em; display:flex; align-items:center; gap:0.35rem;
     white-space:nowrap;
   }
   .slogan-cross{color:var(--gold); font-style:normal; font-size:0.7rem; font-weight:700;}
 
-  @media (max-width:600px){
-    .logo-emblem{ width:40px; height:40px; flex:0 0 40px; }
-    .logo-emblem svg{ width:40px; height:40px; }
-    .brand-title{ font-size:1.3rem; }
-    .biblical-slogan{ font-size:0.62rem; }
-  }
-  
-  /* Centered Traditionally Crafted Navigation */
+  /* Centered Navigation */
   .main-nav{
-    display:flex; align-items:center; justify-content:center; gap:0.4rem;
-    font-size:0.86rem; font-weight:600; flex:1; max-width:640px; margin:0 auto;
+    display:flex; align-items:center; justify-content:center; gap:0.35rem;
+    font-size:0.85rem; font-weight:600; flex:1; max-width:640px; margin:0 auto;
     background:var(--bone); padding:0.35rem 0.6rem; border-radius:99px;
     border:1px solid rgba(23,21,18,0.12); box-shadow:inset 0 1px 3px rgba(0,0,0,0.04);
   }
   .main-nav a{
-    padding:0.42rem 1rem; border-radius:99px; transition:all 0.25s ease;
+    padding:0.42rem 0.9rem; border-radius:99px; transition:all 0.25s ease;
     color:var(--ink-soft); position:relative; white-space:nowrap;
   }
   .main-nav a:hover{color:var(--red); background:rgba(178,58,45,0.08);}
@@ -110,7 +98,7 @@
     box-shadow:0 3px 8px rgba(23,21,18,0.22);
   }
 
-  /* Right Corner Social Icons */
+  /* Right Social Icons */
   .header-socials{display:flex; align-items:center; gap:0.5rem; flex:0 0 auto;}
   .header-socials a{
     width:34px; height:34px; border-radius:50%; background:var(--bone);
@@ -119,7 +107,7 @@
   }
   .header-socials a:hover{
     background:var(--red); color:var(--bone); border-color:var(--red);
-    transform:translateY(-2px); box-shadow:0 4px 10px rgba(178,58,45,0.25);
+    transform:translateY(-2px);
   }
 
   .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;padding:8px;width:36px;height:36px;}
@@ -127,208 +115,203 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
   .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
   .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-  @media (max-width:920px){
-    .header-socials{display:none;}
-    .nav-toggle{display:flex;}
-    .main-nav{
-      display:none; position:absolute; top:100%; left:0; right:0;
-      background:var(--paper); border-bottom:1px solid var(--line);
-      flex-direction:column; gap:0; padding:0.4rem 1.5rem 1rem;
-      box-shadow:0 14px 24px rgba(23,21,18,0.10); z-index:20;
-      max-width:100%; border-radius:0; background:var(--paper);
-    }
-    .main-nav.open{display:flex;}
-    .main-nav a{padding:0.8rem 0;border-bottom:1px solid var(--line);border-radius:0;text-align:center;}
-  }
 
-  /* Page Hero Banner */
-  .page-banner{
-    background:linear-gradient(135deg, var(--green) 0%, #15241b 100%);
-    color:var(--bone); padding:3.5rem 1.5rem 2.8rem; text-align:center; position:relative; overflow:hidden;
+  /* TOP SEARCH CONTAINER & POPULAR SEARCHES (TALENTLY STYLE) */
+  .search-hero-container{
+    background:#ffffff; border-bottom:1px solid var(--line);
+    padding:6rem 1.5rem 1.8rem; box-shadow:0 4px 20px rgba(0,0,0,0.02);
   }
-  .page-banner::before{
-    content:""; position:absolute; inset:0; opacity:0.12;
-    background-image:repeating-linear-gradient(45deg, var(--gold) 0 2px, transparent 2px 28px);
-  }
-  .banner-inner{max-width:860px; margin:0 auto; position:relative; z-index:2;}
-  .banner-inner .eyebrow{color:var(--gold); margin-bottom:0.6rem;}
-  .banner-inner h1{font-family:var(--serif); font-size:clamp(2rem, 4vw, 3.2rem); margin:0 0 0.8rem; font-weight:700; line-height:1.15;}
-  .banner-inner p{font-size:1.02rem; opacity:0.92; line-height:1.55; margin:0 0 1.6rem;}
+  .search-hero-inner{max-width:1240px; margin:0 auto;}
 
-  /* Quick Stat Bar */
-  .stat-strip{
-    display:flex; justify-content:center; align-items:center; gap:2rem; flex-wrap:wrap;
-    background:rgba(23,21,18,0.4); border:1px solid rgba(237,232,221,0.2); border-radius:12px;
-    padding:0.8rem 1.4rem; max-width:820px; margin:0 auto; font-family:var(--mono); font-size:0.8rem;
+  .talently-search-bar{
+    display:flex; align-items:center; gap:0.6rem; background:#ffffff;
+    border:1.5px solid rgba(23,21,18,0.12); border-radius:14px; padding:0.4rem 0.5rem;
+    box-shadow:0 4px 16px rgba(0,0,0,0.04); flex-wrap:wrap;
   }
-  .stat-item strong{color:var(--gold);}
-
-  /* Search & Filters Container */
-  .app-section{padding:3rem 1.5rem; max-width:1180px; margin:0 auto;}
   
-  .filter-wrapper{
-    background:var(--paper); border:1px solid var(--line); border-radius:16px;
-    padding:1.4rem; box-shadow:var(--shadow); margin-bottom:2.2rem;
+  .search-input-group{
+    display:flex; align-items:center; gap:0.6rem; flex:1; min-width:200px;
+    padding:0.4rem 0.8rem; border-right:1px solid rgba(23,21,18,0.08);
   }
-  .search-bar{display:flex; position:relative; margin-bottom:1.2rem;}
-  .search-icon{position:absolute; left:1rem; top:50%; transform:translateY(-50%); width:16px; height:16px; stroke:var(--ink-soft); fill:none; stroke-width:2;}
-  .search-bar input{
-    flex:1; min-width:0; border:1px solid var(--line); border-radius:8px 0 0 8px;
-    padding:0.85rem 1rem 0.85rem 2.6rem; font-family:var(--sans); font-size:0.9rem; color:var(--ink); background:#fff;
-  }
-  .search-bar input:focus{outline:none; border-color:var(--red);}
-  .search-bar select{
-    border:1px solid var(--line); border-left:none; background:var(--bone);
-    padding:0 2rem 0 1rem; font-family:var(--sans); font-size:0.83rem; color:var(--ink); cursor:pointer;
-    appearance:none; -webkit-appearance:none;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%232a2620' stroke-width='2.2'><path d='M6 8l4 4 4-4' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-    background-repeat:no-repeat; background-position:right 0.8rem center; background-size:12px 12px;
-  }
-  .search-bar button{background:var(--red); color:var(--bone); border:none; border-radius:0 8px 8px 0; padding:0 1.4rem; font-weight:600; font-size:0.86rem; cursor:pointer;}
-  .search-bar button:hover{background:var(--red-deep);}
+  .search-input-group:last-of-type{border-right:none;}
 
-  .filter-track{display:flex; gap:0.5rem; overflow-x:auto; padding-bottom:0.4rem; scrollbar-width:none; justify-content:center; flex-wrap:wrap;}
-  html, body{overflow-x:hidden; width:100%;}
-  input, select, textarea{font-size:16px !important;}
-
-  .filter-track{
-    display:flex; gap:0.5rem; overflow-x:auto; -webkit-overflow-scrolling:touch;
-    padding-bottom:0.5rem; scrollbar-width:none; justify-content:flex-start; flex-wrap:nowrap; width:100%;
+  .search-input-group svg{width:18px; height:18px; stroke:var(--ink-soft); fill:none; stroke-width:2; flex:0 0 18px;}
+  .search-input-group input, .search-input-group select{
+    width:100%; border:none; background:transparent; font-family:var(--sans);
+    font-size:0.92rem; color:var(--ink); padding:0.2rem 0;
   }
-  .filter-track::-webkit-scrollbar{display:none;}
+  .search-input-group input:focus, .search-input-group select:focus{outline:none;}
+  
+  .btn-search-primary{
+    background:var(--blue-accent); color:#ffffff; font-family:var(--sans);
+    font-weight:700; font-size:0.9rem; padding:0.75rem 1.8rem; border-radius:10px;
+    border:none; cursor:pointer; transition:all 0.2s ease; display:inline-flex;
+    align-items:center; gap:0.5rem; box-shadow:0 4px 12px rgba(37,99,235,0.25);
+  }
+  .btn-search-primary:hover{background:#1d4ed8; transform:translateY(-1px);}
 
-  .chip-btn{
-    display:inline-flex; align-items:center; gap:0.4rem; flex:0 0 auto; white-space:nowrap;
-    min-height:38px; font-size:0.8rem; font-weight:600; padding:0 0.95rem;
-    border-radius:99px; border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+  /* Popular Searches Chips Row */
+  .popular-searches-row{
+    display:flex; align-items:center; gap:0.6rem; margin-top:1.2rem; flex-wrap:wrap;
+    font-size:0.82rem; color:var(--ink-soft);
+  }
+  .popular-lbl{font-weight:700; color:var(--ink); font-family:var(--mono); font-size:0.76rem;}
+  .pop-chip{
+    background:#F1F5F9; color:var(--ink-soft); font-size:0.78rem; font-weight:600;
+    padding:0.3rem 0.75rem; border-radius:8px; border:1px solid rgba(23,21,18,0.06);
     cursor:pointer; transition:all 0.2s ease;
   }
-  .chip-btn.active{background:var(--ink); color:var(--bone); border-color:var(--ink);}
-  .chip-btn:hover{border-color:var(--red); color:var(--red);}
-  .chip-btn.active:hover{color:var(--bone);}
+  .pop-chip:hover, .pop-chip.active{background:var(--blue-accent); color:#ffffff; border-color:var(--blue-accent);}
 
-  @media (max-width:920px){
-    .site-header{padding:0.75rem 1rem;}
-    .header-socials{display:none;}
-    .nav-toggle{display:flex;}
-    .main-nav{
-      display:none; position:absolute; top:100%; left:0; right:0;
-      background:rgba(250,248,243,0.98); backdrop-filter:blur(14px);
-      border-bottom:2px solid var(--bone-dim); flex-direction:column;
-      gap:0; padding:0.4rem 1.2rem 1.2rem; box-shadow:0 16px 32px rgba(23,21,18,0.16);
-      z-index:99; max-width:100%; border-radius:0;
-    }
-    .main-nav.open{display:flex;}
-    .main-nav a{padding:0.85rem 0; border-bottom:1px solid var(--line); border-radius:0; text-align:center; font-size:0.98rem; font-weight:700;}
-    .main-nav a:last-child{border-bottom:none;}
+  /* 2-COLUMN MASTER LAYOUT */
+  .portal-container{
+    max-width:1240px; margin:0 auto; padding:2rem 1.5rem 4rem;
+    display:grid; grid-template-columns:260px 1fr; gap:1.8rem; align-items:start;
   }
 
-  @media (max-width:640px){
-    .page-banner{padding:2.8rem 1rem 2.2rem;}
-    .app-container{padding:2rem 1rem;}
-    .filter-panel{padding:1.1rem 0.9rem;}
-    .search-bar{ flex-direction:column; gap:0.4rem; }
-    .search-bar input{ border-radius:8px; padding-left:2.4rem; min-height:46px; }
-    .search-bar select{ border:1px solid var(--line); border-radius:8px; min-height:46px; width:100%; }
-    .search-bar button{ border-radius:8px; min-height:46px; width:100%; }
-    .job-card{ padding:1.2rem 1rem; border-radius:14px; }
-    .job-meta-row{ flex-direction:column; align-items:flex-start; gap:0.5rem; }
-    .job-action-row{ flex-direction:column; align-items:stretch; gap:0.5rem; }
-    .btn-action, .btn-wa-chat{ width:100%; min-height:46px; justify-content:center; }
-    .stat-strip{ flex-direction:column; align-items:center; gap:0.6rem; text-align:center; padding:1.2rem 1rem; }
-    .modal-card{ width:95%; max-height:88vh; padding:1.4rem 1rem; }
+  /* LEFT SIDEBAR FILTER PANEL */
+  .filter-sidebar{
+    background:#ffffff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.4rem; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:1.4rem;
+    position:sticky; top:90px;
   }
 
-  /* JOB CARDS LIST */
-  .job-list{display:flex; flex-direction:column; gap:1.4rem;}
-
-  .job-card{
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    padding:1.6rem; display:flex; flex-direction:column; gap:1.2rem;
-    box-shadow:var(--shadow); transition:transform 0.2s ease, box-shadow 0.2s ease;
-    position:relative; overflow:hidden;
+  .sidebar-head{display:flex; align-items:center; justify-content:space-between;}
+  .sidebar-head h3{font-family:var(--sans); font-size:1.05rem; font-weight:800; margin:0; color:var(--ink);}
+  .btn-clear-filter{
+    background:none; border:none; color:var(--red-deep); font-family:var(--mono);
+    font-size:0.75rem; font-weight:700; cursor:pointer; padding:0;
   }
-  .job-card:hover{transform:translateY(-3px); box-shadow:0 16px 36px rgba(23,21,18,0.14);}
-  .job-card::before{content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--ink);}
+  .btn-clear-filter:hover{text-decoration:underline;}
+
+  .filter-group{display:flex; flex-direction:column; gap:0.6rem; border-bottom:1px solid rgba(23,21,18,0.06); padding-bottom:1.1rem;}
+  .filter-group:last-of-type{border-bottom:none; padding-bottom:0;}
   
-  .job-card[data-sector="handloom"]::before{background:var(--red);}
-  .job-card[data-sector="healthcare"]::before{background:var(--green);}
-  .job-card[data-sector="freelance"]::before{background:var(--gold);}
-  .job-card[data-sector="nonprofit"]::before{background:var(--indigo);}
+  .filter-title-row{display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:0.86rem; color:var(--ink);}
+  
+  .checkbox-list{display:flex; flex-direction:column; gap:0.45rem;}
+  .checkbox-item{
+    display:flex; align-items:center; gap:0.55rem; font-size:0.83rem;
+    color:var(--ink-soft); cursor:pointer; user-select:none;
+  }
+  .checkbox-item input[type="checkbox"]{
+    width:16px; height:16px; accent-color:var(--blue-accent); cursor:pointer;
+  }
 
-  .job-header-row{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap;}
-  .job-employer-info{display:flex; gap:1rem; align-items:center;}
-  .employer-logo{
-    width:48px; height:48px; border-radius:12px; background:var(--ink); color:var(--bone);
+  .filter-select{
+    width:100%; border:1px solid rgba(23,21,18,0.15); border-radius:8px;
+    padding:0.55rem 0.75rem; font-family:var(--sans); font-size:0.82rem; color:var(--ink); background:#fff;
+  }
+
+  /* AI SMART MATCH WIDGET (TALENTLY MATCH ME BOX) */
+  .ai-match-widget{
+    background:linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+    border:1px solid var(--blue-border); border-radius:14px; padding:1.2rem 1rem;
+    display:flex; flex-direction:column; gap:0.6rem;
+  }
+  .ai-match-title{
+    display:flex; align-items:center; gap:0.4rem; font-family:var(--sans);
+    font-size:0.88rem; font-weight:800; color:var(--blue-accent);
+  }
+  .ai-match-widget p{margin:0; font-size:0.78rem; color:#1E40AF; line-height:1.45;}
+  .btn-match-me{
+    background:var(--blue-accent); color:#ffffff; font-weight:700; font-size:0.82rem;
+    padding:0.55rem; border-radius:8px; border:none; width:100%; cursor:pointer;
+    transition:all 0.2s ease; box-shadow:0 4px 10px rgba(37,99,235,0.2);
+  }
+  .btn-match-me:hover{background:#1d4ed8;}
+
+  /* RIGHT MAIN CONTENT AREA */
+  .jobs-main-area{display:flex; flex-direction:column; gap:1.2rem;}
+
+  .jobs-header-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-bottom:0.4rem; border-bottom:1px solid rgba(23,21,18,0.06);
+  }
+  .jobs-count-text{font-size:0.95rem; font-weight:700; color:var(--ink);}
+  .jobs-count-text span{color:var(--ink-soft); font-weight:500;}
+
+  /* TALENTLY STYLE JOB CARDS GRID */
+  .job-cards-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2rem;
+  }
+  @media (max-width:1150px){.job-cards-grid{grid-template-columns:repeat(2, 1fr);}}
+  @media (max-width:680px){.job-cards-grid{grid-template-columns:1fr;}}
+
+  /* TALENTLY JOB CARD CARD DESIGN */
+  .t-job-card{
+    background:#ffffff; border:1px solid var(--line); border-radius:18px;
+    padding:1.2rem; display:flex; flex-direction:column; justify-content:space-between; gap:0.9rem;
+    box-shadow:0 2px 8px rgba(0,0,0,0.03); transition:transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    position:relative; cursor:pointer;
+  }
+  .t-job-card:hover{
+    transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.08); border-color:var(--blue-border);
+  }
+
+  .t-card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:0.6rem;}
+  .t-employer-badge{display:flex; align-items:center; gap:0.65rem;}
+  .t-logo-icon{
+    width:42px; height:42px; border-radius:10px; background:var(--ink); color:#ffffff;
     display:flex; align-items:center; justify-content:center; font-family:var(--serif);
-    font-weight:700; font-size:1.15rem; flex:0 0 auto;
+    font-weight:800; font-size:1.05rem; flex:0 0 42px; box-shadow:0 3px 8px rgba(0,0,0,0.08);
   }
-  .job-title-group h3{margin:0; font-size:1.2rem; font-family:var(--serif); font-weight:700; line-height:1.25;}
-  .job-title-group .company{font-size:0.86rem; color:var(--ink-soft); margin-top:0.2rem;}
-
-  .job-badges{display:flex; gap:0.4rem; flex-wrap:wrap;}
-  .badge-sector{
-    font-family:var(--mono); font-size:0.64rem; font-weight:700; text-transform:uppercase;
-    padding:0.28rem 0.6rem; border-radius:4px; letter-spacing:0.06em;
+  .t-title-block h3{
+    margin:0 0 0.15rem; font-size:0.98rem; font-family:var(--sans); font-weight:800;
+    line-height:1.25; color:var(--ink); display:flex; align-items:center; gap:0.3rem;
   }
-  .sec-handloom{background:rgba(178,58,45,0.12); color:var(--red-deep);}
-  .sec-health{background:rgba(63,92,72,0.12); color:var(--green);}
-  .sec-freelance{background:rgba(217,164,65,0.18); color:#7d5707;}
-  .sec-nonprofit{background:rgba(43,58,85,0.12); color:var(--indigo);}
-
-  /* Meta Data Grid (Salary, Location, Type, Deadline) */
-  .job-meta-row{
-    display:flex; gap:1.4rem; flex-wrap:wrap; font-family:var(--mono); font-size:0.8rem; color:var(--ink-soft);
-    background:var(--bone); padding:0.75rem 1rem; border-radius:8px; align-items:center;
-  }
-  .meta-item{display:flex; align-items:center; gap:0.4rem;}
-  .meta-item.salary{color:var(--red-deep); font-weight:700; font-size:0.86rem;}
-
-  .job-desc{font-size:0.9rem; color:var(--ink-soft); line-height:1.55; margin:0;}
-
-  .skill-chips{display:flex; gap:0.4rem; flex-wrap:wrap;}
-  .skill-tag{font-family:var(--mono); font-size:0.66rem; padding:0.2rem 0.5rem; background:rgba(23,21,18,0.06); border-radius:4px; color:var(--ink-soft);}
-
-  .job-action-row{
-    display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
-    border-top:1px solid var(--line); padding-top:1rem; margin-top:0.2rem;
-  }
-  .btn-action{
-    background:var(--ink); color:var(--bone); font-size:0.84rem; font-weight:600;
-    min-height:38px; padding:0 1.2rem; border-radius:7px; border:none; cursor:pointer;
-    transition:all 0.2s ease; display:inline-flex; align-items:center; justify-content:center; gap:0.4rem;
-  }
-  .btn-action:hover{background:var(--red);}
+  .t-title-block h3 .verified-check{color:#2563EB; font-size:0.85rem;}
   
-  .btn-wa-chat{
-    background:#25D366; color:#fff; font-size:0.82rem; font-weight:600;
-    min-height:38px; padding:0 1rem; border-radius:7px; border:none; cursor:pointer;
-    display:inline-flex; align-items:center; gap:0.4rem; text-decoration:none; transition:all 0.2s ease;
+  .btn-bookmark{
+    background:#F8FAFC; border:1px solid rgba(23,21,18,0.1); width:32px; height:32px;
+    border-radius:8px; display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft); transition:all 0.2s ease; flex:0 0 32px;
   }
-  .btn-wa-chat:hover{background:#1da851; color:#fff;}
+  .btn-bookmark:hover{background:var(--blue-soft); color:var(--blue-accent); border-color:var(--blue-border);}
 
-  /* Employer Post Job CTA Box */
+  .t-meta-pills{display:flex; items-center:center; gap:0.5rem; font-size:0.76rem; color:var(--ink-soft); font-weight:500;}
+  .t-meta-pills span{display:inline-flex; align-items:center; gap:0.25rem;}
+
+  .t-desc-text{
+    font-size:0.82rem; color:var(--ink-soft); line-height:1.45; margin:0;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis;
+  }
+
+  .t-salary-row{
+    display:flex; align-items:center; justify-content:space-between; gap:0.4rem;
+    padding-top:0.6rem; border-top:1px solid rgba(23,21,18,0.06); font-size:0.85rem;
+  }
+  .t-salary-val{font-weight:800; color:var(--ink); font-family:var(--sans);}
+  .t-time-val{font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft); opacity:0.75;}
+
+  .t-match-pill{
+    background:var(--blue-soft); color:var(--blue-accent); border:1px solid var(--blue-border);
+    font-family:var(--sans); font-size:0.74rem; font-weight:700; padding:0.4rem 0.6rem;
+    border-radius:8px; text-align:center; display:flex; align-items:center; justify-content:center; gap:0.35rem;
+  }
+
+  /* EMPLOYER POST JOB CTA BOX */
   .post-job-cta{
     background:linear-gradient(135deg, var(--ink) 0%, var(--indigo) 100%);
-    color:var(--bone); border-radius:16px; padding:2.2rem 1.8rem; margin-top:3.5rem;
-    display:flex; align-items:center; justify-content:space-between; gap:1.8rem; flex-wrap:wrap;
+    color:var(--bone); border-radius:18px; padding:2rem 1.6rem; margin-top:2.5rem;
+    display:flex; align-items:center; justify-content:space-between; gap:1.6rem; flex-wrap:wrap;
   }
-  .post-job-cta h3{font-family:var(--serif); font-size:1.4rem; margin:0 0 0.4rem;}
-  .post-job-cta p{margin:0; font-size:0.9rem; opacity:0.88; max-width:48ch;}
+  .post-job-cta h3{font-family:var(--serif); font-size:1.35rem; margin:0 0 0.35rem;}
+  .post-job-cta p{margin:0; font-size:0.88rem; opacity:0.88; max-width:48ch;}
   .btn-gold{
-    background:var(--gold); color:var(--ink); font-weight:700; font-size:0.9rem;
-    padding:0.8rem 1.5rem; border-radius:8px; border:none; cursor:pointer; transition:all 0.2s ease;
+    background:var(--gold); color:var(--ink); font-weight:700; font-size:0.88rem;
+    padding:0.75rem 1.4rem; border-radius:8px; border:none; cursor:pointer; transition:all 0.2s ease;
   }
-  .btn-gold:hover{background:var(--bone); transform:translateY(-2px);}
+  .btn-gold:hover{background:#fff; transform:translateY(-2px);}
 
-  /* Application Modal */
+  /* APPLICATION MODAL */
   .modal-overlay{
     position:fixed; inset:0; background:rgba(23,21,18,0.75); display:none;
-    align-items:center; justify-content:center; z-index:100; padding:1.5rem; backdrop-filter:blur(4px);
+    align-items:center; justify-content:center; z-index:1100; padding:1.5rem; backdrop-filter:blur(4px);
   }
   .modal-overlay.open{display:flex;}
   .modal-card{
-    background:var(--paper); border-radius:16px; max-width:540px; width:100%;
+    background:#ffffff; border-radius:20px; max-width:520px; width:100%;
     padding:2.2rem; box-shadow:0 20px 40px rgba(0,0,0,0.25); border:1px solid var(--line);
     position:relative; max-height:90vh; overflow-y:auto;
   }
@@ -340,9 +323,9 @@
   .modal-close:hover{background:var(--bone); color:var(--ink);}
 
   /* Footer */
-  .site-footer{background:var(--ink); color:var(--bone-dim); padding:3rem 1.5rem 1.5rem; margin-top:3.5rem;}
+  .site-footer{background:var(--ink); color:var(--bone-dim); padding:3.5rem 1.5rem 1.5rem; margin-top:4rem;}
   .footer-grid{
-    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    max-width:1240px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr;
     gap:2rem; padding-bottom:2rem; border-bottom:1px solid rgba(237,232,221,0.15);
   }
   @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
@@ -350,9 +333,8 @@
   .footer-grid h5{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin:0 0 0.8rem;}
   .footer-grid a,.footer-grid p{display:block; font-size:0.85rem; color:var(--bone-dim); margin-bottom:0.55rem; line-height:1.4;}
   .footer-grid a:hover{color:var(--bone);}
-  .footer-brand .brand{color:var(--bone);}
   .footer-brand p{max-width:32ch; opacity:0.75;}
-  .footer-bottom{max-width:1180px; margin:0 auto; padding-top:1.2rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; font-size:0.76rem; color:var(--bone-dim); opacity:0.7;}
+  .footer-bottom{max-width:1240px; margin:0 auto; padding-top:1.2rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; font-size:0.76rem; color:var(--bone-dim); opacity:0.7;}
 </style>
 <link rel="stylesheet" href="css/mobile.css">
 </head>
@@ -362,7 +344,7 @@
   <header class="site-header">
     <a class="brand-logo" href="index.html" title="Lamka Hub — Churachandpur Multi-Tribal Community Platform">
       <div class="logo-emblem">
-        <svg width="52" height="52" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="46" fill="#171512" stroke="#D9A441" stroke-width="3"/>
           <circle cx="50" cy="50" r="42" fill="none" stroke="#B23A2D" stroke-width="1.5" stroke-dasharray="4 3"/>
           <path d="M50 8 L92 50 L50 92 L8 50 Z" fill="none" stroke="#D9A441" stroke-width="3"/>
@@ -411,560 +393,598 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
 
-  <!-- Page Banner -->
-  <section class="page-banner">
-    <div class="banner-inner">
-      <span class="eyebrow">Community Economic Empowerment</span>
-      <h1>Churachandpur Community Jobs & Skill Gigs</h1>
-      <p>Direct employer listings for handloom master weavers, healthcare auxiliary staff, cultural researchers, and freelance technical roles across district wards.</p>
+  <!-- TOP TALENTLY-STYLE SEARCH HERO & POPULAR SEARCHES -->
+  <section class="search-hero-container">
+    <div class="search-hero-inner">
+      
+      <div class="talently-search-bar">
+        
+        <!-- Field 1: Title / Keyword -->
+        <div class="search-input-group">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="jobSearch" placeholder="Master Weaver, Nurse, Photographer...">
+        </div>
 
-      <div class="stat-strip">
-        <span class="stat-item">💼 <strong>12 Verified</strong> Openings</span>
-        <span class="stat-item">🧶 <strong>5 Handloom & Craft</strong> Roles</span>
-        <span class="stat-item">🏥 <strong>4 Healthcare & Field</strong> Gigs</span>
-        <span class="stat-item">🤝 <strong>0% Fee</strong> Direct Contact</span>
+        <!-- Field 2: Location / Ward -->
+        <div class="search-input-group">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <select id="locationSelect">
+            <option value="all">Anywhere (All Wards)</option>
+            <option value="Hiangtam Lamka">Hiangtam Lamka</option>
+            <option value="Tuibong">Tuibong</option>
+            <option value="Rengkai">Rengkai</option>
+            <option value="New Lamka">New Lamka</option>
+            <option value="Sielmat">Sielmat</option>
+            <option value="Kangvai">Kangvai</option>
+          </select>
+        </div>
+
+        <!-- Field 3: Salary Range -->
+        <div class="search-input-group">
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <select id="salarySelect">
+            <option value="all">Salary Range (Any)</option>
+            <option value="15k">₹10,000 – ₹15,000 / month</option>
+            <option value="20k">₹15,000 – ₹20,000 / month</option>
+            <option value="25k">₹20,000+ / month</option>
+          </select>
+        </div>
+
+        <!-- Field 4: Sort -->
+        <div class="search-input-group" style="max-width:180px;">
+          <select id="sortSelect">
+            <option value="latest">Sort by: Latest</option>
+            <option value="salary">Sort by: Highest Pay</option>
+          </select>
+        </div>
+
+        <!-- Action Button -->
+        <button class="btn-search-primary" id="jobSearchBtn">
+          Search
+        </button>
+
       </div>
+
+      <!-- Popular Searches Row -->
+      <div class="popular-searches-row">
+        <span class="popular-lbl">Popular searches:</span>
+        <span class="pop-chip active" onclick="filterByPopularChip('all', this)">All Roles</span>
+        <span class="pop-chip" onclick="filterByPopularChip('Master Weaver', this)">Master Weaver</span>
+        <span class="pop-chip" onclick="filterByPopularChip('Healthcare Nurse', this)">Healthcare Nurse</span>
+        <span class="pop-chip" onclick="filterByPopularChip('Cultural Researcher', this)">Cultural Researcher</span>
+        <span class="pop-chip" onclick="filterByPopularChip('Handloom Photographer', this)">Web & Media</span>
+      </div>
+
     </div>
   </section>
 
-  <div class="stripe"></div>
-
-  <!-- Main Jobs Section -->
-  <main class="app-section">
+  <!-- 2-COLUMN MASTER LAYOUT (SIDEBAR FILTER + MAIN CONTENT) -->
+  <main class="portal-container">
     
-    <!-- Filter Wrapper -->
-    <div class="filter-wrapper">
-      <div class="search-bar">
-        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <input type="text" id="jobSearch" placeholder="Search weaver, nurse, photographer, backstrap loom, Hiangtam Lamka, Rengkai…">
-        <select id="locationSelect">
-          <option value="all">All Ward Locations</option>
-          <option value="Hiangtam Lamka">Hiangtam Lamka</option>
-          <option value="Tuibong">Tuibong</option>
-          <option value="Rengkai">Rengkai</option>
-          <option value="New Lamka">New Lamka</option>
-          <option value="Sielmat">Sielmat</option>
-          <option value="Kangvai">Kangvai</option>
+    <!-- LEFT SIDEBAR FILTER PANEL -->
+    <aside class="filter-sidebar">
+      
+      <div class="sidebar-head">
+        <h3>Filter</h3>
+        <button class="btn-clear-filter" onclick="resetJobFilters()">Clear filter</button>
+      </div>
+
+      <!-- Job Type Checkboxes -->
+      <div class="filter-group">
+        <div class="filter-title-row">Job type</div>
+        <div class="checkbox-list">
+          <label class="checkbox-item">
+            <input type="checkbox" class="type-filter" value="Full-Time" checked onchange="filterJobs()"> Full-Time
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="type-filter" value="Part-Time" checked onchange="filterJobs()"> Part-Time
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="type-filter" value="Freelance" checked onchange="filterJobs()"> Freelance
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="type-filter" value="Contract" checked onchange="filterJobs()"> Contract / Fellowship
+          </label>
+        </div>
+      </div>
+
+      <!-- Experience Checkboxes -->
+      <div class="filter-group">
+        <div class="filter-title-row">Experience</div>
+        <div class="checkbox-list">
+          <label class="checkbox-item">
+            <input type="checkbox" class="exp-filter" value="entry" checked onchange="filterJobs()"> Entry Level
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="exp-filter" value="mid" checked onchange="filterJobs()"> Mid Level
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="exp-filter" value="senior" checked onchange="filterJobs()"> Master / Senior
+          </label>
+        </div>
+      </div>
+
+      <!-- Work Type Checkboxes -->
+      <div class="filter-group">
+        <div class="filter-title-row">Work type</div>
+        <div class="checkbox-list">
+          <label class="checkbox-item">
+            <input type="checkbox" class="work-filter" value="onsite" checked onchange="filterJobs()"> On-site (Ward Sector)
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="work-filter" value="hybrid" checked onchange="filterJobs()"> Hybrid / Field
+          </label>
+        </div>
+      </div>
+
+      <!-- Last Updated Select -->
+      <div class="filter-group">
+        <div class="filter-title-row">Last updated</div>
+        <select class="filter-select" id="dateFilter" onchange="filterJobs()">
+          <option value="30">30 days ago</option>
+          <option value="7">7 days ago</option>
+          <option value="1">Past 24 hours</option>
         </select>
-        <button id="jobSearchBtn">Search Jobs</button>
       </div>
 
-      <!-- Sector Filter Buttons -->
-      <div class="filter-track" id="sectorFilterTrack">
-        <button class="chip-btn active" data-sector="all">All Opportunities (12)</button>
-        <button class="chip-btn" data-sector="handloom">🧶 Handloom & Weaving (5)</button>
-        <button class="chip-btn" data-sector="healthcare">🏥 Healthcare & Auxiliary (3)</button>
-        <button class="chip-btn" data-sector="freelance">📸 Freelance & Gigs (2)</button>
-        <button class="chip-btn" data-sector="nonprofit">🤝 Non-Profit & Research (2)</button>
-      </div>
-    </div>
-
-    <!-- Job Cards List -->
-    <div class="job-list" id="jobList">
-
-      <!-- Empty State Card -->
-      <div class="empty-state-card" id="emptyState" style="display:none; text-align:center; padding:3rem 1.5rem; background:var(--paper); border:1.5px dashed var(--line); border-radius:18px; margin:1rem auto; max-width:600px; grid-column:1 / -1; width:100%;">
-        <div style="font-size:2.5rem; margin-bottom:0.5rem;">💼</div>
-        <h3 style="font-family:var(--serif); font-size:1.3rem; margin:0 0 0.4rem; font-weight:700;">No Matching Opportunities Found</h3>
-        <p style="font-size:0.9rem; color:var(--ink-soft); margin:0 0 1.2rem;">Try adjusting your search terms or clearing your sector and location filters to view all district job postings.</p>
-        <button class="btn-action" onclick="resetJobFilters()" style="background:var(--ink); color:var(--bone); border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer;">Reset All Filters 🔄</button>
+      <!-- AI SMART MATCH CARD WIDGET (TALENTLY FEATURE) -->
+      <div class="ai-match-widget">
+        <div class="ai-match-title">
+          <span style="font-size:1.1rem;">⚡</span> Use Skill Match
+        </div>
+        <p>Let Lamka Hub match your artisan skills & experience with verified district opportunities.</p>
+        <button class="btn-match-me" onclick="showToast('Skill Match AI: Analyzing your profile & skills...', 'info')">Match Me</button>
       </div>
 
-      <!-- Job 1 -->
-      <div class="job-card" data-sector="handloom" data-location="Hiangtam Lamka">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--red);">KS</div>
-            <div class="job-title-group">
-              <h3>Master Backstrap Weaver & Loom Supervisor</h3>
-              <div class="company">at <b>Saipikhup Artisan Circle</b> · Hiangtam Lamka</div>
+    </aside>
+
+    <!-- RIGHT MAIN JOBS CONTENT AREA -->
+    <section class="jobs-main-area">
+      
+      <!-- Header Count Bar -->
+      <div class="jobs-header-bar">
+        <div class="jobs-count-text" id="jobCountText">12 Jobs <span>found in Churachandpur</span></div>
+      </div>
+
+      <!-- TALENTLY CARDS GRID -->
+      <div class="job-cards-grid" id="jobList">
+        
+        <!-- Empty State Card -->
+        <div class="empty-state-card" id="emptyState" style="display:none; text-align:center; padding:3rem 1.5rem; background:#ffffff; border:1.5px dashed var(--line); border-radius:18px; margin:1rem auto; max-width:600px; grid-column:1 / -1; width:100%;">
+          <div style="font-size:2.5rem; margin-bottom:0.5rem;">💼</div>
+          <h3 style="font-family:var(--sans); font-size:1.2rem; margin:0 0 0.4rem; font-weight:700;">No Matching Opportunities Found</h3>
+          <p style="font-size:0.86rem; color:var(--ink-soft); margin:0 0 1.2rem;">Try adjusting your search terms or clearing your sidebar filters to view all district job postings.</p>
+          <button class="btn-search-primary" onclick="resetJobFilters()" style="margin:0 auto;">Reset All Filters 🔄</button>
+        </div>
+
+        <!-- Card 1: Master Weaver -->
+        <div class="t-job-card" data-sector="handloom" data-type="Full-Time" data-location="Hiangtam Lamka" data-exp="senior" data-work="onsite" onclick="openApplyModal('Master Backstrap Weaver', 'Saipikhup Artisan Circle', 'Hiangtam Lamka')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--red);">KS</div>
+                <div class="t-title-block">
+                  <h3>Saipikhup Circle <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Master Backstrap Weaver</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 Hiangtam Lamka</span>
+            </div>
+
+            <p class="t-desc-text">Supervise daily production of traditional Kuki Saipikhup diamond motif shawls and Thangsuo honor weaves. Quality control of hand-dyed cotton yarn.</p>
+          </div>
+
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹16,000 – ₹20,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">2d ago</div>
+            </div>
+
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 94% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-handloom">Kuki Weave Heritage</span>
+        </div>
+
+        <!-- Card 2: Paite Dye Specialist -->
+        <div class="t-job-card" data-sector="handloom" data-type="Full-Time" data-location="Hiangtam Lamka" data-exp="mid" data-work="onsite" onclick="openApplyModal('Paite Dye Specialist', 'Guite Weaving Society', 'Hiangtam Lamka')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--indigo);">GW</div>
+                <div class="t-title-block">
+                  <h3>Guite Weavers <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Paite Dye Specialist</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 Hiangtam Lamka</span>
+            </div>
+
+            <p class="t-desc-text">Prepare natural vegetable and eco-friendly dyes for ceremonial Paite Puandum and Khamtang drapes. Test thread colorfastness.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹16,000 – ₹20,000 / month</span>
-          <span class="meta-item">📍 Hiangtam Lamka, Churachandpur</span>
-          <span class="meta-item">⏱ Full-Time</span>
-          <span class="meta-item">📅 Apply by 25th of this month</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹15,000 – ₹18,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">4d ago</div>
+            </div>
 
-        <p class="job-desc">Supervise daily production of traditional Kuki Saipikhup diamond motif shawls and Thangsuo honor weaves. Quality control of hand-dyed cotton yarn, warp setting on backstrap looms, and artisan training.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Backstrap Loin Loom</span>
-          <span class="skill-tag">Saipikhup Motif</span>
-          <span class="skill-tag">Yarn Dyeing</span>
-          <span class="skill-tag">Artisan Supervision</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Saipikhup Weavers Co-op · 0% Fee</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000001?text=Hello!%20I%20am%20interested%20in%20applying%20for%20the%20Master%20Weaver%20position.">💬 WhatsApp Employer</a>
-            <button class="btn-action" onclick="openApplyModal('Master Backstrap Weaver', 'Saipikhup Artisan Circle', 'Hiangtam Lamka')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 2 -->
-      <div class="job-card" data-sector="handloom" data-location="Hiangtam Lamka">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--indigo);">GW</div>
-            <div class="job-title-group">
-              <h3>Paite Puandum Dye Specialist & Thread Inspector</h3>
-              <div class="company">at <b>Guite Weaving Society</b> · Hiangtam Lamka</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 88% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-handloom">Paite Craft Co-op</span>
+        </div>
+
+        <!-- Card 3: Hmar Craft Coordinator -->
+        <div class="t-job-card" data-sector="handloom" data-type="Full-Time" data-location="Rengkai" data-exp="mid" data-work="onsite" onclick="openApplyModal('Hmar Craft Coordinator', 'Hmar Artisan Collective', 'Rengkai')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--gold); color:var(--ink);">HA</div>
+                <div class="t-title-block">
+                  <h3>Hmar Collective <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Craft Coordinator</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 Rengkai</span>
+            </div>
+
+            <p class="t-desc-text">Coordinate production schedules for traditional Hmar Am tri-color block shawls. Manage weaver thread allocation and buyer dispatch.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹15,000 – ₹18,000 / month</span>
-          <span class="meta-item">📍 Hiangtam Lamka</span>
-          <span class="meta-item">⏱ Full-Time</span>
-          <span class="meta-item">📅 Apply by 28th of this month</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹14,000 – ₹17,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">5d ago</div>
+            </div>
 
-        <p class="job-desc">Prepare natural vegetable and eco-friendly dyes for ceremonial Paite Puandum and Khamtang drapes. Inspect thread tensile strength and colorfastness prior to loom weaving.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Vegetable Dyeing</span>
-          <span class="skill-tag">Paite Puandum Weave</span>
-          <span class="skill-tag">Colorfast Testing</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Guite Weaving Society · Direct Hiring</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000005?text=Hello!%20I%20am%20applying%20for%20the%20Paite%20Dye%20Specialist%20role.">💬 WhatsApp Employer</a>
-            <button class="btn-action" onclick="openApplyModal('Paite Dye Specialist', 'Guite Weaving Society', 'Hiangtam Lamka')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 3 -->
-      <div class="job-card" data-sector="handloom" data-location="Rengkai">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--gold); color:var(--ink);">HA</div>
-            <div class="job-title-group">
-              <h3>Hmar Am Block Weave Craft Coordinator</h3>
-              <div class="company">at <b>Hmar Artisan Collective</b> · Rengkai</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 91% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-handloom">Hmar Artisan Collective</span>
+        </div>
+
+        <!-- Card 4: Handloom Photographer -->
+        <div class="t-job-card" data-sector="freelance" data-type="Freelance" data-location="New Lamka" data-exp="entry" data-work="hybrid" onclick="openApplyModal('Handloom Photographer', 'Thangzam Weavers Group', 'New Lamka')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--indigo);">TW</div>
+                <div class="t-title-block">
+                  <h3>Thangzam Weavers <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Catalog Photographer</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Freelance</span> · <span>📍 New Lamka</span>
+            </div>
+
+            <p class="t-desc-text">Photograph authentic handwoven shawls, drapes, and weaver portraits for the digital catalog showcase. Equipment provided.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹14,000 – ₹17,000 / month</span>
-          <span class="meta-item">📍 Rengkai, Churachandpur</span>
-          <span class="meta-item">⏱ Full-Time</span>
-          <span class="meta-item">📅 Immediate Joining</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹2,500<span style="font-weight:500; font-size:0.75rem;">/session</span></div>
+              <div class="t-time-val">6d ago</div>
+            </div>
 
-        <p class="job-desc">Coordinate production schedules for traditional Hmar Am tri-color block shawls and decorative crafts. Manage weaver thread allocation and buyer order fulfillment.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Hmar Am Weave</span>
-          <span class="skill-tag">Order Dispatch</span>
-          <span class="skill-tag">Craft Coordination</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Hmar Artisan Collective</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000007?text=Hello!%20I%20am%20interested%20in%20the%20Hmar%20Craft%20Coordinator%20job.">💬 WhatsApp Employer</a>
-            <button class="btn-action" onclick="openApplyModal('Hmar Craft Coordinator', 'Hmar Artisan Collective', 'Rengkai')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 4 -->
-      <div class="job-card" data-sector="freelance" data-location="New Lamka">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--indigo);">TW</div>
-            <div class="job-title-group">
-              <h3>Handloom Catalog Photographer & Digital Marketer</h3>
-              <div class="company">at <b>Thangzam Weavers' Group</b> · New Lamka</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 85% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-freelance">Freelance Gig</span>
+        </div>
+
+        <!-- Card 5: Maternal Health Nurse -->
+        <div class="t-job-card" data-sector="healthcare" data-type="Full-Time" data-location="Sielmat" data-exp="mid" data-work="onsite" onclick="openApplyModal('Maternal Health Nurse', 'Sielmat Family Clinic', 'Sielmat')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--red-deep);">SP</div>
+                <div class="t-title-block">
+                  <h3>Sielmat Clinic <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Maternal Health Nurse</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 Sielmat Main</span>
+            </div>
+
+            <p class="t-desc-text">Provide prenatal checkups, assist outpatient immunization clinics, and conduct community health education across Sielmat ward.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹2,500 / photoshoot session</span>
-          <span class="meta-item">📍 New Lamka</span>
-          <span class="meta-item">⏱ Freelance / Flexible</span>
-          <span class="meta-item">📅 2–3 sessions / month</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹15,000 – ₹19,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">1wk ago</div>
+            </div>
 
-        <p class="job-desc">Photograph authentic handwoven shawls, drapes, and weaver portraits for the digital catalog and social media showcase. Lighting equipment and studio backdrop provided.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Product Photography</span>
-          <span class="skill-tag">Lighting Setup</span>
-          <span class="skill-tag">Social Media Showcase</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Thangzam Weavers Group</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000002?text=Hello!%20I%20am%20applying%20for%20the%20Handloom%20Photographer%20gig.">💬 WhatsApp Employer</a>
-            <button class="btn-action" onclick="openApplyModal('Handloom Photographer', 'Thangzam Weavers Group', 'New Lamka')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 5 -->
-      <div class="job-card" data-sector="healthcare" data-location="Sielmat">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--red-deep);">SP</div>
-            <div class="job-title-group">
-              <h3>Community Maternal Health Nurse (ANM / GNM)</h3>
-              <div class="company">at <b>Sielmat Family Clinic & Health Project</b> · Sielmat</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 96% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-health">Community Healthcare</span>
+        </div>
+
+        <!-- Card 6: Weave Instructor -->
+        <div class="t-job-card" data-sector="handloom" data-type="Contract" data-location="Tuibong" data-exp="senior" data-work="onsite" onclick="openApplyModal('Traditional Weave Instructor', 'Vaiphei Loom Group & DIC', 'Tuibong')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--green);">VL</div>
+                <div class="t-title-block">
+                  <h3>DIC & Vaiphei Unit <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Weave Instructor</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Contract</span> · <span>📍 Tuibong</span>
+            </div>
+
+            <p class="t-desc-text">Lead instructor for young weavers learning Vaiphei Khiangte and Zou highland blue weaves. Conduct 5-day module workshops.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹15,000 – ₹19,000 / month</span>
-          <span class="meta-item">📍 Sielmat Main Road</span>
-          <span class="meta-item">⏱ Full-Time</span>
-          <span class="meta-item">📅 Open Until Filled</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹18,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">1wk ago</div>
+            </div>
 
-        <p class="job-desc">Provide prenatal checkups, assist outpatient immunization clinics, and conduct community health education across Sielmat and adjacent ward sectors.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">ANM / GNM Nursing</span>
-          <span class="skill-tag">Maternal Care</span>
-          <span class="skill-tag">Child Vaccination</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Sielmat Family Clinic</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/9103874233990?text=Hello!%20I%20am%20applying%20for%20the%20Maternal%20Health%20Nurse%20role.">💬 WhatsApp Clinic</a>
-            <button class="btn-action" onclick="openApplyModal('Maternal Health Nurse', 'Sielmat Family Clinic', 'Sielmat')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 6 -->
-      <div class="job-card" data-sector="handloom" data-location="Tuibong">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--green);">VL</div>
-            <div class="job-title-group">
-              <h3>Vaiphei & Zou Traditional Weave Instructor</h3>
-              <div class="company">at <b>District Industry Centre & Vaiphei Loom Group</b> · Tuibong</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 90% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-handloom">Skill Development</span>
+        </div>
+
+        <!-- Card 7: Catalog Coordinator -->
+        <div class="t-job-card" data-sector="freelance" data-type="Full-Time" data-location="Hiangtam Lamka" data-exp="entry" data-work="onsite" onclick="openApplyModal('Catalog & Order Coordinator', 'Lamka Artisan Hub Emporium', 'Main Market')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--ink);">LA</div>
+                <div class="t-title-block">
+                  <h3>Artisan Emporium <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Catalog Coordinator</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 Main Market</span>
+            </div>
+
+            <p class="t-desc-text">Manage digital inventory for 9 tribal handloom products, respond to buyer WhatsApp inquiries, and coordinate courier dispatch.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹18,000 / month</span>
-          <span class="meta-item">📍 Tuibong Peace Ground Sector</span>
-          <span class="meta-item">⏱ 6-Month Contract</span>
-          <span class="meta-item">📅 Apply by 30th of this month</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹12,000 – ₹15,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">1wk ago</div>
+            </div>
 
-        <p class="job-desc">Serve as lead instructor for young women weavers learning traditional Vaiphei Khiangte and Zou highland blue weaves. Conduct 5-day module workshops at Tuibong center.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Khiangte Weave</span>
-          <span class="skill-tag">Zou Highland Puan</span>
-          <span class="skill-tag">Weaving Instruction</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by DIC & Vaiphei Handloom Unit</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000009?text=Hello!%20I%20am%20applying%20for%20the%20Weave%20Instructor%20position.">💬 WhatsApp Unit</a>
-            <button class="btn-action" onclick="openApplyModal('Traditional Weave Instructor', 'Vaiphei Loom Group & DIC', 'Tuibong')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 7 -->
-      <div class="job-card" data-sector="freelance" data-location="Main Market">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--ink);">LA</div>
-            <div class="job-title-group">
-              <h3>E-Commerce Catalog & Order Coordinator</h3>
-              <div class="company">at <b>Lamka Artisan Hub Emporium</b> · Main Market</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 83% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-freelance">Digital Retail</span>
+        </div>
+
+        <!-- Card 8: Cultural Researcher -->
+        <div class="t-job-card" data-sector="nonprofit" data-type="Contract" data-location="Rengkai" data-exp="mid" data-work="hybrid" onclick="openApplyModal('Cultural Heritage Researcher', 'Churachandpur Heritage Project', 'Rengkai')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--indigo);">HP</div>
+                <div class="t-title-block">
+                  <h3>Heritage Project <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Cultural Researcher</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Fellowship</span> · <span>📍 Rengkai Wards</span>
+            </div>
+
+            <p class="t-desc-text">Conduct field interviews with senior tribal master weavers across Gangte, Simte, Tedim, Kom, and Zou villages to archive motif histories.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹12,000 – ₹15,000 / month</span>
-          <span class="meta-item">📍 Main Market Road, Lamka</span>
-          <span class="meta-item">⏱ Full-Time / Part-Time</span>
-          <span class="meta-item">📅 Immediate Joining</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹20,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">2wk ago</div>
+            </div>
 
-        <p class="job-desc">Manage digital catalog inventory for 9 tribal handloom products, respond to buyer WhatsApp inquiries, and coordinate order packaging for courier dispatch.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Catalog Entry</span>
-          <span class="skill-tag">WhatsApp Customer Support</span>
-          <span class="skill-tag">Order Dispatch</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Lamka Artisan Emporium</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000099?text=Hello!%20I%20am%20applying%20for%20the%20Catalog%20Coordinator%20role.">💬 WhatsApp Store</a>
-            <button class="btn-action" onclick="openApplyModal('Catalog & Order Coordinator', 'Lamka Artisan Hub Emporium', 'Main Market')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 8 -->
-      <div class="job-card" data-sector="nonprofit" data-location="Rengkai">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--indigo);">HP</div>
-            <div class="job-title-group">
-              <h3>Cultural Documentation & Oral Heritage Researcher</h3>
-              <div class="company">at <b>Churachandpur Tribal Heritage Project</b> · Rengkai</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 95% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-nonprofit">Cultural Research</span>
+        </div>
+
+        <!-- Card 9: Pediatric OPD Assistant -->
+        <div class="t-job-card" data-sector="healthcare" data-type="Full-Time" data-location="Hiangtam Lamka" data-exp="entry" data-work="onsite" onclick="openApplyModal('Pediatric OPD Assistant', 'District Hospital Ccpur', 'IB Road Lamka')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--red-deep);">DH</div>
+                <div class="t-title-block">
+                  <h3>District Hospital <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Pediatric OPD Assistant</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 IB Road Lamka</span>
+            </div>
+
+            <p class="t-desc-text">Manage registration desk for the expanded Pediatric OPD wing, issue immunization cards, and guide mothers to specialty consultation rooms.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹20,000 / month</span>
-          <span class="meta-item">📍 Rengkai & District Wards</span>
-          <span class="meta-item">⏱ 1-Year Fellowship</span>
-          <span class="meta-item">📅 Apply by 31st of this month</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹14,000 – ₹16,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">2wk ago</div>
+            </div>
 
-        <p class="job-desc">Conduct field interviews with senior tribal master weavers across Gangte, Simte, Tedim Chin, Kom, and Zou villages to archive traditional motif histories and oral legends.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Field Research</span>
-          <span class="skill-tag">Oral History Interview</span>
-          <span class="skill-tag">Motif Documentation</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Cultural Heritage Board</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000007?text=Hello!%20I%20am%20applying%20for%20the%20Cultural%20Researcher%20Fellowship.">💬 WhatsApp Project</a>
-            <button class="btn-action" onclick="openApplyModal('Cultural Heritage Researcher', 'Churachandpur Heritage Project', 'Rengkai')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 9 -->
-      <div class="job-card" data-sector="healthcare" data-location="Hiangtam Lamka">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--red-deep);">DH</div>
-            <div class="job-title-group">
-              <h3>Pediatric OPD Assistant & Patient Record Desk</h3>
-              <div class="company">at <b>District Hospital Churachandpur</b> · IB Road Lamka</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 89% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-health">District Hospital</span>
+        </div>
+
+        <!-- Card 10: Cane Craft Artisan -->
+        <div class="t-job-card" data-sector="handloom" data-type="Full-Time" data-location="Tuibong" data-exp="entry" data-work="onsite" onclick="openApplyModal('Cane & Bamboo Craft Artisan', 'Churachandpur Crafts SHG', 'Tuibong')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--gold); color:var(--ink);">CS</div>
+                <div class="t-title-block">
+                  <h3>Crafts SHG <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Cane Craft Artisan</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 Tuibong</span>
+            </div>
+
+            <p class="t-desc-text">Craft traditional cane baskets, woven bamboo utility items, and cultural decorative gift products for local and exhibition sales.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹14,000 – ₹16,000 / month</span>
-          <span class="meta-item">📍 IB Road, Lamka</span>
-          <span class="meta-item">⏱ Full-Time</span>
-          <span class="meta-item">📅 Immediate Joining</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹15,000<span style="font-weight:500; font-size:0.75rem;">/mo + bonus</span></div>
+              <div class="t-time-val">3wk ago</div>
+            </div>
 
-        <p class="job-desc">Manage registration desk for the newly expanded Pediatric OPD wing, issue immunization cards, and guide mothers to specialty consultation rooms.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">OPD Registration</span>
-          <span class="skill-tag">Patient Guidance</span>
-          <span class="skill-tag">Health Records</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by District Hospital Administration</div>
-          <div style="display:flex; gap:0.6rem;">
-            <button class="btn-action" onclick="openApplyModal('Pediatric OPD Assistant', 'District Hospital Ccpur', 'IB Road Lamka')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 10 -->
-      <div class="job-card" data-sector="handloom" data-location="Tuibong">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--gold); color:var(--ink);">CS</div>
-            <div class="job-title-group">
-              <h3>Cane & Bamboo Handicraft Artisan</h3>
-              <div class="company">at <b>Churachandpur Crafts SHG</b> · Tuibong</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 87% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-handloom">Indigenous Crafts</span>
+        </div>
+
+        <!-- Card 11: Farm Produce Logistics -->
+        <div class="t-job-card" data-sector="freelance" data-type="Full-Time" data-location="Kangvai" data-exp="entry" data-work="onsite" onclick="openApplyModal('Produce Logistics Coordinator', 'Lamka Farmers Co-op', 'Kangvai')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--green);">FC</div>
+                <div class="t-title-block">
+                  <h3>Farmers Co-op <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Produce Coordinator</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Full-Time</span> · <span>📍 Kangvai</span>
+            </div>
+
+            <p class="t-desc-text">Coordinate daily collection of organic passion fruit, ginger, and local produce from hill farmers for town market transport.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹15,000 / month (piece-rate bonus)</span>
-          <span class="meta-item">📍 Tuibong Main Market</span>
-          <span class="meta-item">⏱ Full-Time</span>
-          <span class="meta-item">📅 Open Position</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹13,000 – ₹16,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">3wk ago</div>
+            </div>
 
-        <p class="job-desc">Craft traditional cane baskets, woven bamboo utility items, and cultural decorative gift products for local and exhibition sales.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Cane Weaving</span>
-          <span class="skill-tag">Bamboo Craft</span>
-          <span class="skill-tag">Indigenous Artisan</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Ccpur Crafts SHG</div>
-          <div style="display:flex; gap:0.6rem;">
-            <a class="btn-wa-chat" target="_blank" href="https://wa.me/919862000011?text=Hello!%20I%20am%20applying%20for%20the%20Cane%20Craft%20Artisan%20role.">💬 WhatsApp SHG</a>
-            <button class="btn-action" onclick="openApplyModal('Cane & Bamboo Craft Artisan', 'Churachandpur Crafts SHG', 'Tuibong')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 11 -->
-      <div class="job-card" data-sector="freelance" data-location="Kangvai">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--green);">FC</div>
-            <div class="job-title-group">
-              <h3>Organic Produce & Farm Logistics Coordinator</h3>
-              <div class="company">at <b>Lamka Farmers Cooperative</b> · Kangvai</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 82% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-freelance">Agri-Logistics</span>
+        </div>
+
+        <!-- Card 12: Youth Football Coach -->
+        <div class="t-job-card" data-sector="nonprofit" data-type="Part-Time" data-location="Hiangtam Lamka" data-exp="mid" data-work="onsite" onclick="openApplyModal('Youth Football Coach', 'District Sports Association', 'Hiangtam Lamka')">
+          <div>
+            <div class="t-card-top">
+              <div class="t-employer-badge">
+                <div class="t-logo-icon" style="background:var(--indigo);">SA</div>
+                <div class="t-title-block">
+                  <h3>Sports Association <span class="verified-check" title="Verified Employer">✔</span></h3>
+                  <div style="font-size:0.92rem; font-weight:800; color:var(--ink);">Youth Football Coach</div>
+                </div>
+              </div>
+              <button class="btn-bookmark" onclick="event.stopPropagation(); showToast('Saved job to bookmarks', 'info');" title="Save Job">🔖</button>
+            </div>
+            
+            <div class="t-meta-pills" style="margin:0.6rem 0;">
+              <span>💼 Part-Time</span> · <span>📍 Hiangtam Lamka</span>
+            </div>
+
+            <p class="t-desc-text">Train youth football teams preparing for the District Inter-Ward Championship. Conduct 3 evening training sessions per week.</p>
           </div>
-        </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹13,000 – ₹16,000 / month</span>
-          <span class="meta-item">📍 Kangvai Sector</span>
-          <span class="meta-item">⏱ Full-Time</span>
-          <span class="meta-item">📅 Apply by 25th of this month</span>
-        </div>
+          <div>
+            <div class="t-salary-row">
+              <div class="t-salary-val">₹8,000 – ₹10,000<span style="font-weight:500; font-size:0.75rem;">/mo</span></div>
+              <div class="t-time-val">4wk ago</div>
+            </div>
 
-        <p class="job-desc">Coordinate daily collection of organic passion fruit, ginger, and local produce from hill farmers for town market transport and distribution.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Agri Produce</span>
-          <span class="skill-tag">Logistics</span>
-          <span class="skill-tag">Farmer Support</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by Lamka Farmers Co-op</div>
-          <div style="display:flex; gap:0.6rem;">
-            <button class="btn-action" onclick="openApplyModal('Produce Logistics Coordinator', 'Lamka Farmers Co-op', 'Kangvai')">Quick Apply →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Job 12 -->
-      <div class="job-card" data-sector="nonprofit" data-location="Hiangtam Lamka">
-        <div class="job-header-row">
-          <div class="job-employer-info">
-            <div class="employer-logo" style="background:var(--indigo);">SA</div>
-            <div class="job-title-group">
-              <h3>Youth Inter-Ward Football & Athletics Coach</h3>
-              <div class="company">at <b>District Sports Association</b> · Hiangtam Lamka</div>
+            <div class="t-match-pill" style="margin-top:0.6rem;">
+              ⚡ Skill Match: 97% Match
             </div>
           </div>
-          <div class="job-badges">
-            <span class="badge-sector sec-nonprofit">Youth Sports</span>
-          </div>
         </div>
 
-        <div class="job-meta-row">
-          <span class="meta-item salary">💰 ₹8,000 – ₹10,000 / month</span>
-          <span class="meta-item">📍 Public Ground Hiangtam Lamka</span>
-          <span class="meta-item">⏱ Part-Time Evening</span>
-          <span class="meta-item">📅 Apply by 20th of this month</span>
-        </div>
-
-        <p class="job-desc">Train youth football teams and athletic squads preparing for the District Inter-Ward Championship. Conduct 3 evening training sessions per week.</p>
-
-        <div class="skill-chips">
-          <span class="skill-tag">Football Coaching</span>
-          <span class="skill-tag">Athletic Training</span>
-          <span class="skill-tag">Youth Mentorship</span>
-        </div>
-
-        <div class="job-action-row">
-          <div style="font-family:var(--mono); font-size:0.76rem; color:var(--ink-soft);">Posted by District Sports Association</div>
-          <div style="display:flex; gap:0.6rem;">
-            <button class="btn-action" onclick="openApplyModal('Youth Football Coach', 'District Sports Association', 'Hiangtam Lamka')">Quick Apply →</button>
-          </div>
-        </div>
       </div>
 
-    </div>
-
-    <!-- EMPLOYER POST A JOB CTA -->
-    <div class="post-job-cta">
-      <div>
-        <h3>Are you a Local Weaver Cooperative, SHG, Clinic, or Business?</h3>
-        <p>Post your open roles, artisan opportunities, and skill gigs on Lamka Hub for 100% free with direct WhatsApp applicant connections.</p>
+      <!-- EMPLOYER POST A JOB CTA -->
+      <div class="post-job-cta">
+        <div>
+          <h3>Are you a Local Weaver Cooperative, SHG, Clinic, or Business?</h3>
+          <p>Post your open roles, artisan opportunities, and skill gigs on Lamka Hub for 100% free with direct WhatsApp applicant connections.</p>
+        </div>
+        <a class="btn-gold" target="_blank" href="https://wa.me/919862000000?text=Hello!%20I%20would%20like%20to%20post%20a%20new%20job%20or%20artisan%20opportunity%20on%20Lamka%20Hub." style="text-decoration:none; display:inline-block;">Post an Opportunity (Free) →</a>
       </div>
-      <a class="btn-gold" target="_blank" href="https://wa.me/919862000000?text=Hello!%20I%20would%20like%20to%20post%20a%20new%20job%20or%20artisan%20opportunity%20on%20Lamka%20Hub." style="text-decoration:none; display:inline-block;">Post an Opportunity (Free) →</a>
-    </div>
+
+    </section>
+
   </main>
 
   <!-- Interactive Application Modal -->
   <div class="modal-overlay" id="applyModal">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModals()">&times;</button>
-      <span class="eyebrow">Community Application Portal</span>
-      <h3 id="modalJobTitle" style="margin:0.4rem 0 0.2rem; font-family:var(--serif);">Apply for Position</h3>
+      <span class="eyebrow" style="color:var(--blue-accent);">Community Application Portal</span>
+      <h3 id="modalJobTitle" style="margin:0.4rem 0 0.2rem; font-family:var(--serif); font-size:1.35rem;">Apply for Position</h3>
       <p id="modalJobMeta" style="font-size:0.85rem; color:var(--ink-soft); margin:0 0 1.2rem;"></p>
       
       <form onsubmit="handleApplicationSubmit(event)">
-        <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:0.3rem;">Your Full Name *</label>
-        <input type="text" id="appFullName" required placeholder="e.g. Mary Chingthankim / Pauminlun Guite" style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:6px; margin-bottom:1rem;">
+        <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:0.35rem;">Your Full Name *</label>
+        <input type="text" id="appFullName" required placeholder="e.g. Mary Chingthankim / Pauminlun Guite" style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:8px; margin-bottom:1rem;">
 
-        <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:0.3rem;">Phone / WhatsApp Number *</label>
-        <input type="tel" id="appPhone" required placeholder="+91 98620 00000" style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:6px; margin-bottom:1rem;">
+        <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:0.35rem;">Phone / WhatsApp Number *</label>
+        <input type="tel" id="appPhone" required placeholder="+91 98620 00000" style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:8px; margin-bottom:1rem;">
 
-        <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:0.3rem;">Tribal Community / Ward Sector *</label>
-        <select id="appWard" style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:6px; margin-bottom:1rem; background:#fff;">
+        <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:0.35rem;">Tribal Community / Ward Sector *</label>
+        <select id="appWard" style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:8px; margin-bottom:1rem; background:#fff;">
           <option value="Hiangtam Lamka">Hiangtam Lamka</option>
           <option value="Tuibong">Tuibong</option>
           <option value="Rengkai">Rengkai</option>
@@ -974,10 +994,10 @@
           <option value="Other Ward">Other District Sector</option>
         </select>
 
-        <label style="display:block; font-size:0.82rem; font-weight:600; margin-bottom:0.3rem;">Brief Weaving / Professional Experience</label>
-        <textarea id="appExp" rows="3" placeholder="Describe your experience in handloom weaving, nursing, photography, or relevant skills..." style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:6px; margin-bottom:1.2rem; font-family:var(--sans);"></textarea>
+        <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:0.35rem;">Brief Experience / Skills</label>
+        <textarea id="appExp" rows="3" placeholder="Describe your experience in handloom weaving, nursing, photography, or relevant skills..." style="width:100%; padding:0.75rem; border:1px solid var(--line); border-radius:8px; margin-bottom:1.2rem; font-family:var(--sans);"></textarea>
 
-        <button type="submit" class="btn-action" style="width:100%; padding:0.85rem; font-size:0.92rem; background:var(--red);">Submit Application Directly to Employer →</button>
+        <button type="submit" class="btn-search-primary" style="width:100%; min-height:46px; justify-content:center;">Submit Application Directly to Employer →</button>
       </form>
     </div>
   </div>
@@ -1010,7 +1030,7 @@
       </div>
       <div>
         <h5>Explore</h5>
-        <a href="index.html#home">Home</a>
+        <a href="index.html">Home</a>
         <a href="handloom.html">Handloom Market</a>
         <a href="directory.html">Directory</a>
         <a href="jobs.html">Jobs</a>
@@ -1021,7 +1041,7 @@
         <h5>Job Sectors</h5>
         <a href="jobs.html">Handloom & Weaving Roles</a>
         <a href="jobs.html">Community Healthcare Nursing</a>
-        <a href="jobs.html">Freelance Photography & Digital</a>
+        <a href="jobs.html">Freelance Photography & Media</a>
         <a href="jobs.html">Cultural Heritage Fellowships</a>
       </div>
       <div>
@@ -1082,17 +1102,8 @@
     });
   }
 
-  // Filter Logic by Sector & Location
-  let activeSector = 'all';
-
-  document.querySelectorAll('#sectorFilterTrack .chip-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#sectorFilterTrack .chip-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeSector = btn.getAttribute('data-sector');
-      filterJobs();
-    });
-  });
+  // Filter Logic
+  let activePopularChip = 'all';
 
   const searchInp = document.getElementById('jobSearch');
   if(searchInp) searchInp.addEventListener('input', filterJobs);
@@ -1100,31 +1111,66 @@
   const locSel = document.getElementById('locationSelect');
   if(locSel) locSel.addEventListener('change', filterJobs);
 
+  const salSel = document.getElementById('salarySelect');
+  if(salSel) salSel.addEventListener('change', filterJobs);
+
+  const sortSel = document.getElementById('sortSelect');
+  if(sortSel) sortSel.addEventListener('change', filterJobs);
+
   const searchBtn = document.getElementById('jobSearchBtn');
   if(searchBtn) searchBtn.addEventListener('click', filterJobs);
+
+  function filterByPopularChip(val, chipEl){
+    document.querySelectorAll('.popular-searches-row .pop-chip').forEach(c => c.classList.remove('active'));
+    if(chipEl) chipEl.classList.add('active');
+    activePopularChip = val;
+    if(val !== 'all' && searchInp) {
+      searchInp.value = val;
+    } else if(val === 'all' && searchInp) {
+      searchInp.value = '';
+    }
+    filterJobs();
+  }
 
   function filterJobs(){
     const query = searchInp ? searchInp.value.toLowerCase().trim() : '';
     const selectedLoc = locSel ? locSel.value : 'all';
-    const cards = document.querySelectorAll('#jobList .job-card');
+    
+    // Checked Job Types
+    const checkedTypes = Array.from(document.querySelectorAll('.type-filter:checked')).map(cb => cb.value);
+    // Checked Exps
+    const checkedExps = Array.from(document.querySelectorAll('.exp-filter:checked')).map(cb => cb.value);
+    // Checked Work Types
+    const checkedWorks = Array.from(document.querySelectorAll('.work-filter:checked')).map(cb => cb.value);
+
+    const cards = document.querySelectorAll('#jobList .t-job-card');
     let visibleCount = 0;
 
     cards.forEach(card => {
-      const sector = card.getAttribute('data-sector') || '';
+      const type = card.getAttribute('data-type') || '';
       const location = card.getAttribute('data-location') || '';
+      const exp = card.getAttribute('data-exp') || '';
+      const work = card.getAttribute('data-work') || '';
       const text = card.innerText.toLowerCase();
 
-      const matchSector = (activeSector === 'all' || sector === activeSector);
+      const matchType = checkedTypes.length === 0 || checkedTypes.includes(type);
       const matchLoc = (selectedLoc === 'all' || location === selectedLoc);
+      const matchExp = checkedExps.length === 0 || checkedExps.includes(exp);
+      const matchWork = checkedWorks.length === 0 || checkedWorks.includes(work);
       const matchQuery = (!query || text.includes(query));
 
-      if(matchSector && matchLoc && matchQuery){
+      if(matchType && matchLoc && matchExp && matchWork && matchQuery){
         card.style.display = 'flex';
         visibleCount++;
       } else {
         card.style.display = 'none';
       }
     });
+
+    const countText = document.getElementById('jobCountText');
+    if(countText) {
+      countText.innerHTML = visibleCount + ' Jobs <span>found in Churachandpur</span>';
+    }
 
     const emptyState = document.getElementById('emptyState');
     if(emptyState) {
@@ -1135,10 +1181,13 @@
   function resetJobFilters(){
     if(searchInp) searchInp.value = '';
     if(locSel) locSel.value = 'all';
-    activeSector = 'all';
-    document.querySelectorAll('#sectorFilterTrack .chip-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-sector') === 'all');
-    });
+    if(salSel) salSel.value = 'all';
+    if(sortSel) sortSel.value = 'latest';
+    
+    document.querySelectorAll('.type-filter, .exp-filter, .work-filter').forEach(cb => cb.checked = true);
+    document.querySelectorAll('.popular-searches-row .pop-chip').forEach(c => c.classList.remove('active'));
+    document.querySelector('.popular-searches-row .pop-chip').classList.add('active');
+    
     filterJobs();
     showToast('All job filters reset', 'info');
   }
@@ -1148,7 +1197,7 @@
     document.getElementById('modalJobTitle').innerText = role;
     document.getElementById('modalJobMeta').innerText = 'at ' + company + ' · ' + location;
     document.getElementById('applyModal').classList.add('open');
-    showToast('Opening application for ' + role, 'info');
+    showToast('Opening application portal for ' + role, 'info');
   }
 
   function closeModals(){

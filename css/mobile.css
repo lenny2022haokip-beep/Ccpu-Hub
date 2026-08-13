@@ -94,6 +94,42 @@ input, select, textarea {
     transition: transform 0.15s ease;
   }
 
+  .chip-btn:active, .chip:active {
+    transform: scale(0.96);
+  }
+
+  /* TALENTLY JOB PORTAL RESPONSIVE OVERRIDES */
+  @media (max-width: 960px) {
+    .portal-container {
+      grid-template-columns: 1fr !important;
+      padding: 1.2rem 0.8rem 3rem !important;
+      gap: 1.2rem !important;
+    }
+    .filter-sidebar {
+      position: static !important;
+      padding: 1rem !important;
+    }
+    .talently-search-bar {
+      flex-direction: column !important;
+      padding: 0.6rem !important;
+    }
+    .search-input-group {
+      width: 100% !important;
+      border-right: none !important;
+      border-bottom: 1px solid rgba(23,21,18,0.06) !important;
+    }
+    .search-input-group:last-of-type {
+      max-width: 100% !important;
+    }
+    .btn-search-primary {
+      width: 100% !important;
+      justify-content: center !important;
+    }
+    .job-cards-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
   .dock-item:active {
     transform: scale(0.92);
   }
@@ -441,79 +477,88 @@ input, select, textarea {
     padding: 1.2rem 0.6rem !important;
   }
 
-  /* 1. HANDLOOM MARKET CARDS FEED */
-  .product-grid, .catalog-grid, .handloom-grid, .highlight-grid-4 {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1rem !important;
+  /* 1. HANDLOOM MARKET CARDS FEED (MATCHING PUMA / NIKE MOBILE APP MOCKUP) */
+  .product-grid, .highlight-grid-4 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
     width: 100% !important;
+  }
+
+  @media (max-width: 360px) {
+    .product-grid, .highlight-grid-4 {
+      grid-template-columns: 1fr !important;
+    }
   }
 
   .product-card {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    border-radius: 14px !important;
+    border-radius: 16px !important;
     overflow: hidden !important;
     background: #ffffff !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
     border: 1px solid rgba(23, 21, 18, 0.08) !important;
     box-sizing: border-box !important;
   }
 
-  .swatch-container, .product-swatch {
+  .swatch-container {
     width: 100% !important;
-    height: 160px !important;
-    flex: 0 0 160px !important;
+    height: 140px !important;
+    flex: 0 0 140px !important;
+    background: #F6F4EF !important;
   }
 
-  .product-body, .product-info, .product-card-body {
+  .product-body {
     width: 100% !important;
-    padding: 1rem !important;
+    padding: 0.75rem 0.7rem 0.8rem !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.4rem !important;
+    gap: 0.2rem !important;
     box-sizing: border-box !important;
   }
 
-  .product-title, .product-card h3 {
-    font-size: 1.1rem !important;
-    line-height: 1.25 !important;
+  .product-title {
+    font-size: 0.88rem !important;
+    line-height: 1.2 !important;
     margin: 0 !important;
     color: var(--ink) !important;
     font-weight: 700 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
-  .weaver-meta, .weaver {
-    font-size: 0.78rem !important;
+  .product-category-tag {
+    font-size: 0.7rem !important;
     color: var(--ink-soft) !important;
+    opacity: 0.8 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
-  .price-action-row, .price-row {
+  .price-action-row {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     width: 100% !important;
-    margin-top: 0.4rem !important;
-    padding-top: 0.4rem !important;
-    border-top: 1px solid rgba(23,21,18,0.08) !important;
+    margin-top: 0.3rem !important;
+    padding-top: 0.3rem !important;
+    border-top: 1px solid rgba(23,21,18,0.06) !important;
   }
 
-  .price-tag, .price {
-    font-size: 1.1rem !important;
+  .price-tag {
+    font-size: 0.98rem !important;
     font-weight: 800 !important;
     color: var(--red-deep) !important;
   }
 
-  .btn-view-spec, .btn-order-wa, .btn-action {
-    min-height: 38px !important;
-    font-size: 0.8rem !important;
-    padding: 0 0.8rem !important;
-    border-radius: 8px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-weight: 700 !important;
+  .btn-add-circle {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 1.1rem !important;
   }
 
   /* 2. DIRECTORY CARDS FEED */

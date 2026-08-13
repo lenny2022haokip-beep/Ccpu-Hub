@@ -255,22 +255,24 @@
   }
   .results-count strong{color:var(--red-deep);}
 
-  /* LUXURY FEATURED SHOWCASE CATALOG GRID */
-  .product-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:1.8rem;}
-  @media (max-width:1100px){.product-grid{grid-template-columns:1fr; gap:1.6rem;}}
+  /* MODERN CLEAN E-COMMERCE PRODUCT GRID (MATCHING USER MOCKUP IMAGE) */
+  .product-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:1.4rem;}
+  @media (max-width:1100px){.product-grid{grid-template-columns:repeat(3, 1fr); gap:1.2rem;}}
+  @media (max-width:768px){.product-grid{grid-template-columns:repeat(2, 1fr) !important; gap:0.8rem !important;}}
+  @media (max-width:420px){.product-grid{grid-template-columns:repeat(2, 1fr) !important; gap:0.6rem !important;}}
 
-  /* Product Card Side-by-Side Layout */
   .product-card{
-    background:#fff; border-radius:18px; overflow:hidden;
-    box-shadow:var(--shadow); display:grid; grid-template-columns:260px 1fr;
-    border:1px solid var(--line); transition:transform 0.25s ease, box-shadow 0.25s ease;
-    position:relative; min-height:280px;
+    background:#ffffff; border-radius:18px; overflow:hidden;
+    box-shadow:0 4px 18px rgba(0,0,0,0.04); display:flex; flex-direction:column;
+    border:1px solid var(--line, rgba(23,21,18,0.08)); transition:transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    position:relative; cursor:pointer;
   }
-  .product-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-hover);}
+  .product-card:hover{transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.08);}
 
-  /* Fabric Swatch Container (Left Side) */
+  /* Fabric Swatch Container (Top) */
   .swatch-container{
-    position:relative; overflow:hidden; background:#171512; cursor:pointer; height:100%; min-height:240px;
+    position:relative; overflow:hidden; background:#F6F4EF; cursor:pointer; width:100%; height:180px;
+    display:flex; align-items:center; justify-content:center;
   }
   .swatch-container svg{
     width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;
@@ -278,11 +280,11 @@
   .product-card:hover .swatch-container svg{transform:scale(1.06);}
 
   /* Badge Overlay Tags */
-  .badge-overlay{position:absolute; top:0.8rem; left:0.8rem; display:flex; gap:0.4rem; flex-wrap:wrap; z-index:3;}
+  .badge-overlay{position:absolute; top:0.6rem; right:0.6rem; display:flex; gap:0.4rem; z-index:3;}
   .badge-chip{
     background:rgba(23,21,18,0.85); color:var(--bone); font-family:var(--mono);
-    font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; padding:0.3rem 0.6rem;
-    border-radius:4px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.15); font-weight:600;
+    font-size:0.6rem; letter-spacing:0.06em; text-transform:uppercase; padding:0.25rem 0.55rem;
+    border-radius:99px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.15); font-weight:600;
   }
   .badge-kuki{background:var(--red-deep); color:var(--gold); border-color:var(--gold);}
   .badge-paite{background:var(--indigo); color:var(--bone);}
@@ -294,56 +296,33 @@
   .badge-tedim{background:#2B3A55; color:var(--bone);}
   .badge-kom{background:#B23A2D; color:var(--bone);}
 
-  .story-quick-btn{
-    position:absolute; bottom:0.8rem; right:0.8rem; background:rgba(250,248,243,0.95);
-    color:var(--ink); border:none; padding:0.35rem 0.7rem; border-radius:6px;
-    font-family:var(--mono); font-size:0.64rem; font-weight:700; cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:all 0.2s ease; z-index:3;
-  }
-  .story-quick-btn:hover{background:var(--gold); color:var(--ink); transform:scale(1.05);}
-
-  /* Product Details Body (Right Side WITH Image) */
+  /* Product Details Body */
   .product-body{
-    padding:1.4rem 1.5rem; display:flex; flex-direction:column; gap:0.6rem; flex:1; justify-content:space-between;
+    padding:0.85rem 0.95rem 0.95rem; display:flex; flex-direction:column; gap:0.25rem; flex:1; justify-content:space-between;
   }
-
-  .product-eyebrow-row{display:flex; align-items:center; justify-content:space-between; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.2rem;}
-  .product-category-tag{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--red-deep); font-weight:700;}
 
   .product-title{
-    margin:0 0 0.2rem; font-size:1.25rem; font-family:var(--serif); font-weight:700; line-height:1.25; color:var(--ink);
+    margin:0 0 0.15rem; font-size:0.98rem; font-family:var(--sans, sans-serif); font-weight:700; line-height:1.25; color:var(--ink);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-  .weaver-meta{font-size:0.83rem; color:var(--ink-soft); line-height:1.35; font-weight:500;}
-
-  .product-desc{
-    font-size:0.88rem; color:var(--ink-soft); line-height:1.55; margin:0.4rem 0 0.6rem;
-    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+  .product-category-tag{
+    font-size:0.76rem; color:var(--ink-soft); opacity:0.8; font-weight:500;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-
-  .spec-strip{
-    display:flex; gap:0.5rem; font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);
-    padding-top:0.6rem; border-top:1px dashed var(--line); flex-wrap:wrap;
-  }
-  .spec-pill{background:var(--paper); padding:0.25rem 0.6rem; border-radius:6px; border:1px solid var(--line); font-weight:600;}
 
   .price-action-row{
-    display:flex; align-items:center; justify-content:space-between; gap:0.6rem;
-    padding-top:0.8rem; margin-top:0.2rem;
+    display:flex; align-items:center; justify-content:space-between; gap:0.4rem;
+    padding-top:0.5rem; margin-top:0.3rem; border-top:1px solid rgba(23,21,18,0.06);
   }
-  .price-tag{font-family:var(--mono); font-weight:700; font-size:1.25rem; color:var(--red-deep);}
+  .price-tag{font-family:var(--mono); font-weight:800; font-size:1.15rem; color:var(--red-deep);}
 
-  .btn-order-wa{
-    background:#25D366; color:#fff; font-size:0.8rem; font-weight:700;
-    min-height:38px; padding:0 1rem; border-radius:8px; border:none; cursor:pointer;
-    display:inline-flex; align-items:center; gap:0.4rem; transition:all 0.2s ease; text-decoration:none;
+  .btn-add-circle{
+    width:32px; height:32px; border-radius:50%; background:var(--red-deep, #8C2C21);
+    color:#ffffff; font-size:1.2rem; font-weight:700; border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; transition:transform 0.15s ease, background 0.15s ease;
+    box-shadow:0 3px 8px rgba(0,0,0,0.12);
   }
-  .btn-order-wa:hover{background:#1da851; transform:translateY(-1px);}
-
-  .btn-view-spec{
-    background:var(--paper); color:var(--ink); border:1px solid var(--line);
-    font-size:0.78rem; font-weight:600; min-height:38px; padding:0 0.85rem; border-radius:8px; cursor:pointer;
-  }
-  .btn-view-spec:hover{background:var(--ink); color:var(--bone);}
+  .product-card:hover .btn-add-circle{transform:scale(1.1); background:var(--ink);}
 
   /* 4-Pillar Fair Trade Guarantee Section */
   .guarantee-grid-section{
@@ -553,12 +532,9 @@
         <div style="font-size:2.5rem; margin-bottom:0.5rem;">🧶</div>
         <h3 style="font-family:var(--serif); font-size:1.3rem; margin:0 0 0.4rem; font-weight:700;">No Matching Weaves Found</h3>
         <p style="font-size:0.9rem; color:var(--ink-soft); margin:0 0 1.2rem;">Try adjusting your search query or clearing your tribe and fabric category filters to view all 14 handloom weaves.</p>
-        <button class="btn-action" onclick="resetFilters()" style="background:var(--ink); color:var(--bone); border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer;">Reset All Filters 🔄</button>
-      </div>
-
-      <!-- Weave 1: Kuki Saipikhup -->
-      <div class="product-card" data-tribe="Kuki" data-type="Shawl" data-price="3800" data-name="Kuki Saipikhup Shawl">
-        <div class="swatch-container" onclick="openSpecModal('Kuki Saipikhup Shawl', 'Saipikhup Artisan Circle', 'Hiangtam Lamka', '₹3,800', '+919862000001', 'Kuki Traditional Weave', '100% Organic Cotton & Gold Thread', 'Backstrap Loin Loom', '18 Days', 'The iconic Saipikhup shawl represents the quail-footprint diamond pattern, a revered symbol of resilience, agility, and ancestral honor in Kuki tradition.')">
+        <button class="btn-action" onclick="resetFilters()" style="background:var(--ink); color:var(--bone); border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer;">Reset A      <!-- Weave 1: Kuki Saipikhup -->
+      <div class="product-card" data-tribe="Kuki" data-type="Shawl" data-price="3800" data-name="Kuki Saipikhup Shawl" onclick="openSpecModal(this, 'Kuki Saipikhup Shawl', 'Saipikhup Artisan Circle', 'Hiangtam Lamka', '₹3,800', '+919862000001', 'Kuki Traditional Weave', '100% Organic Cotton & Gold Thread', 'Backstrap Loin Loom', '18 Days', 'The iconic Saipikhup shawl represents the quail-footprint diamond pattern, a revered symbol of resilience, agility, and ancestral honor in Kuki tradition.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#8C2C21"/>
             <rect y="0" width="400" height="18" fill="#171512"/>
@@ -574,40 +550,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-kuki">Kuki</span>
-            <span class="badge-chip">Shawl</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Kuki Traditional Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Hiangtam Lamka</span>
-            </div>
-            <h3 class="product-title">Kuki Saipikhup Shawl</h3>
-            <div class="weaver-meta">by Saipikhup Artisan Circle</div>
-            <p class="product-desc">The iconic Saipikhup shawl represents the quail-footprint diamond pattern, a revered symbol of resilience, agility, and ancestral honor in Kuki tradition.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Backstrap Loom</span>
-              <span class="spec-pill">⏱ 18 Days Weave</span>
-              <span class="spec-pill">🧵 Organic Cotton</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,800</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Kuki Saipikhup Shawl', 'Saipikhup Artisan Circle', 'Hiangtam Lamka', '₹3,800', '+919862000001', 'Kuki Traditional Weave', '100% Organic Cotton & Gold Thread', 'Backstrap Loin Loom', '18 Days', 'The iconic Saipikhup shawl represents the quail-footprint diamond pattern, a revered symbol of resilience, agility, and ancestral honor in Kuki tradition.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000001?text=Hello!%20I%20want%20to%20order%20the%20Kuki%20Saipikhup%20Shawl%20(₹3,800).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Kuki Saipikhup Shawl</h3>
+          <div class="product-category-tag">Kuki Handloom · Hiangtam Lamka</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,800</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 2: Kuki Thangsuo -->
-      <div class="product-card" data-tribe="Kuki" data-type="Shawl" data-price="4200" data-name="Kuki Thangsuo Shawl">
-        <div class="swatch-container" onclick="openSpecModal('Kuki Thangsuo Honor Shawl', 'Haokip Handloom Co-op', 'Tuibong', '₹4,200', '+919862000002', 'Kuki Honorific Weave', 'Heavy Cotton & Crimson Silk Lines', 'Frame & Loin Loom', '21 Days', 'The Thangsuo shawl is a high-status honorific weave featuring prominent horizontal crimson, yellow, black, and white bands. Traditionally presented to community leaders and elders.')">
+      <div class="product-card" data-tribe="Kuki" data-type="Shawl" data-price="4200" data-name="Kuki Thangsuo Shawl" onclick="openSpecModal(this, 'Kuki Thangsuo Honor Shawl', 'Haokip Handloom Co-op', 'Tuibong Sector', '₹4,200', '+919862000002', 'Kuki Honorific Weave', 'Heavy Cotton & Crimson Silk Lines', 'Frame & Loin Loom', '21 Days', 'The Thangsuo shawl is a high-status honorific weave featuring prominent horizontal crimson, yellow, black, and white bands. Traditionally presented to community leaders and elders.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#171512"/>
             <rect y="0" width="400" height="26" fill="#B23A2D"/>
@@ -626,40 +583,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-kuki">Kuki</span>
-            <span class="badge-chip">Shawl</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Kuki Honorific Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Tuibong Sector</span>
-            </div>
-            <h3 class="product-title">Kuki Thangsuo Honor Shawl</h3>
-            <div class="weaver-meta">by Haokip Handloom Co-op</div>
-            <p class="product-desc">The Thangsuo shawl is a high-status honorific weave featuring prominent horizontal crimson, yellow, black, and white bands. Traditionally presented to community leaders and elders.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Frame & Loin Loom</span>
-              <span class="spec-pill">⏱ 21 Days Weave</span>
-              <span class="spec-pill">🧵 Crimson Silk</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹4,200</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Kuki Thangsuo Honor Shawl', 'Haokip Handloom Co-op', 'Tuibong', '₹4,200', '+919862000002', 'Kuki Honorific Weave', 'Heavy Cotton & Crimson Silk Lines', 'Frame & Loin Loom', '21 Days', 'The Thangsuo shawl is a high-status honorific weave featuring prominent horizontal crimson, yellow, black, and white bands. Traditionally presented to community leaders and elders.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000002?text=Hello!%20I%20want%20to%20order%20the%20Kuki%20Thangsuo%20Shawl%20(₹4,200).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Kuki Thangsuo Honor Shawl</h3>
+          <div class="product-category-tag">Kuki Handloom · Tuibong Sector</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹4,200</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 3: Paite Puandum -->
-      <div class="product-card" data-tribe="Paite" data-type="Puan" data-price="3400" data-name="Paite Puandum Puan">
-        <div class="swatch-container" onclick="openSpecModal('Paite Puandum Puan', 'Guite Weaving Society', 'Hiangtam Lamka', '₹3,400', '+919862000005', 'Paite Ceremonial Weave', 'Deep Indigo Cotton & Crimson Bands', 'Traditional Loin Loom', '15 Days', 'Puandum features vertical bands of crimson red, forest green, and gold on a deep navy canvas. Revered as an essential ceremonial drape in Paite tradition.')">
+      <div class="product-card" data-tribe="Paite" data-type="Puan" data-price="3400" data-name="Paite Puandum Puan" onclick="openSpecModal(this, 'Paite Puandum Puan', 'Guite Weaving Society', 'Hiangtam Lamka', '₹3,400', '+919862000005', 'Paite Ceremonial Weave', 'Deep Indigo Cotton & Crimson Bands', 'Traditional Loin Loom', '15 Days', 'Puandum features vertical bands of crimson red, forest green, and gold on a deep navy canvas. Revered as an essential ceremonial drape in Paite tradition.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#12151B"/>
             <rect x="30" width="22" height="240" fill="#B23A2D"/>
@@ -674,40 +612,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-paite">Paite</span>
-            <span class="badge-chip">Puan</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Paite Ceremonial Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Hiangtam Lamka</span>
-            </div>
-            <h3 class="product-title">Paite Puandum Puan</h3>
-            <div class="weaver-meta">by Guite Weaving Society</div>
-            <p class="product-desc">Puandum features vertical bands of crimson red, forest green, and gold on a deep navy canvas. Revered as an essential ceremonial drape in Paite tradition.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Traditional Loin Loom</span>
-              <span class="spec-pill">⏱ 15 Days Weave</span>
-              <span class="spec-pill">🧵 Deep Indigo</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,400</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Paite Puandum Puan', 'Guite Weaving Society', 'Hiangtam Lamka', '₹3,400', '+919862000005', 'Paite Ceremonial Weave', 'Deep Indigo Cotton & Crimson Bands', 'Traditional Loin Loom', '15 Days', 'Puandum features vertical bands of crimson red, forest green, and gold on a deep navy canvas. Revered as an essential ceremonial drape in Paite tradition.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000005?text=Hello!%20I%20want%20to%20order%20the%20Paite%20Puandum%20Puan%20(₹3,400).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Paite Puandum Puan</h3>
+          <div class="product-category-tag">Paite Handloom · Hiangtam Lamka</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,400</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 4: Hmar Am -->
-      <div class="product-card" data-tribe="Hmar" data-type="Shawl" data-price="3650" data-name="Hmar Am Shawl">
-        <div class="swatch-container" onclick="openSpecModal('Hmar Am Traditional Shawl', 'Hmar Artisan Collective', 'Rengkai', '₹3,650', '+919862000007', 'Hmar Heritage Weave', 'Thick Handspun Cotton Yarn', 'Loin & Frame Loom', '16 Days', 'Hmar Am is a bold tri-color shawl composed of red, black, and white rectangular block motifs. Woven with thick cotton threads by Rengkai Artisan Collective.')">
+      <div class="product-card" data-tribe="Hmar" data-type="Shawl" data-price="3650" data-name="Hmar Am Shawl" onclick="openSpecModal(this, 'Hmar Am Traditional Shawl', 'Hmar Artisan Collective', 'Rengkai Sector', '₹3,650', '+919862000007', 'Hmar Heritage Weave', 'Thick Handspun Cotton Yarn', 'Loin & Frame Loom', '16 Days', 'Hmar Am is a bold tri-color shawl composed of red, black, and white rectangular block motifs. Woven with thick cotton threads by Rengkai Artisan Collective.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#FAF8F3"/>
             <pattern id="hmaram" width="80" height="80" patternUnits="userSpaceOnUse">
@@ -720,40 +639,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-hmar">Hmar</span>
-            <span class="badge-chip">Shawl</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Hmar Heritage Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Rengkai Sector</span>
-            </div>
-            <h3 class="product-title">Hmar Am Traditional Shawl</h3>
-            <div class="weaver-meta">by Hmar Artisan Collective</div>
-            <p class="product-desc">Hmar Am is a bold tri-color shawl composed of red, black, and white rectangular block motifs. Woven with thick cotton threads by Rengkai Artisan Collective.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Tri-Color Blocks</span>
-              <span class="spec-pill">⏱ 16 Days Weave</span>
-              <span class="spec-pill">🧵 Handspun Cotton</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,650</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Hmar Am Traditional Shawl', 'Hmar Artisan Collective', 'Rengkai', '₹3,650', '+919862000007', 'Hmar Heritage Weave', 'Thick Handspun Cotton Yarn', 'Loin & Frame Loom', '16 Days', 'Hmar Am is a bold tri-color shawl composed of red, black, and white rectangular block motifs. Woven with thick cotton threads by Rengkai Artisan Collective.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000007?text=Hello!%20I%20want%20to%20order%20the%20Hmar%20Am%20Shawl%20(₹3,650).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Hmar Am Traditional Shawl</h3>
+          <div class="product-category-tag">Hmar Handloom · Rengkai Sector</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,650</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 5: Vaiphei Khiangte -->
-      <div class="product-card" data-tribe="Vaiphei" data-type="Puan" data-price="3200" data-name="Vaiphei Khiangte Puan">
-        <div class="swatch-container" onclick="openSpecModal('Vaiphei Khiangte Puan', 'Vaiphei Handloom Group', 'Tuibong', '₹3,200', '+919862000009', 'Vaiphei Traditional Weave', 'Fine Gold Thread & Crimson Cotton', 'Loin Loom', '14 Days', 'Khiangte Puan features fine gold thread lines woven onto a rich crimson canvas. Handwoven by master Vaiphei weavers.')">
+      <div class="product-card" data-tribe="Vaiphei" data-type="Puan" data-price="3200" data-name="Vaiphei Khiangte Puan" onclick="openSpecModal(this, 'Vaiphei Khiangte Puan', 'Vaiphei Handloom Group', 'Tuibong Sector', '₹3,200', '+919862000009', 'Vaiphei Traditional Weave', 'Fine Gold Thread & Crimson Cotton', 'Loin Loom', '14 Days', 'Khiangte Puan features fine gold thread lines woven onto a rich crimson canvas. Handwoven by master Vaiphei weavers with exquisite attention to border symmetry.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#8C2C21"/>
             <pattern id="khiangte" width="24" height="240" patternUnits="userSpaceOnUse">
@@ -765,40 +665,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-vaiphei">Vaiphei</span>
-            <span class="badge-chip">Puan</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Vaiphei Traditional Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Tuibong Sector</span>
-            </div>
-            <h3 class="product-title">Vaiphei Khiangte Puan</h3>
-            <div class="weaver-meta">by Vaiphei Handloom Group</div>
-            <p class="product-desc">Khiangte Puan features fine gold thread lines woven onto a rich crimson canvas. Handwoven by master Vaiphei weavers with exquisite attention to border symmetry.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Gold Thread Lines</span>
-              <span class="spec-pill">⏱ 14 Days Weave</span>
-              <span class="spec-pill">🧵 Crimson Cotton</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,200</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Vaiphei Khiangte Puan', 'Vaiphei Handloom Group', 'Tuibong', '₹3,200', '+919862000009', 'Vaiphei Traditional Weave', 'Fine Gold Thread & Crimson Cotton', 'Loin Loom', '14 Days', 'Khiangte Puan features fine gold thread lines woven onto a rich crimson canvas. Handwoven by master Vaiphei weavers.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000009?text=Hello!%20I%20want%20to%20order%20the%20Vaiphei%20Khiangte%20Puan%20(₹3,200).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Vaiphei Khiangte Puan</h3>
+          <div class="product-category-tag">Vaiphei Handloom · Tuibong Sector</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,200</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 6: Zou Puan -->
-      <div class="product-card" data-tribe="Zou" data-type="Puan" data-price="2950" data-name="Zou Highland Blue Puan">
-        <div class="swatch-container" onclick="openSpecModal('Zou Highland Blue Puan', 'Zou Loom Co-op', 'New Lamka', '₹2,950', '+919862000010', 'Zou Traditional Weave', 'Highland Navy Cotton & Red Accents', 'Loin Loom', '13 Days', 'Distinguished Zou traditional drape featuring navy highland blue canvas with green and crimson accent stripes inspired by highland heritage.')">
+      <div class="product-card" data-tribe="Zou" data-type="Puan" data-price="2950" data-name="Zou Highland Blue Puan" onclick="openSpecModal(this, 'Zou Highland Blue Puan', 'Zou Loom Co-op', 'New Lamka', '₹2,950', '+919862000010', 'Zou Traditional Weave', 'Highland Navy Cotton & Red Accents', 'Loin Loom', '13 Days', 'Distinguished Zou traditional drape featuring navy highland blue canvas with green and crimson accent stripes inspired by highland ancestral heritage.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#1C293A"/>
             <rect x="50" width="14" height="240" fill="#3F5C48"/>
@@ -809,40 +690,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-zou">Zou</span>
-            <span class="badge-chip">Puan</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Zou Traditional Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">New Lamka</span>
-            </div>
-            <h3 class="product-title">Zou Highland Blue Puan</h3>
-            <div class="weaver-meta">by Zou Loom Co-op</div>
-            <p class="product-desc">Distinguished Zou traditional drape featuring navy highland blue canvas with green and crimson accent stripes inspired by highland ancestral heritage.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Highland Blue Indigo</span>
-              <span class="spec-pill">⏱ 13 Days Weave</span>
-              <span class="spec-pill">🧵 Loin Loom</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹2,950</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Zou Highland Blue Puan', 'Zou Loom Co-op', 'New Lamka', '₹2,950', '+919862000010', 'Zou Traditional Weave', 'Highland Navy Cotton & Red Accents', 'Loin Loom', '13 Days', 'Distinguished Zou traditional drape featuring navy highland blue canvas with green and crimson accent stripes inspired by highland heritage.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000010?text=Hello!%20I%20want%20to%20order%20the%20Zou%20Highland%20Puan%20(₹2,950).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Zou Highland Blue Puan</h3>
+          <div class="product-category-tag">Zou Handloom · New Lamka</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹2,950</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 7: Gangte Puanchei -->
-      <div class="product-card" data-tribe="Gangte" data-type="Wrap" data-price="3100" data-name="Gangte Puanchei Wrap">
-        <div class="swatch-container" onclick="openSpecModal('Gangte Puanchei Wrap', 'Gangte Artisans Circle', 'Tuibong', '₹3,100', '+919862000011', 'Gangte Festive Weave', 'Rich Crimson Cotton & Ivory Borders', 'Backstrap Loom', '15 Days', 'Traditional Gangte festive wrap with rich crimson body and handcrafted ivory-charcoal border stripes woven by Gangte Artisans Circle.')">
+      <div class="product-card" data-tribe="Gangte" data-type="Wrap" data-price="3100" data-name="Gangte Puanchei Wrap" onclick="openSpecModal(this, 'Gangte Puanchei Wrap', 'Gangte Artisans Circle', 'Tuibong Sector', '₹3,100', '+919862000011', 'Gangte Festive Weave', 'Rich Crimson Cotton & Ivory Borders', 'Backstrap Loom', '15 Days', 'Traditional Gangte festive wrap with rich crimson body and handcrafted ivory-charcoal border stripes woven by Gangte Artisans Circle.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#B23A2D"/>
             <rect y="16" width="400" height="14" fill="#171512"/>
@@ -852,40 +714,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-gangte">Gangte</span>
-            <span class="badge-chip">Wrap</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Gangte Festive Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Tuibong Sector</span>
-            </div>
-            <h3 class="product-title">Gangte Puanchei Wrap</h3>
-            <div class="weaver-meta">by Gangte Artisans Circle</div>
-            <p class="product-desc">Traditional Gangte festive wrap with rich crimson body and handcrafted ivory-charcoal border stripes woven by Gangte Artisans Circle.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Festive Crimson Wrap</span>
-              <span class="spec-pill">⏱ 15 Days Weave</span>
-              <span class="spec-pill">🧵 Backstrap Loom</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,100</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Gangte Puanchei Wrap', 'Gangte Artisans Circle', 'Tuibong', '₹3,100', '+919862000011', 'Gangte Festive Weave', 'Rich Crimson Cotton & Ivory Borders', 'Backstrap Loom', '15 Days', 'Traditional Gangte festive wrap with rich crimson body and handcrafted ivory-charcoal border stripes woven by Gangte Artisans Circle.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000011?text=Hello!%20I%20want%20to%20order%20the%20Gangte%20Puanchei%20Wrap%20(₹3,100).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Gangte Puanchei Wrap</h3>
+          <div class="product-category-tag">Gangte Handloom · Tuibong Sector</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,100</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 8: Simte Puanchei -->
-      <div class="product-card" data-tribe="Simte" data-type="Wrap" data-price="3000" data-name="Simte Puanchei Wrap">
-        <div class="swatch-container" onclick="openSpecModal('Simte Puanchei Wrap', 'Simte Weavers Society', 'New Lamka', '₹3,000', '+919862000012', 'Simte Traditional Weave', 'Gold & Crimson Borders on Charcoal', 'Loin Loom', '14 Days', 'Finely woven Simte ceremonial drape featuring gold and crimson accent borders on deep charcoal black canvas.')">
+      <div class="product-card" data-tribe="Simte" data-type="Wrap" data-price="3000" data-name="Simte Puanchei Wrap" onclick="openSpecModal(this, 'Simte Puanchei Wrap', 'Simte Weavers Society', 'New Lamka', '₹3,000', '+919862000012', 'Simte Traditional Weave', 'Gold & Crimson Borders on Charcoal', 'Loin Loom', '14 Days', 'Finely woven Simte ceremonial drape featuring gold and crimson accent borders on deep charcoal black canvas.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#171512"/>
             <rect y="170" width="400" height="16" fill="#D9A441"/>
@@ -893,40 +736,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-simte">Simte</span>
-            <span class="badge-chip">Wrap</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Simte Traditional Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">New Lamka</span>
-            </div>
-            <h3 class="product-title">Simte Puanchei Wrap</h3>
-            <div class="weaver-meta">by Simte Weavers Society</div>
-            <p class="product-desc">Finely woven Simte ceremonial drape featuring gold and crimson accent borders on deep charcoal black canvas.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Charcoal Gold Weave</span>
-              <span class="spec-pill">⏱ 14 Days Weave</span>
-              <span class="spec-pill">🧵 Loin Loom</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,000</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Simte Puanchei Wrap', 'Simte Weavers Society', 'New Lamka', '₹3,000', '+919862000012', 'Simte Traditional Weave', 'Gold & Crimson Borders on Charcoal', 'Loin Loom', '14 Days', 'Finely woven Simte ceremonial drape featuring gold and crimson accent borders on deep charcoal black canvas.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000012?text=Hello!%20I%20want%20to%20order%20the%20Simte%20Puanchei%20Wrap%20(₹3,000).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Simte Puanchei Wrap</h3>
+          <div class="product-category-tag">Simte Handloom · New Lamka</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,000</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 9: Tedim Tangcip -->
-      <div class="product-card" data-tribe="Tedim Chin" data-type="Puan" data-price="3300" data-name="Tedim Tangcip Puan">
-        <div class="swatch-container" onclick="openSpecModal('Tedim Tangcip Puan', 'Tedim Handloom Unit', 'Lamka', '₹3,300', '+919862000013', 'Tedim Chin Heritage Weave', 'Ivory Cotton & Gold Diamond Motif', 'Traditional Loin Loom', '16 Days', 'Intricate Tedim Chin geometric diamond pattern woven with indigo and gold accents on ivory cotton fabric.')">
+      <div class="product-card" data-tribe="Tedim Chin" data-type="Puan" data-price="3300" data-name="Tedim Tangcip Puan" onclick="openSpecModal(this, 'Tedim Tangcip Puan', 'Tedim Handloom Unit', 'Lamka Sector', '₹3,300', '+919862000013', 'Tedim Chin Heritage Weave', 'Ivory Cotton & Gold Diamond Motif', 'Traditional Loin Loom', '16 Days', 'Intricate Tedim Chin geometric diamond pattern woven with indigo and gold accents on ivory cotton fabric.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#FAF8F3"/>
             <pattern id="htangcipfull" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -937,40 +761,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-tedim">Tedim Chin</span>
-            <span class="badge-chip">Puan</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Tedim Chin Heritage Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Lamka Sector</span>
-            </div>
-            <h3 class="product-title">Tedim Tangcip Puan</h3>
-            <div class="weaver-meta">by Tedim Handloom Unit</div>
-            <p class="product-desc">Intricate Tedim Chin geometric diamond pattern woven with indigo and gold accents on ivory cotton fabric.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Geometric Diamond</span>
-              <span class="spec-pill">⏱ 16 Days Weave</span>
-              <span class="spec-pill">🧵 Ivory Cotton</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,300</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Tedim Tangcip Puan', 'Tedim Handloom Unit', 'Lamka', '₹3,300', '+919862000013', 'Tedim Chin Heritage Weave', 'Ivory Cotton & Gold Diamond Motif', 'Traditional Loin Loom', '16 Days', 'Intricate Tedim Chin geometric diamond pattern woven with indigo and gold accents on ivory cotton fabric.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000013?text=Hello!%20I%20want%20to%20order%20the%20Tedim%20Tangcip%20Puan%20(₹3,300).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Tedim Tangcip Puan</h3>
+          <div class="product-category-tag">Tedim Chin Handloom · Lamka</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,300</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 10: Kom Tribal Wrap -->
-      <div class="product-card" data-tribe="Kom" data-type="Wrap" data-price="2850" data-name="Kom Traditional Wrap">
-        <div class="swatch-container" onclick="openSpecModal('Kom Traditional Wrap', 'Kom Artisan Circle', 'Churachandpur', '₹2,850', '+919862000014', 'Kom Traditional Weave', 'Crimson Canvas & Zig-Zag Border', 'Loin Loom', '12 Days', 'Authentic Kom tribal wrap adorned with traditional zig-zag wave border motifs and ancestral crimson-black colors.')">
+      <div class="product-card" data-tribe="Kom" data-type="Wrap" data-price="2850" data-name="Kom Traditional Wrap" onclick="openSpecModal(this, 'Kom Traditional Wrap', 'Kom Artisan Circle', 'Khoini Village', '₹2,850', '+919862000014', 'Kom Traditional Weave', 'Crimson Canvas & Zig-Zag Border', 'Loin Loom', '12 Days', 'Authentic Kom tribal wrap adorned with traditional zig-zag wave border motifs and ancestral crimson-black colors.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#8C2C21"/>
             <path d="M0,24 L15,8 L30,24 L45,8 L60,24 L75,8 L90,24 L105,8 L120,24 L135,8 L150,24 L165,8 L180,24 L195,8 L210,24 L225,8 L240,24 L255,8 L270,24 L285,8 L300,24 L315,8 L330,24 L345,8 L360,24 L375,8 L390,24 L405,8" fill="none" stroke="#171512" stroke-width="4"/>
@@ -978,40 +783,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-kom">Kom</span>
-            <span class="badge-chip">Wrap</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Kom Traditional Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Khoini Village</span>
-            </div>
-            <h3 class="product-title">Kom Traditional Wrap</h3>
-            <div class="weaver-meta">by Kom Artisan Circle</div>
-            <p class="product-desc">Authentic Kom tribal wrap adorned with traditional zig-zag wave border motifs and ancestral crimson-black colors.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Zig-Zag Wave Motif</span>
-              <span class="spec-pill">⏱ 12 Days Weave</span>
-              <span class="spec-pill">🧵 Loin Loom</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹2,850</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Kom Traditional Wrap', 'Kom Artisan Circle', 'Churachandpur', '₹2,850', '+919862000014', 'Kom Traditional Weave', 'Crimson Canvas & Zig-Zag Border', 'Loin Loom', '12 Days', 'Authentic Kom tribal wrap adorned with traditional zig-zag wave border motifs and ancestral crimson-black colors.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000014?text=Hello!%20I%20want%20to%20order%20the%20Kom%20Tribal%20Wrap%20(₹2,850).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Kom Traditional Wrap</h3>
+          <div class="product-category-tag">Kom Handloom · Khoini Village</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹2,850</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 11: Khamtang Puan -->
-      <div class="product-card" data-tribe="Kuki" data-type="Puan" data-price="2900" data-name="Khamtang Puan (Ponmong)">
-        <div class="swatch-container" onclick="openSpecModal('Khamtang Puan (Ponmong)', 'Kuki Women SHG', 'New Lamka', '₹2,900', '+919862000003', 'Kuki Formal Wear', 'Dark Indigo Black Cotton', 'Backstrap Loin Loom', '14 Days', 'Khamtang Puan (Ponmong) features dark indigo black canvas with crisp crimson and ivory border lines. Classic formal attire.')">
+      <div class="product-card" data-tribe="Kuki" data-type="Puan" data-price="2900" data-name="Khamtang Puan (Ponmong)" onclick="openSpecModal(this, 'Khamtang Puan (Ponmong)', 'Kuki Women SHG', 'New Lamka', '₹2,900', '+919862000003', 'Kuki Formal Wear', 'Dark Indigo Black Cotton', 'Backstrap Loin Loom', '14 Days', 'Khamtang Puan (Ponmong) features dark indigo black canvas with crisp crimson and ivory border lines. Classic formal attire.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#171512"/>
             <rect y="16" width="400" height="8" fill="#B23A2D"/>
@@ -1021,40 +807,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-kuki">Kuki</span>
-            <span class="badge-chip">Puan</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Kuki Formal Wear</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">New Lamka</span>
-            </div>
-            <h3 class="product-title">Khamtang Puan (Ponmong)</h3>
-            <div class="weaver-meta">by Kuki Women SHG</div>
-            <p class="product-desc">Khamtang Puan (Ponmong) features dark indigo black canvas with crisp crimson and ivory border lines. Classic formal attire.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Formal Indigo Puan</span>
-              <span class="spec-pill">⏱ 14 Days Weave</span>
-              <span class="spec-pill">🧵 Backstrap Loom</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹2,900</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Khamtang Puan (Ponmong)', 'Kuki Women SHG', 'New Lamka', '₹2,900', '+919862000003', 'Kuki Formal Wear', 'Dark Indigo Black Cotton', 'Backstrap Loin Loom', '14 Days', 'Khamtang Puan (Ponmong) features dark indigo black canvas with crisp crimson and ivory border lines. Classic formal attire.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000003?text=Hello!%20I%20want%20to%20order%20the%20Khamtang%20Puan%20(₹2,900).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Khamtang Puan (Ponmong)</h3>
+          <div class="product-category-tag">Kuki Handloom · New Lamka</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹2,900</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 12: Paite Khamtang -->
-      <div class="product-card" data-tribe="Paite" data-type="Puan" data-price="3150" data-name="Paite Khamtang Puan">
-        <div class="swatch-container" onclick="openSpecModal('Paite Khamtang Puan', 'Zomi Loom Society', 'New Lamka', '₹3,150', '+919862000006', 'Paite Weave', 'Navy Indigo Cotton & Gold Lines', 'Loin Loom', '15 Days', 'Traditional Paite dark indigo puan featuring crimson and fine gold accent border lines. Handwoven by Zomi Loom Society.')">
+      <div class="product-card" data-tribe="Paite" data-type="Puan" data-price="3150" data-name="Paite Khamtang Puan" onclick="openSpecModal(this, 'Paite Khamtang Puan', 'Zomi Loom Society', 'New Lamka', '₹3,150', '+919862000006', 'Paite Weave', 'Navy Indigo Cotton & Gold Lines', 'Loin Loom', '15 Days', 'Traditional Paite dark indigo puan featuring crimson and fine gold accent border lines. Handwoven by Zomi Loom Society.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#171512"/>
             <rect x="40" width="16" height="240" fill="#B23A2D"/>
@@ -1063,40 +830,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-paite">Paite</span>
-            <span class="badge-chip">Puan</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Paite Heritage Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">New Lamka</span>
-            </div>
-            <h3 class="product-title">Paite Khamtang Puan</h3>
-            <div class="weaver-meta">by Zomi Loom Society</div>
-            <p class="product-desc">Traditional Paite dark indigo puan featuring crimson and fine gold accent border lines. Handwoven by Zomi Loom Society.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Navy Gold Borders</span>
-              <span class="spec-pill">⏱ 15 Days Weave</span>
-              <span class="spec-pill">🧵 Loin Loom</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,150</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Paite Khamtang Puan', 'Zomi Loom Society', 'New Lamka', '₹3,150', '+919862000006', 'Paite Weave', 'Navy Indigo Cotton & Gold Lines', 'Loin Loom', '15 Days', 'Traditional Paite dark indigo puan featuring crimson and fine gold accent border lines. Handwoven by Zomi Loom Society.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000006?text=Hello!%20I%20want%20to%20order%20the%20Paite%20Khamtang%20Puan%20(₹3,150).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Paite Khamtang Puan</h3>
+          <div class="product-category-tag">Paite Handloom · New Lamka</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,150</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 13: Hmar Thangsuo -->
-      <div class="product-card" data-tribe="Hmar" data-type="Shawl" data-price="3900" data-name="Hmar Thangsuo Shawl">
-        <div class="swatch-container" onclick="openSpecModal('Hmar Thangsuo Shawl', 'Rengkai Weavers Association', 'Rengkai', '₹3,900', '+919862000008', 'Hmar Honorific Weave', 'Dark Green & Crimson Cotton', 'Loin Loom', '19 Days', 'Honorific Hmar shawl woven with dark green and crimson stripes. Symbol of community achievement and respect.')">
+      <div class="product-card" data-tribe="Hmar" data-type="Shawl" data-price="3900" data-name="Hmar Thangsuo Shawl" onclick="openSpecModal(this, 'Hmar Thangsuo Shawl', 'Rengkai Weavers Association', 'Rengkai Sector', '₹3,900', '+919862000008', 'Hmar Honorific Weave', 'Dark Green & Crimson Cotton', 'Loin Loom', '19 Days', 'Honorific Hmar shawl woven with dark green and crimson stripes. Symbol of community achievement and respect.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#171512"/>
             <rect y="10" width="400" height="20" fill="#B23A2D"/>
@@ -1106,40 +854,21 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-hmar">Hmar</span>
-            <span class="badge-chip">Shawl</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Hmar Honorific Weave</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Rengkai Sector</span>
-            </div>
-            <h3 class="product-title">Hmar Thangsuo Honor Shawl</h3>
-            <div class="weaver-meta">by Rengkai Weavers Association</div>
-            <p class="product-desc">Honorific Hmar shawl woven with dark green and crimson stripes. Symbol of community achievement, tribal status, and respect.</p>
-          </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Honorific Green Striped</span>
-              <span class="spec-pill">⏱ 19 Days Weave</span>
-              <span class="spec-pill">🧵 Loin Loom</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹3,900</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Hmar Thangsuo Shawl', 'Rengkai Weavers Association', 'Rengkai', '₹3,900', '+919862000008', 'Hmar Honorific Weave', 'Dark Green & Crimson Cotton', 'Loin Loom', '19 Days', 'Honorific Hmar shawl woven with dark green and crimson stripes. Symbol of community achievement and respect.')">Full Specs 📜</button>
-                <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000008?text=Hello!%20I%20want%20to%20order%20the%20Hmar%20Thangsuo%20Shawl%20(₹3,900).">💬 Order</a>
-              </div>
-            </div>
+          <h3 class="product-title">Hmar Thangsuo Honor Shawl</h3>
+          <div class="product-category-tag">Hmar Handloom · Rengkai Sector</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹3,900</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
         </div>
       </div>
 
       <!-- Weave 14: Kuki Del Puan Wrap -->
-      <div class="product-card" data-tribe="Kuki" data-type="Wrap" data-price="2450" data-name="Kuki Del Puan Wrap">
-        <div class="swatch-container" onclick="openSpecModal('Kuki Del Puan Wrap', 'Independent Weaver', 'Kangvai', '₹2,450', '+919862000004', 'Kuki Traditional Wrap', 'Ivory Cotton & Crimson Diamond', 'Loin Loom', '11 Days', 'Del Puan is a decorative traditional wrap woven with geometric ancestral symbols. Handwoven by independent weaver in Kangvai.')">
+      <div class="product-card" data-tribe="Kuki" data-type="Wrap" data-price="2450" data-name="Kuki Del Puan Wrap" onclick="openSpecModal(this, 'Kuki Del Puan Wrap', 'Independent Weaver', 'Kangvai Sector', '₹2,450', '+919862000004', 'Kuki Traditional Wrap', 'Ivory Cotton & Crimson Diamond', 'Loin Loom', '11 Days', 'Del Puan is a decorative traditional wrap woven with geometric ancestral symbols. Handwoven by independent weaver in Kangvai.')">
+        <div class="swatch-container">
           <svg viewBox="0 0 400 240" preserveAspectRatio="none">
             <rect width="400" height="240" fill="#FAF8F3"/>
             <pattern id="delpuan" width="30" height="30" patternUnits="userSpaceOnUse">
@@ -1150,30 +879,17 @@
           </svg>
           <div class="badge-overlay">
             <span class="badge-chip badge-kuki">Kuki</span>
-            <span class="badge-chip">Wrap</span>
           </div>
-          <button class="story-quick-btn">Motif Legend 📜</button>
         </div>
         <div class="product-body">
-          <div>
-            <div class="product-eyebrow-row">
-              <span class="product-category-tag">Kuki Traditional Wrap</span>
-              <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-soft);">Kangvai Sector</span>
-            </div>
-            <h3 class="product-title">Kuki Del Puan Wrap</h3>
-            <div class="weaver-meta">by Independent Weaver</div>
-            <p class="product-desc">Del Puan is a decorative traditional wrap woven with geometric ancestral symbols. Handwoven by independent artisan weaver in Kangvai.</p>
+          <h3 class="product-title">Kuki Del Puan Wrap</h3>
+          <div class="product-category-tag">Kuki Handloom · Kangvai Sector</div>
+          <div class="price-action-row">
+            <span class="price-tag">₹2,450</span>
+            <button class="btn-add-circle" title="View Details & Order">+</button>
           </div>
-          <div>
-            <div class="spec-strip">
-              <span class="spec-pill">🧶 Geometric Diamond</span>
-              <span class="spec-pill">⏱ 11 Days Weave</span>
-              <span class="spec-pill">🧵 Ivory Cotton</span>
-            </div>
-            <div class="price-action-row">
-              <span class="price-tag">₹2,450</span>
-              <div style="display:flex; gap:0.4rem;">
-                <button class="btn-view-spec" onclick="openSpecModal('Kuki Del Puan Wrap', 'Independent Weaver', 'Kangvai', '₹2,450', '+919862000004', 'Kuki Traditional Wrap', 'Ivory Cotton & Crimson Diamond', 'Loin Loom', '11 Days', 'Del Puan is a decorative traditional wrap woven with geometric ancestral symbols. Handwoven by independent weaver in Kangvai.')">Full Specs 📜</button>
+        </div>
+      </div>wrap woven with geometric ancestral symbols. Handwoven by independent weaver in Kangvai.')">Full Specs 📜</button>
                 <a class="btn-order-wa" target="_blank" href="https://wa.me/919862000004?text=Hello!%20I%20want%20to%20order%20the%20Kuki%20Del%20Puan%20Wrap%20(₹2,450).">💬 Order</a>
               </div>
             </div>
@@ -1217,29 +933,42 @@
     </div>
   </main>
 
-  <!-- Interactive Specifications & Motif Modal -->
+  <!-- Interactive Product Detail & Story Modal -->
   <div class="modal-overlay" id="specModal">
-    <div class="modal-card">
+    <div class="modal-card spec-modal-card" style="max-width:520px; padding:1.2rem; border-radius:20px;">
       <button class="modal-close" onclick="closeModals()">&times;</button>
-      <span class="eyebrow" style="color:var(--gold);" id="modalTribeTag">Cultural Heritage Motif</span>
-      <h2 id="modalItemTitle" style="margin:0.3rem 0 0.2rem; font-family:var(--serif); font-size:1.4rem;">Weave Title</h2>
-      <div id="modalWeaverMeta" style="font-size:0.85rem; color:var(--ink-soft); margin-bottom:1rem;">by Artisan Group</div>
-
-      <div class="spec-grid">
-        <div>🧶 <strong>Loom Type:</strong> <span id="modalLoom">Backstrap Loin Loom</span></div>
-        <div>🧵 <strong>Yarn Material:</strong> <span id="modalYarn">100% Organic Cotton</span></div>
-        <div>⏱ <strong>Time to Weave:</strong> <span id="modalTime">15 Days</span></div>
-        <div>💰 <strong>Artisan Price:</strong> <span id="modalPrice" style="color:var(--red-deep); font-weight:700;">₹3,800</span></div>
+      
+      <!-- Product Swatch Image Container -->
+      <div id="modalSwatchBox" style="width:100%; height:200px; border-radius:14px; overflow:hidden; margin-bottom:1rem; background:#F6F4EF; display:flex; align-items:center; justify-content:center;">
       </div>
 
-      <div style="margin-bottom:1.5rem;">
-        <h4 style="margin:0 0 0.4rem; font-family:var(--serif); font-size:1.05rem;">Cultural Motif & Ancestral Legend:</h4>
-        <p id="modalStoryBody" style="font-size:0.9rem; color:var(--ink-soft); line-height:1.6; margin:0;"></p>
+      <!-- Title & Price Header -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.8rem; margin-bottom:0.3rem;">
+        <div>
+          <span class="eyebrow" style="color:var(--gold); display:inline-block; margin-bottom:0.15rem;" id="modalTribeTag">Cultural Heritage Weave</span>
+          <h2 id="modalItemTitle" style="margin:0; font-family:var(--serif); font-size:1.35rem; font-weight:800; color:var(--ink);">Weave Title</h2>
+          <div id="modalWeaverMeta" style="font-size:0.82rem; color:var(--ink-soft); font-weight:600; margin-top:0.15rem;">by Artisan Group</div>
+        </div>
+        <div id="modalPrice" style="font-size:1.35rem; font-weight:800; color:var(--red-deep); font-family:var(--mono);">₹3,800</div>
       </div>
 
-      <div style="display:flex; gap:0.8rem;">
-        <a id="modalWaBtn" target="_blank" style="flex:1; background:#25D366; color:#fff; padding:0.85rem; border-radius:8px; text-align:center; font-weight:700; text-decoration:none;">💬 Order via WhatsApp (Direct to Weaver)</a>
+      <!-- Specs Pills Strip -->
+      <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin:0.8rem 0 1rem;">
+        <span class="spec-pill" id="modalLoom" style="font-size:0.75rem; background:var(--paper); border:1px solid var(--line); padding:0.25rem 0.6rem; border-radius:99px;">🧶 Backstrap Loom</span>
+        <span class="spec-pill" id="modalYarn" style="font-size:0.75rem; background:var(--paper); border:1px solid var(--line); padding:0.25rem 0.6rem; border-radius:99px;">🧵 Organic Cotton</span>
+        <span class="spec-pill" id="modalTime" style="font-size:0.75rem; background:var(--paper); border:1px solid var(--line); padding:0.25rem 0.6rem; border-radius:99px;">⏱ 15 Days</span>
       </div>
+
+      <!-- Full Description & Cultural Motif Story Under Product Image -->
+      <div style="background:var(--paper); border:1px solid var(--line); padding:0.9rem 1rem; border-radius:12px; margin-bottom:1.2rem;">
+        <h4 style="margin:0 0 0.35rem; font-family:var(--serif); font-size:0.95rem; font-weight:700; color:var(--ink);">Description & Cultural Motif Legend:</h4>
+        <p id="modalStoryBody" style="font-size:0.86rem; color:var(--ink-soft); line-height:1.55; margin:0;"></p>
+      </div>
+
+      <!-- Fixed WhatsApp Order Button -->
+      <a id="modalWaBtn" target="_blank" style="width:100%; min-height:46px; background:#25D366; color:#ffffff; font-weight:700; font-size:0.9rem; border-radius:12px; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:0.5rem; box-shadow:0 6px 18px rgba(37,211,102,0.25);">
+        💬 Order via WhatsApp (Direct to Weaver)
+      </a>
     </div>
   </div>
 
@@ -1435,21 +1164,40 @@
   }
 
   // Modal Spec Viewer
-  function openSpecModal(title, weaver, location, price, phone, tribe, yarn, loom, time, story){
+  function openSpecModal(cardElemOrTitle, weaver, location, price, phone, tribe, yarn, loom, time, story){
+    let title = cardElemOrTitle;
+    let actualStory = story;
+
+    if (typeof cardElemOrTitle === 'object' && cardElemOrTitle !== null) {
+      const svg = cardElemOrTitle.querySelector('.swatch-container svg');
+      if (svg) {
+        document.getElementById('modalSwatchBox').innerHTML = svg.outerHTML;
+      }
+      title = weaver;
+      weaver = location;
+      location = price;
+      price = phone;
+      phone = tribe;
+      tribe = yarn;
+      yarn = loom;
+      loom = time;
+      time = story;
+      actualStory = arguments[10] || '';
+    }
+
     document.getElementById('modalItemTitle').innerText = title;
     document.getElementById('modalWeaverMeta').innerText = 'by ' + weaver + ' · ' + location;
     document.getElementById('modalPrice').innerText = price;
     document.getElementById('modalTribeTag').innerText = tribe;
-    document.getElementById('modalYarn').innerText = yarn;
-    document.getElementById('modalLoom').innerText = loom;
-    document.getElementById('modalTime').innerText = time;
-    document.getElementById('modalStoryBody').innerText = story;
+    document.getElementById('modalYarn').innerText = '🧵 Material: ' + yarn;
+    document.getElementById('modalLoom').innerText = '🧶 Loom: ' + loom;
+    document.getElementById('modalTime').innerText = '⏱ Time: ' + time;
+    document.getElementById('modalStoryBody').innerText = actualStory;
 
-    const rawPhone = phone.replace(/[^0-9]/g, '');
+    const rawPhone = (phone || '').replace(/[^0-9]/g, '');
     document.getElementById('modalWaBtn').href = 'https://wa.me/' + (rawPhone.length === 10 ? '91' + rawPhone : rawPhone) + '?text=' + encodeURIComponent('Hello! I would like to order "' + title + '" (' + price + ') from Lamka Hub Handloom Store.');
 
     document.getElementById('specModal').classList.add('open');
-    showToast('Loaded weave specifications for ' + title, 'info');
   }
 
   function closeModals(){
