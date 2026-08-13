@@ -1,10 +1,10 @@
 /* ==========================================================================
-   LAMKA HUB — HORIZONTAL SCROLLING CATEGORIES & MOBILE WEBAPP STYLESHEET
+   LAMKA HUB — COMPACT NATIVE MOBILE APP DESIGN SYSTEM
    Targets: Mobile Viewports (<= 768px & <= 480px) and Tablets (<= 1024px)
    Desktop layout (width > 1024px) remains 100% UNTOUCHED and pristine.
    ========================================================================== */
 
-/* Prevent horizontal scroll leakage */
+/* Prevent horizontal overflow */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
@@ -23,7 +23,7 @@ input, select, textarea {
 
 @media (max-width: 768px) {
   body {
-    padding-bottom: 64px !important; /* Space for fixed bottom app dock */
+    padding-bottom: 60px !important; /* Space for fixed bottom app dock */
   }
 
   .mobile-app-dock {
@@ -32,16 +32,16 @@ input, select, textarea {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 56px;
-    background: rgba(255, 255, 255, 0.97);
+    height: 54px;
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid rgba(23, 21, 18, 0.1);
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.08);
     z-index: 999;
     align-items: center;
     justify-content: space-around;
-    padding: 0 0.2rem;
+    padding: 0 0.1rem;
   }
 
   .dock-item {
@@ -55,7 +55,7 @@ input, select, textarea {
     color: var(--ink-soft, #2a2620);
     text-decoration: none;
     font-family: var(--sans, sans-serif);
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     font-weight: 600;
     transition: all 0.15s ease;
     position: relative;
@@ -63,8 +63,8 @@ input, select, textarea {
   }
 
   .dock-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     fill: currentColor;
     transition: transform 0.15s ease;
   }
@@ -86,7 +86,7 @@ input, select, textarea {
     content: "";
     position: absolute;
     top: 0;
-    width: 22px;
+    width: 20px;
     height: 3px;
     background: var(--red, #B23A2D);
     border-radius: 0 0 3px 3px;
@@ -102,33 +102,33 @@ input, select, textarea {
   }
   
   .app-section, .store-section, .highlight-section {
-    padding: 2rem 1rem;
+    padding: 1.8rem 1rem;
   }
 
   .handloom-grid, .catalog-grid, .product-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1.2rem !important;
+    gap: 1rem !important;
   }
 
   .dir-grid, .notice-grid, .notice-board-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.2rem !important;
+    gap: 1rem !important;
   }
 
   .footer-grid {
     grid-template-columns: 1fr 1fr !important;
-    gap: 1.5rem !important;
+    gap: 1.4rem !important;
   }
 }
 
 /* --------------------------------------------------------------------------
-   2. HORIZONTAL CATEGORY SCROLLING & MOBILE WEBAPP OVERHAUL (<= 768px)
+   2. COMPACT NATIVE MOBILE APP DESIGN SYSTEM (<= 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
 
-  /* STICKY APP HEADER */
+  /* STICKY COMPACT APP HEADER BAR */
   .site-header {
-    padding: 0.55rem 0.9rem !important;
+    padding: 0.5rem 0.8rem !important;
     position: sticky;
     top: 0;
     z-index: 99;
@@ -139,22 +139,22 @@ input, select, textarea {
   }
 
   .logo-emblem {
-    width: 38px !important;
-    height: 38px !important;
-    flex: 0 0 38px !important;
+    width: 36px !important;
+    height: 36px !important;
+    flex: 0 0 36px !important;
   }
 
   .brand-title {
-    font-size: 1.2rem !important;
+    font-size: 1.15rem !important;
   }
 
   .brand-sub {
-    font-size: 0.46rem !important;
-    padding: 0.1rem 0.3rem !important;
+    font-size: 0.44rem !important;
+    padding: 0.1rem 0.25rem !important;
   }
 
   .biblical-slogan {
-    font-size: 0.6rem !important;
+    font-size: 0.58rem !important;
   }
 
   .header-socials {
@@ -163,9 +163,9 @@ input, select, textarea {
 
   .nav-toggle {
     display: flex !important;
-    width: 36px !important;
-    height: 36px !important;
-    padding: 6px !important;
+    width: 34px !important;
+    height: 34px !important;
+    padding: 5px !important;
     border-radius: 8px !important;
     background: var(--bone, #EDE8DD);
   }
@@ -174,14 +174,13 @@ input, select, textarea {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
+    left: 0; right: 0;
     background: var(--paper, #FAF8F3) !important;
     border-bottom: 2px solid var(--line, rgba(23,21,18,0.12)) !important;
     flex-direction: column !important;
     gap: 0 !important;
-    padding: 0.4rem 0.9rem 0.9rem !important;
-    box-shadow: 0 14px 28px rgba(23,21,18,0.18) !important;
+    padding: 0.4rem 0.8rem 0.8rem !important;
+    box-shadow: 0 12px 24px rgba(23,21,18,0.15) !important;
     z-index: 95;
   }
 
@@ -191,31 +190,31 @@ input, select, textarea {
 
   .main-nav a {
     width: 100%;
-    padding: 0.7rem 0.9rem !important;
+    padding: 0.6rem 0.8rem !important;
     border-bottom: 1px solid var(--line, rgba(23,21,18,0.1));
     border-radius: 6px !important;
     text-align: center !important;
-    font-size: 0.9rem !important;
+    font-size: 0.88rem !important;
   }
 
   /* TICKER BAR */
   .ticker-bar {
-    height: 30px !important;
+    height: 28px !important;
   }
   .ticker-label {
-    font-size: 0.58rem !important;
-    padding: 0 8px !important;
+    font-size: 0.55rem !important;
+    padding: 0 6px !important;
   }
   .ticker-track span {
-    font-size: 0.72rem !important;
-    padding: 0 0.8rem !important;
+    font-size: 0.7rem !important;
+    padding: 0 0.6rem !important;
   }
 
-  /* HERO BANNER */
+  /* COMPACT HERO SLIDER BANNER */
   .hero {
     position: relative !important;
     width: 100% !important;
-    min-height: 420px !important;
+    min-height: 360px !important;
     height: auto !important;
     display: block !important;
     overflow: hidden !important;
@@ -226,7 +225,7 @@ input, select, textarea {
     position: absolute !important;
     top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
     width: 100% !important; height: 100% !important;
-    padding: 2rem 1rem 3.2rem !important;
+    padding: 1.4rem 0.8rem 2.8rem !important;
     opacity: 0 !important; visibility: hidden !important; display: none !important;
     z-index: 1 !important; box-sizing: border-box !important;
   }
@@ -239,11 +238,11 @@ input, select, textarea {
   }
 
   .hero-shawl-layout {
-    width: 100% !important; max-width: 100% !important;
+    width: 100% !important;
     display: flex !important; flex-direction: column !important;
     align-items: center !important; justify-content: center !important;
-    text-align: center !important; gap: 1rem !important;
-    margin: 0 auto !important; position: relative !important; z-index: 3 !important;
+    text-align: center !important; gap: 0.8rem !important;
+    margin: 0 auto !important;
   }
 
   .hero-content {
@@ -253,60 +252,58 @@ input, select, textarea {
   }
 
   .hero-content h1 {
-    font-size: 1.45rem !important; line-height: 1.2 !important;
-    text-align: center !important; margin: 0 0 0.4rem !important;
+    font-size: 1.3rem !important; line-height: 1.18 !important;
+    text-align: center !important; margin: 0 0 0.3rem !important;
     color: var(--bone, #EDE8DD) !important;
   }
 
   .hero-content p {
-    font-size: 0.84rem !important; line-height: 1.4 !important;
-    text-align: center !important; margin: 0 0 1rem !important;
-    max-width: 100% !important; color: var(--bone-dim, #DED7C6) !important;
+    font-size: 0.8rem !important; line-height: 1.35 !important;
+    text-align: center !important; margin: 0 0 0.8rem !important;
+    color: var(--bone-dim, #DED7C6) !important;
   }
 
   .hero-btn-row {
     width: 100% !important; display: flex !important;
-    flex-direction: column !important; gap: 0.5rem !important; align-items: stretch !important;
+    flex-direction: column !important; gap: 0.4rem !important; align-items: stretch !important;
   }
 
   .hero-cta, .hero-secondary-btn {
-    width: 100% !important; min-height: 42px !important;
-    font-size: 0.85rem !important; justify-content: center !important;
-    text-align: center !important; border-radius: 8px !important;
+    width: 100% !important; min-height: 38px !important;
+    font-size: 0.8rem !important; justify-content: center !important;
+    text-align: center !important; border-radius: 8px !important; padding: 0 0.8rem !important;
   }
 
   .hero-shawl-card {
-    width: 100% !important; max-width: 300px !important;
-    height: 120px !important; margin: 0 auto !important; border-radius: 12px !important;
+    width: 100% !important; max-width: 260px !important;
+    height: 90px !important; margin: 0 auto !important; border-radius: 10px !important;
   }
 
   .carousel-arrow {
-    width: 32px !important; height: 32px !important; font-size: 1rem !important; z-index: 10 !important;
+    width: 30px !important; height: 30px !important; font-size: 0.9rem !important; z-index: 10 !important;
   }
-  .arrow-prev { left: 0.4rem !important; }
-  .arrow-next { right: 0.4rem !important; }
+  .arrow-prev { left: 0.3rem !important; }
+  .arrow-next { right: 0.3rem !important; }
 
   /* PAGE BANNERS */
   .store-hero, .page-banner, .dev-hero-text {
-    padding: 1.4rem 0.9rem !important;
+    padding: 1.2rem 0.8rem !important;
     text-align: center !important;
   }
 
   .store-hero h1, .page-banner h1, .dev-hero-text h1 {
-    font-size: 1.45rem !important;
-    line-height: 1.2 !important;
-    margin-bottom: 0.4rem !important;
+    font-size: 1.35rem !important;
+    line-height: 1.18 !important;
+    margin-bottom: 0.3rem !important;
   }
 
   .store-hero p, .page-banner p, .dev-hero-text p {
-    font-size: 0.85rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 0.8rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.6rem !important;
   }
 
-  /* --------------------------------------------------------------------------
-     CRITICAL: HORIZONTAL ONE-AT-A-TIME CATEGORY SCROLL TRACK (FOR ALL PAGES)
-     -------------------------------------------------------------------------- */
+  /* HORIZONTAL CATEGORY SCROLL TRACK (SWIPEABLE PILLS) */
   .filter-track, 
   .tribe-chips-track, 
   .filter-selects, 
@@ -318,11 +315,11 @@ input, select, textarea {
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
     -webkit-overflow-scrolling: touch !important;
-    gap: 0.55rem !important;
-    padding: 0.5rem 0.4rem 0.7rem !important;
+    gap: 0.45rem !important;
+    padding: 0.4rem 0.2rem 0.5rem !important;
     width: 100% !important;
     box-sizing: border-box !important;
-    scrollbar-width: none !important; /* Firefox */
+    scrollbar-width: none !important;
   }
 
   .filter-track::-webkit-scrollbar,
@@ -330,10 +327,9 @@ input, select, textarea {
   .filter-selects::-webkit-scrollbar,
   .guarantee-bar::-webkit-scrollbar,
   .emergency-ribbon::-webkit-scrollbar {
-    display: none !important; /* Chrome / Safari */
+    display: none !important;
   }
 
-  /* CATEGORY CHIP & OPTION PILLS */
   .chip-btn, 
   .select-box, 
   .guarantee-item,
@@ -341,149 +337,147 @@ input, select, textarea {
     scroll-snap-align: start !important;
     flex: 0 0 auto !important;
     white-space: nowrap !important;
-    min-height: 40px !important;
-    font-size: 0.82rem !important;
+    min-height: 36px !important;
+    font-size: 0.78rem !important;
     font-weight: 600 !important;
-    padding: 0 1rem !important;
+    padding: 0 0.85rem !important;
     border-radius: 99px !important;
-    border: 1px solid rgba(23, 21, 18, 0.15) !important;
+    border: 1px solid rgba(23, 21, 18, 0.12) !important;
     background: #ffffff !important;
     color: var(--ink) !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
   }
 
   .chip-btn.active {
     background: var(--ink) !important;
     color: var(--bone) !important;
     border-color: var(--ink) !important;
-    box-shadow: 0 4px 12px rgba(23, 21, 18, 0.25) !important;
   }
 
   .tribe-chips-label {
-    font-size: 0.76rem !important;
+    font-size: 0.72rem !important;
     font-weight: 700 !important;
-    margin: 0.8rem 0 0.4rem !important;
+    margin: 0.6rem 0 0.3rem !important;
     color: var(--ink-soft) !important;
-    display: block !important;
   }
 
   /* SEARCH BAR MOBILE */
   .search-module, .filter-panel, .filter-wrapper {
     width: 100% !important;
-    padding: 0.75rem !important;
-    border-radius: 14px !important;
-    margin-bottom: 0.9rem !important;
+    padding: 0.6rem !important;
+    border-radius: 12px !important;
+    margin-bottom: 0.8rem !important;
     background: #ffffff !important;
     border: 1px solid var(--line, rgba(23,21,18,0.1)) !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03) !important;
   }
 
   .search-bar, .search-row {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.5rem !important;
+    gap: 0.4rem !important;
     width: 100% !important;
   }
 
   .search-bar input, .search-row input {
     width: 100% !important;
-    min-height: 44px !important;
+    min-height: 40px !important;
     font-size: 16px !important;
-    padding: 0.6rem 0.9rem 0.6rem 2.2rem !important;
+    padding: 0.5rem 0.8rem 0.5rem 2rem !important;
     border-radius: 99px !important;
     border: 1px solid rgba(23,21,18,0.15) !important;
-    background: #FFFDF9 !important;
   }
 
   /* --------------------------------------------------------------------------
-     CLEAN 1-COLUMN MOBILE CARDS FEED
+     COMPACT MOBILE LIST CARDS (HIGH DENSITY APP FEED - 3-4 CARDS PER SCREEN)
      -------------------------------------------------------------------------- */
 
   .highlight-section, .store-section, .app-section {
-    padding: 1.4rem 0.8rem !important;
+    padding: 1.2rem 0.6rem !important;
   }
 
   .section-header-left h2, .section-head h2 {
-    font-size: 1.35rem !important;
+    font-size: 1.25rem !important;
     line-height: 1.2 !important;
   }
 
   .section-header-left p, .section-head p {
-    font-size: 0.82rem !important;
+    font-size: 0.78rem !important;
   }
 
-  /* 1. HANDLOOM PRODUCT CARDS */
+  /* 1. HANDLOOM PRODUCT CARDS (COMPACT APP LIST CARD WITH THUMBNAIL ON LEFT) */
   .product-grid, .catalog-grid, .handloom-grid, .highlight-grid-4 {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1.2rem !important;
+    gap: 0.75rem !important;
     width: 100% !important;
   }
 
   .product-card {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important; /* Horizontal App List Item */
+    align-items: center !important;
     width: 100% !important;
-    border-radius: 16px !important;
+    min-height: 115px !important;
+    max-height: 135px !important;
+    border-radius: 12px !important;
     overflow: hidden !important;
     background: #ffffff !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
     border: 1px solid rgba(23, 21, 18, 0.08) !important;
+    padding: 0.5rem !important;
+    gap: 0.65rem !important;
+    box-sizing: border-box !important;
   }
 
   .swatch-container, .product-swatch {
-    width: 100% !important;
-    height: 180px !important;
-    flex: 0 0 180px !important;
+    width: 95px !important;
+    height: 95px !important;
+    flex: 0 0 95px !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
     position: relative !important;
   }
 
   .product-body, .product-info, .product-card-body {
-    width: 100% !important;
-    padding: 1.1rem !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+    padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.5rem !important;
+    justify-content: center !important;
+    gap: 0.2rem !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   .product-title, .product-card h3 {
-    font-size: 1.15rem !important;
-    line-height: 1.25 !important;
-    margin: 0.1rem 0 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
     color: var(--ink) !important;
     font-weight: 700 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   .weaver-meta, .weaver {
-    font-size: 0.8rem !important;
+    font-size: 0.75rem !important;
     color: var(--ink-soft) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   .product-desc, .product-card p {
-    font-size: 0.85rem !important;
-    line-height: 1.45 !important;
-    color: var(--ink-soft) !important;
-    margin: 0.3rem 0 !important;
+    display: none !important; /* Hide descriptions on mobile list view for high density */
   }
 
   .spec-strip {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 0.35rem !important;
-    margin: 0.3rem 0 !important;
-  }
-
-  .spec-pill {
-    font-size: 0.72rem !important;
-    padding: 0.2rem 0.55rem !important;
-    border-radius: 6px !important;
-    background: var(--paper) !important;
-    color: var(--ink) !important;
-    border: 1px solid rgba(23,21,18,0.08) !important;
+    display: none !important;
   }
 
   .price-action-row, .price-row {
@@ -491,22 +485,22 @@ input, select, textarea {
     align-items: center !important;
     justify-content: space-between !important;
     width: 100% !important;
-    margin-top: 0.6rem !important;
-    padding-top: 0.6rem !important;
-    border-top: 1px solid rgba(23,21,18,0.08) !important;
+    margin-top: 0.25rem !important;
+    padding-top: 0.25rem !important;
+    border-top: 1px solid rgba(23,21,18,0.06) !important;
   }
 
   .price-tag, .price {
-    font-size: 1.15rem !important;
+    font-size: 0.95rem !important;
     font-weight: 800 !important;
     color: var(--red-deep) !important;
   }
 
   .btn-view-spec, .btn-order-wa, .btn-action {
-    min-height: 42px !important;
-    font-size: 0.84rem !important;
-    padding: 0 0.9rem !important;
-    border-radius: 8px !important;
+    min-height: 32px !important;
+    font-size: 0.75rem !important;
+    padding: 0 0.65rem !important;
+    border-radius: 6px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -519,11 +513,11 @@ input, select, textarea {
     text-decoration: none !important;
   }
 
-  /* 2. DIRECTORY LISTING CARDS */
+  /* 2. DIRECTORY LISTING CARDS (COMPACT APP LIST ITEM) */
   .dir-grid, .highlight-grid-2 {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1.1rem !important;
+    gap: 0.75rem !important;
     width: 100% !important;
   }
 
@@ -531,159 +525,128 @@ input, select, textarea {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    padding: 1.1rem !important;
-    border-radius: 16px !important;
+    padding: 0.85rem !important;
+    border-radius: 12px !important;
     background: #ffffff !important;
     border: 1px solid rgba(23, 21, 18, 0.08) !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
     box-sizing: border-box !important;
   }
 
   .dir-card-header {
     display: flex !important;
     align-items: center !important;
-    gap: 0.8rem !important;
-    margin-bottom: 0.5rem !important;
+    gap: 0.65rem !important;
+    margin-bottom: 0.35rem !important;
   }
 
   .dir-logo {
-    width: 44px !important;
-    height: 44px !important;
-    flex: 0 0 44px !important;
-    font-size: 1rem !important;
-    border-radius: 10px !important;
+    width: 38px !important;
+    height: 38px !important;
+    flex: 0 0 38px !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
   }
 
   .dir-body h3 {
-    font-size: 1.15rem !important;
-    line-height: 1.25 !important;
-    margin: 0 0 0.2rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
     color: var(--ink) !important;
     font-weight: 700 !important;
   }
 
-  .dir-body p {
-    font-size: 0.85rem !important;
-    line-height: 1.45 !important;
+  .dir-body p, .dir-body-desc {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
     color: var(--ink-soft) !important;
-    margin: 0.4rem 0 !important;
+    margin: 0.2rem 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
-  .dir-meta, .dir-details-box {
+  .dir-meta, .dir-details-box, .dir-info-list {
     width: 100% !important;
     background: var(--paper, #FAF8F3) !important;
-    border: 1px solid rgba(23,21,18,0.08) !important;
-    border-radius: 10px !important;
-    padding: 0.85rem 1rem !important;
-    margin: 0.7rem 0 !important;
+    border: 1px solid rgba(23,21,18,0.06) !important;
+    border-radius: 8px !important;
+    padding: 0.6rem 0.75rem !important;
+    margin: 0.4rem 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.4rem !important;
+    gap: 0.25rem !important;
     font-family: var(--sans, sans-serif) !important;
-    font-size: 0.82rem !important;
-    line-height: 1.45 !important;
+    font-size: 0.76rem !important;
+    line-height: 1.35 !important;
     color: var(--ink) !important;
     box-sizing: border-box !important;
   }
 
-  .dir-meta div, .dir-meta p, .dir-details-box div {
-    display: block !important;
-    word-break: normal !important;
-    overflow-wrap: break-word !important;
-  }
-
-  .dir-btn-group {
+  .dir-action-row, .dir-btn-group {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 0.6rem !important;
+    gap: 0.45rem !important;
     width: 100% !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0.4rem !important;
   }
 
   .dir-btn-group button, .dir-btn-group a, .btn-wa-chat, .btn-sec-outline {
     width: 100% !important;
-    min-height: 42px !important;
-    font-size: 0.84rem !important;
+    min-height: 36px !important;
+    font-size: 0.78rem !important;
     font-weight: 700 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     text-decoration: none !important;
   }
 
-  .btn-wa-chat {
-    background: #25D366 !important;
-    color: #ffffff !important;
-  }
-
-  .emergency-ribbon {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    gap: 0.5rem !important;
-    padding: 0.6rem !important;
-    border-radius: 12px !important;
-  }
-
-  .hotline-btn {
-    width: auto !important;
-    min-height: 40px !important;
-    font-size: 0.82rem !important;
-    padding: 0 0.9rem !important;
-    white-space: nowrap !important;
-  }
-
-  /* 3. TOWN NOTICES BULLETIN CARDS */
-  .cork-board-wrapper, .cork-board-frame {
-    padding: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    width: 100% !important;
-  }
-
+  /* 3. TOWN NOTICES BULLETIN (COMPACT APP LIST CARDS) */
   .notice-grid, .notice-board-grid {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1.1rem !important;
+    gap: 0.75rem !important;
     width: 100% !important;
   }
 
   .notice-card, .notice-card-hl, .notice-paper {
     width: 100% !important;
-    padding: 1.1rem !important;
-    border-radius: 16px !important;
+    padding: 0.85rem !important;
+    border-radius: 12px !important;
     background: #ffffff !important;
     border: 1px solid rgba(23, 21, 18, 0.08) !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
     box-sizing: border-box !important;
-    margin-bottom: 0 !important;
   }
 
   .notice-card h3, .notice-card-hl h3, .notice-paper h3 {
-    font-size: 1.15rem !important;
-    line-height: 1.28 !important;
-    margin: 0.5rem 0 0.4rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.25 !important;
+    margin: 0.3rem 0 0.25rem !important;
     color: var(--ink) !important;
     font-weight: 700 !important;
   }
 
   .notice-card p, .notice-card-hl p, .notice-paper p {
-    font-size: 0.85rem !important;
-    line-height: 1.45 !important;
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
     color: var(--ink-soft) !important;
-    margin-bottom: 0.8rem !important;
-    display: block !important;
+    margin-bottom: 0.5rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   .btn-read-doc {
     width: 100% !important;
-    min-height: 42px !important;
-    font-size: 0.84rem !important;
+    min-height: 36px !important;
+    font-size: 0.78rem !important;
     justify-content: center !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     font-weight: 700 !important;
   }
 
@@ -691,7 +654,7 @@ input, select, textarea {
   .job-list {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1rem !important;
+    gap: 0.75rem !important;
     width: 100% !important;
   }
 
@@ -699,61 +662,40 @@ input, select, textarea {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    padding: 1.1rem !important;
-    border-radius: 16px !important;
+    padding: 0.85rem !important;
+    border-radius: 12px !important;
     background: #ffffff !important;
     border: 1px solid rgba(23, 21, 18, 0.08) !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
   }
 
   .job-main h3 {
-    font-size: 1.15rem !important;
+    font-size: 0.95rem !important;
     line-height: 1.25 !important;
-    margin: 0 0 0.4rem !important;
+    margin: 0 0 0.25rem !important;
     font-weight: 700 !important;
   }
 
   .job-main p {
-    font-size: 0.85rem !important;
-    line-height: 1.45 !important;
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
   }
 
-  .jobs-hero-stats {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr 1fr !important;
-    gap: 0.5rem !important;
-    width: 100% !important;
-  }
-
-  .stat-box {
-    padding: 0.6rem 0.4rem !important;
-    text-align: center !important;
-    border-radius: 10px !important;
-  }
-
-  .stat-box .num {
-    font-size: 1.2rem !important;
-  }
-
-  .stat-box .label {
-    font-size: 0.65rem !important;
-  }
-
-  /* 5. ABOUT US & MISSION CARDS */
+  /* 5. ABOUT US GRIDS */
   .dev-stats-grid, .mission-grid, .tribes-showcase-grid, .tech-stack-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 0.8rem !important;
+    gap: 0.6rem !important;
     width: 100% !important;
   }
 
   .contact-welcome-card {
-    padding: 1.4rem 1rem !important;
-    border-radius: 16px !important;
+    padding: 1.1rem 0.85rem !important;
+    border-radius: 14px !important;
     width: 100% !important;
   }
 
-  /* MOBILE SHEET MODAL OVERLAYS */
+  /* MOBILE SHEET MODALS */
   .modal-overlay {
     padding: 0 !important;
     align-items: flex-end !important;
@@ -762,20 +704,20 @@ input, select, textarea {
   .modal-card {
     max-width: 100% !important;
     width: 100% !important;
-    border-radius: 24px 24px 0 0 !important;
+    border-radius: 20px 20px 0 0 !important;
     max-height: 88vh !important;
-    padding: 1.4rem 1.1rem 2rem !important;
+    padding: 1.2rem 1rem 1.8rem !important;
     animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .modal-card::before {
     content: "";
     display: block;
-    width: 36px;
+    width: 32px;
     height: 4px;
     background: rgba(23, 21, 18, 0.2);
     border-radius: 2px;
-    margin: 0 auto 1rem;
+    margin: 0 auto 0.8rem;
   }
 
   @keyframes slideUp {
@@ -784,29 +726,29 @@ input, select, textarea {
   }
 
   .modal-close {
-    top: 0.8rem !important;
-    right: 0.8rem !important;
-    width: 36px !important;
-    height: 36px !important;
+    top: 0.6rem !important;
+    right: 0.6rem !important;
+    width: 32px !important;
+    height: 32px !important;
   }
 
   /* FOOTER MOBILE */
   .site-footer {
-    padding: 2rem 1rem 1.2rem !important;
-    margin-top: 2rem !important;
+    padding: 1.5rem 0.8rem 1rem !important;
+    margin-top: 1.5rem !important;
   }
 
   .footer-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 1.4rem !important;
+    gap: 1rem !important;
   }
 
   .footer-bottom {
     flex-direction: column !important;
-    gap: 0.4rem !important;
+    gap: 0.3rem !important;
     text-align: center !important;
-    font-size: 0.74rem !important;
+    font-size: 0.68rem !important;
   }
 }
 
@@ -815,34 +757,36 @@ input, select, textarea {
    -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
   .hero {
-    min-height: 440px !important;
+    min-height: 340px !important;
   }
 
   .hero-content h1 {
-    font-size: 1.35rem !important;
+    font-size: 1.25rem !important;
   }
 
   .store-hero h1, .page-banner h1, .dev-hero-text h1 {
-    font-size: 1.35rem !important;
+    font-size: 1.25rem !important;
   }
 
   .section-header-left h2, .section-head h2 {
-    font-size: 1.2rem !important;
+    font-size: 1.15rem !important;
   }
 
   .swatch-container, .product-swatch {
-    height: 160px !important;
+    width: 85px !important;
+    height: 85px !important;
+    flex: 0 0 85px !important;
   }
 
   .quick-contact-row {
     flex-direction: column !important;
-    gap: 0.5rem !important;
+    gap: 0.4rem !important;
   }
   
   .quick-pill {
     width: 100% !important;
     justify-content: center !important;
-    padding: 0.5rem 0.8rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.75rem !important;
   }
 }
