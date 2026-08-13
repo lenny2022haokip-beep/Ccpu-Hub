@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us & Developer Portfolio — Lamka Hub | Churachandpur</title>
+<title>About Us & Web Services — Lamka Hub | Churachandpur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -16,8 +16,8 @@
     --green:#3F5C48; --gold:#D9A441; --indigo:#2B3A55;
     --line: rgba(23,21,18,0.12);
     --shadow: 0 12px 32px rgba(23,21,18,0.10);
-    --shadow-hover: 0 20px 45px rgba(23,21,18,0.18);
-    --radius: 16px;
+    --shadow-hover: 0 22px 48px rgba(23,21,18,0.18);
+    --radius: 18px;
     --serif: "Newsreader", Georgia, serif;
     --sans: "Public Sans", -apple-system, Segoe UI, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -30,7 +30,7 @@
   a{color:inherit;text-decoration:none;}
   button{font-family:inherit;cursor:pointer;}
   :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
-  .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;text-align:center;}
+  .eyebrow{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;}
 
   .stripe{
     height:7px; width:100%;
@@ -39,13 +39,13 @@
 
   /* Header Navigation */
   .site-header{
-    background:rgba(250,248,243,0.94); backdrop-filter:blur(10px);
+    background:rgba(250,248,243,0.95); backdrop-filter:blur(12px);
     border-bottom:2px solid var(--bone-dim); padding:0.8rem 1.8rem;
     display:flex; align-items:center; justify-content:space-between; gap:1rem;
     position:sticky; top:0; z-index:90; box-shadow:0 4px 16px rgba(23,21,18,0.06);
   }
 
-  /* REDESIGNED ENLARGED TRIBAL LOGO & BIBLICAL BROTHERHOOD SLOGAN */
+  /* ENLARGED TRIBAL LOGO & BIBLICAL BROTHERHOOD SLOGAN */
   .brand-logo{
     display:flex; align-items:center; gap:0.85rem; text-decoration:none; flex:0 0 auto;
     transition:transform 0.25s ease;
@@ -69,12 +69,8 @@
     font-size:1.65rem; font-weight:800; letter-spacing:0.06em; line-height:1.05;
     display:flex; align-items:baseline; gap:0.2rem;
   }
-  .brand-title .mark-red{
-    color:var(--red); text-shadow:0 1px 2px rgba(178,58,45,0.15);
-  }
-  .brand-title .mark-ink{
-    color:var(--ink);
-  }
+  .brand-title .mark-red{color:var(--red); text-shadow:0 1px 2px rgba(178,58,45,0.15);}
+  .brand-title .mark-ink{color:var(--ink);}
   .brand-title .brand-sub{
     font-family:var(--mono); font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase;
     color:var(--gold); background:var(--ink); padding:0.18rem 0.45rem; border-radius:4px;
@@ -88,13 +84,6 @@
   }
   .slogan-cross{color:var(--gold); font-style:normal; font-size:0.7rem; font-weight:700;}
 
-  @media (max-width:600px){
-    .logo-emblem{ width:40px; height:40px; flex:0 0 40px; }
-    .logo-emblem svg{ width:40px; height:40px; }
-    .brand-title{ font-size:1.3rem; }
-    .biblical-slogan{ font-size:0.62rem; }
-  }
-  
   /* Centered Navigation */
   .main-nav{
     display:flex; align-items:center; justify-content:center; gap:0.35rem;
@@ -129,66 +118,117 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
   .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
   .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-  @media (max-width:980px){
-    .header-socials{display:none;}
-    .nav-toggle{display:flex;}
-    .main-nav{
-      display:none; position:absolute; top:100%; left:0; right:0;
-      background:var(--paper); border-bottom:1px solid var(--line);
-      flex-direction:column; gap:0; padding:0.4rem 1.5rem 1rem;
-      box-shadow:0 14px 24px rgba(23,21,18,0.10); z-index:20;
-      max-width:100%; border-radius:0;
-    }
-    .main-nav.open{display:flex;}
-    .main-nav a{padding:0.8rem 0;border-bottom:1px solid var(--line);border-radius:0;text-align:center;}
-  }
 
-  /* About Hero Section */
+  /* About Hero Section with Impact Stats */
   .about-hero{
-    background:linear-gradient(135deg, #191613 0%, #2c1e19 60%, #12100e 100%);
-    color:var(--bone); padding:4.5rem 1.5rem 3.5rem; text-align:center; position:relative; overflow:hidden;
+    background:linear-gradient(135deg, #191613 0%, #2c1e19 55%, #12100e 100%);
+    color:var(--bone); padding:4.5rem 1.5rem 3.8rem; text-align:center; position:relative; overflow:hidden;
   }
   .about-hero::before{
     content:""; position:absolute; inset:0; opacity:0.12;
     background-image:repeating-linear-gradient(45deg, var(--gold) 0 2px, transparent 2px 32px);
   }
-  .hero-inner{max-width:880px; margin:0 auto; position:relative; z-index:2;}
-  .hero-inner .eyebrow{color:var(--gold); background:rgba(23,21,18,0.6); display:inline-block; padding:0.35rem 0.9rem; border-radius:4px; margin-bottom:0.8rem; border:1px solid rgba(217,164,65,0.3);}
-  .hero-inner h1{font-family:var(--serif); font-size:clamp(2.3rem, 4.8vw, 3.8rem); margin:0.4rem 0 0.8rem; font-weight:700; line-height:1.1;}
-  .hero-inner p{font-size:1.08rem; opacity:0.92; line-height:1.6; margin:0 0 2rem; max-width:68ch; margin-left:auto; margin-right:auto;}
+  .hero-inner{max-width:960px; margin:0 auto; position:relative; z-index:2;}
+  .hero-inner .eyebrow{
+    color:var(--gold); background:rgba(23,21,18,0.7); display:inline-block;
+    padding:0.4rem 1rem; border-radius:6px; margin-bottom:0.9rem; border:1px solid rgba(217,164,65,0.35);
+  }
+  .hero-inner h1{font-family:var(--serif); font-size:clamp(2.4rem, 5vw, 4rem); margin:0.4rem 0 1rem; font-weight:700; line-height:1.08;}
+  .hero-inner p{font-size:1.1rem; opacity:0.92; line-height:1.65; margin:0 auto 2.5rem; max-width:72ch;}
+
+  /* Hero Impact Stats Grid */
+  .hero-stats-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem;
+    max-width:920px; margin:0 auto 2.2rem;
+  }
+  .stat-card-box{
+    background:rgba(250,248,243,0.07); border:1px solid rgba(237,232,221,0.18);
+    border-radius:14px; padding:1.2rem 1rem; backdrop-filter:blur(6px);
+    transition:transform 0.25s ease, background 0.25s ease;
+  }
+  .stat-card-box:hover{transform:translateY(-4px); background:rgba(250,248,243,0.12); border-color:var(--gold);}
+  .stat-val{font-family:'Cinzel', var(--serif); font-size:1.9rem; font-weight:800; color:var(--gold); line-height:1.1; margin-bottom:0.3rem;}
+  .stat-lbl{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--bone-dim); font-weight:600;}
+
+  /* Quick Jump Navigation Track */
+  .quick-jump-track{
+    display:flex; justify-content:center; align-items:center; gap:0.6rem; flex-wrap:wrap;
+  }
+  .jump-chip{
+    display:inline-flex; align-items:center; gap:0.45rem; font-family:var(--mono);
+    font-size:0.78rem; font-weight:600; padding:0.45rem 1rem; border-radius:99px;
+    background:rgba(237,232,221,0.12); color:var(--bone); border:1px solid rgba(237,232,221,0.22);
+    transition:all 0.25s ease; text-decoration:none;
+  }
+  .jump-chip:hover{background:var(--gold); color:var(--ink); border-color:var(--gold); transform:translateY(-2px);}
 
   /* Main Container */
-  .app-container{max-width:1180px; margin:0 auto; padding:3.5rem 1.5rem;}
+  .app-container{max-width:1180px; margin:0 auto; padding:3.8rem 1.5rem;}
 
   /* Section Titles */
   .centered-head{
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; margin:0 auto 2.5rem; max-width:760px;
+    text-align:center; margin:0 auto 2.8rem; max-width:780px;
   }
-  .centered-head h2{font-family:var(--serif); font-size:clamp(1.8rem, 3.5vw, 2.5rem); margin:0.3rem 0 0; font-weight:700; text-align:center;}
+  .centered-head h2{font-family:var(--serif); font-size:clamp(1.9rem, 3.8vw, 2.6rem); margin:0.4rem 0 0; font-weight:700; text-align:center;}
   .centered-head .eyebrow{color:var(--red); text-align:center;}
-  .centered-head p{font-size:0.96rem; color:var(--ink-soft); text-align:center; margin:0.5rem 0 0; line-height:1.55;}
+  .centered-head p{font-size:1rem; color:var(--ink-soft); text-align:center; margin:0.5rem 0 0; line-height:1.6;}
 
-  /* Mission Grid Cards */
-  .mission-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; margin-bottom:4.5rem;}
-  @media (max-width:900px){.mission-grid{grid-template-columns:repeat(2,1fr);}}
+  /* Platform Pillars Cards */
+  .mission-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; margin-bottom:4.8rem;}
+  @media (max-width:1024px){.mission-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:600px){.mission-grid{grid-template-columns:1fr;}}
 
   .mission-card{
     background:#fff; border:1px solid var(--line); border-radius:var(--radius);
-    padding:1.8rem; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:0.8rem;
-    transition:transform 0.25s ease, box-shadow 0.25s ease;
+    padding:1.8rem 1.5rem; box-shadow:var(--shadow); display:flex; flex-direction:column; justify-content:space-between;
+    transition:transform 0.25s ease, box-shadow 0.25s ease; position:relative; overflow:hidden;
+  }
+  .mission-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg, var(--red) 0%, var(--gold) 100%);
   }
   .mission-card:hover{transform:translateY(-5px); box-shadow:var(--shadow-hover);}
   .mission-icon{
-    width:52px; height:52px; border-radius:12px; background:var(--ink); color:var(--gold);
-    display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex:0 0 auto;
+    width:50px; height:50px; border-radius:12px; background:var(--ink); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex:0 0 auto; margin-bottom:1rem;
   }
-  .mission-card h3{margin:0; font-family:var(--serif); font-size:1.25rem; font-weight:700;}
-  .mission-card p{margin:0; font-size:0.9rem; color:var(--ink-soft); line-height:1.55;}
+  .mission-card h3{margin:0 0 0.5rem; font-family:var(--serif); font-size:1.2rem; font-weight:700; color:var(--ink);}
+  .mission-card p{margin:0 0 1.2rem; font-size:0.88rem; color:var(--ink-soft); line-height:1.55;}
+  .mission-badge{
+    align-self:flex-start; font-family:var(--mono); font-size:0.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; padding:0.25rem 0.6rem; border-radius:4px;
+    background:var(--paper); border:1px solid var(--line); color:var(--ink-soft);
+  }
+
+  /* 9 TRIBAL HERITAGE SHOWCASE GRID */
+  .tribes-section{
+    background:var(--paper); border:1.5px solid var(--line); border-radius:24px;
+    padding:3.2rem 2.2rem; margin-bottom:4.8rem; box-shadow:var(--shadow);
+  }
+  .tribes-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:2rem;
+  }
+  @media (max-width:900px){.tribes-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:580px){.tribes-grid{grid-template-columns:1fr;}}
+
+  .tribe-item-card{
+    background:#ffffff; border:1px solid var(--line); border-radius:14px; padding:1.2rem 1.1rem;
+    display:flex; align-items:center; gap:0.9rem; transition:all 0.25s ease; cursor:pointer;
+  }
+  .tribe-item-card:hover{
+    transform:translateY(-3px); border-color:var(--red); box-shadow:0 8px 20px rgba(178,58,45,0.12);
+  }
+  .tribe-badge-num{
+    width:42px; height:42px; flex:0 0 42px; border-radius:50%; background:var(--ink);
+    color:var(--gold); font-family:'Cinzel', var(--serif); font-weight:800; font-size:0.95rem;
+    display:flex; align-items:center; justify-content:center; border:1.5px solid var(--gold);
+  }
+  .tribe-info-text h4{margin:0 0 0.25rem; font-family:var(--serif); font-size:1.05rem; font-weight:700; color:var(--ink);}
+  .tribe-info-text p{margin:0; font-size:0.78rem; color:var(--ink-soft); line-height:1.4;}
 
   /* PORTFOLIO & PROMOTION OF WORKS SECTION */
-  .portfolio-section{margin-bottom:4.5rem;}
+  .portfolio-section{margin-bottom:4.8rem;}
   .portfolio-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem;}
   @media (max-width:960px){.portfolio-grid{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:640px){.portfolio-grid{grid-template-columns:1fr;}}
@@ -224,12 +264,12 @@
   }
   .btn-demo:hover{color:var(--ink);}
 
-  /* HIGHLIGHTED DEVELOPER SECTION: BUILD YOUR OWN PLATFORM */
+  /* DEVELOPER SECTION & INTERACTIVE ESTIMATOR */
   .dev-services-section{
     background:linear-gradient(135deg, var(--ink) 0%, var(--indigo) 100%);
-    color:var(--bone); border-radius:24px; padding:3.5rem 2.2rem;
+    color:var(--bone); border-radius:24px; padding:3.8rem 2.2rem;
     box-shadow:0 24px 60px rgba(23,21,18,0.25); position:relative; overflow:hidden;
-    margin-bottom:4.5rem; border:2px solid rgba(217,164,65,0.3);
+    margin-bottom:4.8rem; border:2px solid rgba(217,164,65,0.35);
   }
   .dev-services-section::before{
     content:""; position:absolute; inset:0; opacity:0.08;
@@ -237,13 +277,13 @@
   }
   .dev-inner{position:relative; z-index:2; max-width:1060px; margin:0 auto;}
 
-  .dev-head{text-align:center; max-width:760px; margin:0 auto 2.8rem;}
-  .dev-head .eyebrow{color:var(--gold); background:rgba(237,232,221,0.1); padding:0.3rem 0.8rem; border-radius:4px; display:inline-block;}
-  .dev-head h2{font-family:var(--serif); font-size:clamp(2rem, 4vw, 3rem); margin:0.4rem 0 0.8rem; font-weight:700; color:#fff;}
-  .dev-head p{font-size:1.02rem; opacity:0.92; line-height:1.6; margin:0;}
+  .dev-head{text-align:center; max-width:780px; margin:0 auto 3rem;}
+  .dev-head .eyebrow{color:var(--gold); background:rgba(237,232,221,0.1); padding:0.35rem 0.9rem; border-radius:4px; display:inline-block;}
+  .dev-head h2{font-family:var(--serif); font-size:clamp(2.1rem, 4.2vw, 3.2rem); margin:0.4rem 0 0.8rem; font-weight:700; color:#fff;}
+  .dev-head p{font-size:1.04rem; opacity:0.92; line-height:1.62; margin:0;}
 
-  /* What We Can Build Grid */
-  .services-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1.6rem; margin-bottom:3rem;}
+  /* Services Grid */
+  .services-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1.6rem; margin-bottom:3.2rem;}
   @media (max-width:780px){.services-grid{grid-template-columns:1fr;}}
 
   .service-box{
@@ -251,7 +291,7 @@
     border-radius:16px; padding:1.8rem; backdrop-filter:blur(6px);
     transition:transform 0.25s ease, background 0.25s ease;
   }
-  .service-box:hover{transform:translateY(-4px); background:rgba(250,248,243,0.12);}
+  .service-box:hover{transform:translateY(-4px); background:rgba(250,248,243,0.12); border-color:var(--gold);}
   .service-box-header{display:flex; align-items:center; gap:0.9rem; margin-bottom:0.8rem;}
   .service-box-icon{
     width:46px; height:46px; border-radius:10px; background:var(--gold); color:var(--ink);
@@ -260,78 +300,54 @@
   .service-box h3{margin:0; font-family:var(--serif); font-size:1.25rem; font-weight:700; color:#fff;}
   .service-box p{margin:0; font-size:0.9rem; opacity:0.88; line-height:1.55;}
 
-  /* Reasonable Pricing Offer Card */
-  .pricing-card{
-    background:rgba(217,164,65,0.12); border:1.5px solid var(--gold); border-radius:18px;
-    padding:2rem; text-align:center; max-width:820px; margin:0 auto 3rem;
+  /* INTERACTIVE WEBSITE PRICE ESTIMATOR CALCULATOR WIDGET */
+  .estimator-widget-card{
+    background:rgba(237,232,221,0.08); border:1.5px solid var(--gold); border-radius:20px;
+    padding:2.2rem; max-width:880px; margin:0 auto 3rem; backdrop-filter:blur(10px);
   }
-  .pricing-card h3{font-family:var(--serif); font-size:1.5rem; margin:0 0 0.5rem; color:var(--gold);}
-  .pricing-card p{font-size:0.95rem; opacity:0.92; line-height:1.55; margin:0 0 1.2rem;}
-  .pricing-features{display:flex; justify-content:center; gap:1.8rem; flex-wrap:wrap; font-family:var(--mono); font-size:0.82rem; color:var(--bone);}
-  .pricing-features span{display:flex; align-items:center; gap:0.4rem;}
+  .estimator-head{text-align:center; margin-bottom:1.6rem;}
+  .estimator-head h3{font-family:var(--serif); font-size:1.55rem; color:var(--gold); margin:0 0 0.4rem; font-weight:700;}
+  .estimator-head p{font-size:0.92rem; color:var(--bone-dim); margin:0;}
 
-  /* Contact Action Buttons */
-  .dev-contact-row{display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap;}
-  .btn-dev-wa{
-    background:#25D366; color:#fff; font-weight:700; font-size:1rem;
-    padding:0.9rem 2rem; border-radius:10px; border:none; cursor:pointer;
-    display:inline-flex; align-items:center; gap:0.6rem; text-decoration:none;
-    box-shadow:0 8px 20px rgba(37,211,102,0.3); transition:all 0.25s ease;
+  .estimator-controls-grid{display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.6rem;}
+  @media (max-width:680px){.estimator-controls-grid{grid-template-columns:1fr;}}
+  
+  .est-group label{
+    display:block; font-family:var(--mono); font-size:0.72rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:0.45rem; font-weight:700;
   }
-  .btn-dev-wa:hover{background:#1da851; transform:translateY(-3px); box-shadow:0 12px 28px rgba(37,211,102,0.4);}
-
-  html, body{overflow-x:hidden; width:100%;}
-  input, select, textarea{font-size:16px !important;}
-
-  @media (max-width:920px){
-    .site-header{padding:0.75rem 1rem;}
-    .header-socials{display:none;}
-    .nav-toggle{display:flex;}
-    .main-nav{
-      display:none; position:absolute; top:100%; left:0; right:0;
-      background:rgba(250,248,243,0.98); backdrop-filter:blur(14px);
-      border-bottom:2px solid var(--bone-dim); flex-direction:column;
-      gap:0; padding:0.4rem 1.2rem 1.2rem; box-shadow:0 16px 32px rgba(23,21,18,0.16);
-      z-index:99; max-width:100%; border-radius:0;
-    }
-    .main-nav.open{display:flex;}
-    .main-nav a{padding:0.85rem 0; border-bottom:1px solid var(--line); border-radius:0; text-align:center; font-size:0.98rem; font-weight:700;}
-    .main-nav a:last-child{border-bottom:none;}
+  .est-group select{
+    width:100%; padding:0.8rem 1rem; border-radius:10px; border:1px solid rgba(237,232,221,0.3);
+    background:#171512; color:var(--bone); font-family:var(--sans); font-size:0.9rem;
   }
+  .est-group select:focus{outline:none; border-color:var(--gold);}
 
-  @media (max-width:640px){
-    .about-hero{padding:2.8rem 1rem 2.2rem;}
-    .app-container{padding:2rem 1rem;}
-    .mission-grid, .portfolio-grid, .services-grid{grid-template-columns:1fr; gap:1.2rem;}
-    .mission-card, .portfolio-card, .service-box{padding:1.2rem 1rem; border-radius:14px;}
-    .pricing-card{padding:1.4rem 1rem; border-radius:14px;}
-    .pricing-features{flex-direction:column; gap:0.6rem; align-items:center;}
-    .dev-contact-row{flex-direction:column; width:100%; gap:0.7rem;}
-    .btn-dev-wa, .btn-dev-call{width:100%; justify-content:center; min-height:48px; box-sizing:border-box;}
-    .dev-services-section{padding:2rem 1rem; border-radius:16px;}
+  .estimator-output-panel{
+    background:rgba(23,21,18,0.85); border:1px solid var(--gold); border-radius:14px;
+    padding:1.4rem; text-align:center; display:flex; justify-content:space-around; align-items:center;
+    flex-wrap:wrap; gap:1rem;
   }
-  .btn-dev-call:hover{background:var(--bone); transform:translateY(-3px);}
+  .output-box .lbl{font-family:var(--mono); font-size:0.68rem; text-transform:uppercase; color:var(--bone-dim);}
+  .output-box .val{font-family:'Cinzel', var(--serif); font-size:1.5rem; font-weight:800; color:var(--gold); margin-top:0.2rem;}
 
-  .btn-dev-contact-page{
-    background:var(--paper); color:var(--ink); font-weight:700; font-size:1rem;
-    padding:0.9rem 2rem; border-radius:10px; border:none; cursor:pointer;
-    display:inline-flex; align-items:center; gap:0.6rem; text-decoration:none;
-    transition:all 0.25s ease;
+  .btn-est-apply{
+    background:var(--gold); color:var(--ink); font-weight:700; font-size:0.88rem;
+    padding:0.7rem 1.4rem; border-radius:8px; border:none; cursor:pointer;
+    transition:all 0.2s ease;
   }
-  .btn-dev-contact-page:hover{background:var(--red); color:#fff; transform:translateY(-3px);}
+  .btn-est-apply:hover{background:#fff; transform:scale(1.04);}
 
   /* Warm & Welcoming "Send Us a Message" Section */
   .contact-section-container{
-    max-width:820px; margin:4rem auto 0; padding:0 1.5rem;
+    max-width:860px; margin:0 auto; padding:0 1.5rem;
   }
   
   .contact-welcome-card{
     background:#FAF8F3; border:2px solid rgba(217,164,65,0.35); border-radius:28px;
-    padding:3rem 2.5rem; box-shadow:0 20px 48px rgba(140,44,33,0.08), 0 4px 12px rgba(23,21,18,0.04);
+    padding:3.2rem 2.5rem; box-shadow:0 20px 48px rgba(140,44,33,0.08), 0 4px 12px rgba(23,21,18,0.04);
     position:relative; overflow:hidden;
   }
   
-  /* Top Loom Stripe Accent */
   .contact-welcome-card::before{
     content:""; position:absolute; top:0; left:0; right:0; height:6px;
     background:linear-gradient(90deg, #B23A2D 0 33%, #D9A441 33% 66%, #171512 66% 100%);
@@ -346,13 +362,24 @@
   }
   
   .contact-header-block h2{
-    font-family:'Cinzel', 'Newsreader', Georgia, serif; font-size:clamp(1.8rem, 3.5vw, 2.5rem);
+    font-family:'Cinzel', 'Newsreader', Georgia, serif; font-size:clamp(1.9rem, 3.8vw, 2.6rem);
     font-weight:800; color:var(--ink); margin:0 0 0.6rem; letter-spacing:0.02em;
   }
   
   .contact-header-block p{
-    font-size:0.98rem; color:var(--ink-soft); line-height:1.6; margin:0 auto; max-width:58ch;
+    font-size:0.98rem; color:var(--ink-soft); line-height:1.6; margin:0 auto; max-width:60ch;
   }
+
+  /* Quick Subject Selector Chips */
+  .subject-chips-row{
+    display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.8rem;
+  }
+  .subj-chip{
+    font-family:var(--mono); font-size:0.74rem; font-weight:600; padding:0.4rem 0.85rem;
+    border-radius:99px; border:1.5px solid var(--line); background:#fff; color:var(--ink-soft);
+    cursor:pointer; transition:all 0.2s ease;
+  }
+  .subj-chip:hover, .subj-chip.active{background:var(--ink); color:var(--bone); border-color:var(--ink);}
 
   /* Quick Direct Contact Pills */
   .quick-contact-row{
@@ -404,7 +431,7 @@
   }
 
   /* Footer */
-  .site-footer{background:var(--ink); color:var(--bone-dim); padding:3.5rem 1.5rem 1.5rem; margin-top:4rem;}
+  .site-footer{background:var(--ink); color:var(--bone-dim); padding:3.5rem 1.5rem 1.5rem; margin-top:4.5rem;}
   .footer-grid{
     max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr;
     gap:2rem; padding-bottom:2rem; border-bottom:1px solid rgba(237,232,221,0.15);
@@ -414,7 +441,6 @@
   .footer-grid h5{font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin:0 0 0.8rem;}
   .footer-grid a,.footer-grid p{display:block; font-size:0.85rem; color:var(--bone-dim); margin-bottom:0.55rem; line-height:1.4;}
   .footer-grid a:hover{color:var(--bone);}
-  .footer-brand .brand{color:var(--bone);}
   .footer-brand p{max-width:32ch; opacity:0.75;}
   .footer-bottom{max-width:1180px; margin:0 auto; padding-top:1.2rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; font-size:0.76rem; color:var(--bone-dim); opacity:0.7;}
 </style>
@@ -474,12 +500,42 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
 
-  <!-- About Hero -->
+  <!-- About Hero with Live Impact Stats -->
   <section class="about-hero">
     <div class="hero-inner">
-      <span class="eyebrow">About Lamka Hub & Web Services</span>
+      <span class="eyebrow">About Lamka Hub & Web Development Services</span>
       <h1>Empowering Churachandpur Digitally</h1>
       <p>Lamka Hub is a unified multi-tribal community platform built to preserve local handloom traditions, connect verified district services, share employment opportunities, and help local businesses build modern online platforms at affordable prices.</p>
+
+      <!-- Hero Impact Stats Grid -->
+      <div class="hero-stats-grid">
+        <div class="stat-card-box">
+          <div class="stat-val">9</div>
+          <div class="stat-lbl">District Tribes United</div>
+        </div>
+        <div class="stat-card-box">
+          <div class="stat-val">14+</div>
+          <div class="stat-lbl">Authentic Weaves</div>
+        </div>
+        <div class="stat-card-box">
+          <div class="stat-val">24/7</div>
+          <div class="stat-lbl">Ward Directory</div>
+        </div>
+        <div class="stat-card-box">
+          <div class="stat-val">3–7 Days</div>
+          <div class="stat-lbl">Web Turnaround</div>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigation Track -->
+      <div class="quick-jump-track">
+        <a href="#pillars" class="jump-chip">✨ Platform Pillars</a>
+        <a href="#tribes" class="jump-chip">🏛 9 Tribal Traditions</a>
+        <a href="#portfolio" class="jump-chip">🚀 Featured Works</a>
+        <a href="#build-platform" class="jump-chip">💻 Web Development</a>
+        <a href="#contact-form" class="jump-chip">💌 Send Us a Message</a>
+      </div>
+
     </div>
   </section>
 
@@ -488,39 +544,134 @@
   <!-- Main Content Body -->
   <main class="app-container">
     
-    <!-- 1. OUR COMMUNITY MISSION -->
-    <div class="centered-head">
-      <span class="eyebrow">Platform Pillars</span>
-      <h2>Built for Churachandpur, by Churachandpur</h2>
-      <p>Connecting every ward in Lamka while honoring the 9 district tribal traditions equally.</p>
-    </div>
-
-    <div class="mission-grid">
-      <div class="mission-card">
-        <div class="mission-icon">🧶</div>
-        <h3>0% Commission Handloom Market</h3>
-        <p>Connecting traditional weavers from Kuki, Paite, Hmar, Vaiphei, Zou, Gangte, Simte, Tedim Chin, and Kom communities directly to buyers with zero middleman fees.</p>
-      </div>
-
-      <div class="mission-card">
-        <div class="mission-icon">🏥</div>
-        <h3>Verified District Directory</h3>
-        <p>A reliable local directory indexing clinics, hospitals, emergency helplines, artisan cooperatives, and essential services across all Lamka ward sectors.</p>
-      </div>
-
-      <div class="mission-card">
-        <div class="mission-icon">💼</div>
-        <h3>Employment & Civic Notices</h3>
-        <p>Providing direct employer job postings for local youth and an authentic town notice board for PHED, district hospital, and festival announcements.</p>
-      </div>
-    </div>
-
-    <!-- 2. PROMOTION OF WORKS & FEATURED PORTFOLIO -->
-    <div class="portfolio-section" id="portfolio">
+    <!-- 1. OUR COMMUNITY MISSION & PILLARS -->
+    <section id="pillars" style="scroll-margin-top:100px;">
       <div class="centered-head">
-        <span class="eyebrow" style="color:var(--gold); background:var(--ink); padding:0.3rem 0.8rem; border-radius:4px; display:inline-block;">Featured Portfolio</span>
-        <h2>Our Platform Works & Showcase</h2>
-        <p>Explore some of the high-performance digital platforms, e-commerce systems, and directory portals we have built for local communities, businesses, and organizations.</p>
+        <span class="eyebrow">Platform Pillars</span>
+        <h2>Built for Churachandpur, by Churachandpur</h2>
+        <p>Connecting every ward in Lamka while honoring all 9 district tribal handloom traditions equally.</p>
+      </div>
+
+      <div class="mission-grid">
+        <div class="mission-card">
+          <div class="mission-icon">🧶</div>
+          <h3>0% Commission Market</h3>
+          <p>Connecting traditional weavers from Kuki, Paite, Hmar, Vaiphei, Zou, Gangte, Simte, Tedim Chin, and Kom communities directly to buyers with zero middleman fees.</p>
+          <span class="mission-badge">Handloom Heritage</span>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon">🏥</div>
+          <h3>Verified District Directory</h3>
+          <p>A reliable local directory indexing clinics, hospitals, emergency helplines, artisan cooperatives, and essential services across all Lamka ward sectors.</p>
+          <span class="mission-badge">24/7 Emergency</span>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon">💼</div>
+          <h3>Employment & Town Board</h3>
+          <p>Providing direct employer job postings for local youth and an authentic town notice board for PHED, district hospital, and festival announcements.</p>
+          <span class="mission-badge">Youth Opportunities</span>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon">💻</div>
+          <h3>Affordable Web Development</h3>
+          <p>Helping local weavers, small shops, clinics, schools, and church welfare groups build modern, fast web applications and e-commerce stores at low prices.</p>
+          <span class="mission-badge">Digital Empowerment</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 9 DISTRICT TRIBAL HERITAGE SHOWCASE -->
+    <section class="tribes-section" id="tribes" style="scroll-margin-top:100px;">
+      <div class="centered-head" style="margin-bottom:1.5rem;">
+        <span class="eyebrow">Equal Representation</span>
+        <h2>9 District Tribal Handloom Traditions</h2>
+        <p>Lamka Hub actively celebrates and preserves the unique weaving motifs and ceremonial drapes of all 9 indigenous tribes of Churachandpur District.</p>
+      </div>
+
+      <div class="tribes-grid">
+        <div class="tribe-item-card" onclick="showToast('Kuki Weave Heritage: Saipikhup, Thangsuo, and Pon Laili backstrap loin loom weaves.', 'info')">
+          <div class="tribe-badge-num">1</div>
+          <div class="tribe-info-text">
+            <h4>Kuki Traditional Weaves</h4>
+            <p>Saipikhup quail-foot diamond shawl, Thangsuo honor drape & Pon Laili.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Paite Weave Heritage: Puandum vertical stripes and Khamtang formal ceremonial drapes.', 'info')">
+          <div class="tribe-badge-num">2</div>
+          <div class="tribe-info-text">
+            <h4>Paite Traditional Weaves</h4>
+            <p>Puandum vertical stripe puan, Khamtang formal wear & Nikhap drapes.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Hmar Weave Heritage: Thangsuo Puan and Khavawpuan ceremonial textiles.', 'info')">
+          <div class="tribe-badge-num">3</div>
+          <div class="tribe-info-text">
+            <h4>Hmar Traditional Weaves</h4>
+            <p>Thangsuo Puan, Khavawpuan honor drapes & Nzo ceremonial patterns.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Vaiphei Weave Heritage: Khiangte pattern and ceremonial woven drapes.', 'info')">
+          <div class="tribe-badge-num">4</div>
+          <div class="tribe-info-text">
+            <h4>Vaiphei Traditional Weaves</h4>
+            <p>Khiangte pattern drapes, Suankhai motif & organic cotton loin weaves.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Zou Weave Heritage: Zou Traditional Puan with intricate border geometry.', 'info')">
+          <div class="tribe-badge-num">5</div>
+          <div class="tribe-info-text">
+            <h4>Zou Traditional Weaves</h4>
+            <p>Zou Traditional Puan with geometric border weaves & vegetable dye yarn.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Gangte Weave Heritage: Ancestral Gangte Puan and ceremonial wraps.', 'info')">
+          <div class="tribe-badge-num">6</div>
+          <div class="tribe-info-text">
+            <h4>Gangte Traditional Weaves</h4>
+            <p>Ancestral Gangte Puan, ceremonial wraps & backstrap loom textiles.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Simte Weave Heritage: Simte Traditional Weaves handcrafted by master weavers.', 'info')">
+          <div class="tribe-badge-num">7</div>
+          <div class="tribe-info-text">
+            <h4>Simte Traditional Weaves</h4>
+            <p>Handcrafted Simte Puan, traditional loin loom motifs & shawls.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Tedim Chin Heritage: Tedim Chin Pattern Drapes with gold accent thread.', 'info')">
+          <div class="tribe-badge-num">8</div>
+          <div class="tribe-info-text">
+            <h4>Tedim Chin Weaves</h4>
+            <p>Tedim Chin pattern drapes with gold accent thread & ceremonial shawls.</p>
+          </div>
+        </div>
+
+        <div class="tribe-item-card" onclick="showToast('Kom Weave Heritage: Kom Traditional Handloom Creations and cultural wraps.', 'info')">
+          <div class="tribe-badge-num">9</div>
+          <div class="tribe-info-text">
+            <h4>Kom Traditional Weaves</h4>
+            <p>Kom Handloom creations, vibrant cultural wraps & loin loom drapes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROMOTION OF WORKS & FEATURED PORTFOLIO -->
+    <section class="portfolio-section" id="portfolio" style="scroll-margin-top:100px;">
+      <div class="centered-head">
+        <span class="eyebrow" style="color:var(--gold); background:var(--ink); padding:0.35rem 0.9rem; border-radius:4px; display:inline-block;">Featured Portfolio</span>
+        <h2>Our Digital Platforms & Works Showcase</h2>
+        <p>Explore some of the high-performance digital platforms, e-commerce systems, and directory portals built for local communities, businesses, and organizations.</p>
       </div>
 
       <div class="portfolio-grid">
@@ -646,10 +797,10 @@
         </div>
 
       </div>
-    </div>
+    </section>
 
-    <!-- 3. HIGHLIGHTED DEVELOPER SECTION: BUILD YOUR OWN ONLINE PLATFORM -->
-    <section class="dev-services-section" id="build-platform">
+    <!-- 4. HIGHLIGHTED DEVELOPER SECTION: BUILD YOUR OWN ONLINE PLATFORM & ESTIMATOR -->
+    <section class="dev-services-section" id="build-platform" style="scroll-margin-top:100px;">
       <div class="dev-inner">
         
         <div class="dev-head">
@@ -658,7 +809,7 @@
           <p>We craft high-performance, beautiful, custom web applications, online stores, directory portals, and business websites for local artisans, SHGs, clinics, schools, NGOs, and entrepreneurs in Churachandpur — at <strong>highly affordable and reasonable prices</strong>.</p>
         </div>
 
-        <!-- What We Can Build For You -->
+        <!-- Services Grid -->
         <div class="services-grid">
           
           <div class="service-box">
@@ -695,29 +846,66 @@
 
         </div>
 
-        <!-- Reasonable Price Guarantee Card -->
-        <div class="pricing-card">
-          <h3>💰 Affordable & Reasonable Pricing Promise</h3>
-          <p>We understand the local economy. Every project is priced transparently based on your budget and requirements, ensuring that local weavers, small shops, and non-profits get world-class websites without high agency costs.</p>
-          <div class="pricing-features">
-            <span>✔ Fast Turnaround (3–7 Days)</span>
-            <span>✔ 100% Mobile Friendly</span>
-            <span>✔ Direct WhatsApp / Call Integration</span>
-            <span>✔ Free Setup Guidance</span>
+        <!-- INTERACTIVE WEBSITE PRICE ESTIMATOR CALCULATOR WIDGET -->
+        <div class="estimator-widget-card">
+          <div class="estimator-head">
+            <h3>⚡ Quick Web Estimate & Time Calculator</h3>
+            <p>Select your project type and desired features to see estimated turnaround time and pre-fill your inquiry form below.</p>
+          </div>
+
+          <div class="estimator-controls-grid">
+            <div class="est-group">
+              <label for="estProjectType">🌐 Project Type</label>
+              <select id="estProjectType" onchange="calculateWebEstimate()">
+                <option value="basic">Basic Local Business / Shop Website</option>
+                <option value="store">Handloom / Product E-Commerce Store</option>
+                <option value="portal">NGO / Church / Clinic Community Portal</option>
+                <option value="app">Custom Web Application / Booking System</option>
+              </select>
+            </div>
+
+            <div class="est-group">
+              <label for="estSpeedType">⏱ Turnaround Speed</label>
+              <select id="estSpeedType" onchange="calculateWebEstimate()">
+                <option value="std">Standard Delivery (5–7 Days)</option>
+                <option value="exp">Express Delivery (3–4 Days)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="estimator-output-panel">
+            <div class="output-box">
+              <div class="lbl">Estimated Delivery</div>
+              <div class="val" id="estDaysVal">3–5 Days</div>
+            </div>
+            <div class="output-box">
+              <div class="lbl">Pricing Promise</div>
+              <div class="val" id="estPriceVal">Affordable Local Budget</div>
+            </div>
+            <button class="btn-est-apply" onclick="applyEstimateToForm()">Request This Estimate &rarr;</button>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 4. EMBEDDED CONSULTATION & CONTACT FORM SECTION -->
-    <section class="contact-section-container" id="contact-form">
+    <!-- 5. EMBEDDED CONSULTATION & CONTACT FORM SECTION -->
+    <section class="contact-section-container" id="contact-form" style="scroll-margin-top:100px;">
       <div class="contact-welcome-card">
         
         <div class="contact-header-block">
           <span class="contact-header-badge">💌 Warm Community Greetings · Lamka Hub Desk</span>
           <h2>Send Us a Message</h2>
           <p>Whether you're a local weaver, small business owner, church group, or resident of Churachandpur — we'd love to hear from you! Reach out for a free website estimate, directory update, or general inquiry.</p>
+        </div>
+
+        <!-- Quick Subject Selector Chips -->
+        <div class="subject-chips-row">
+          <button class="subj-chip active" onclick="selectSubjectChip('web-dev', this)">🌐 Website Estimate</button>
+          <button class="subj-chip" onclick="selectSubjectChip('handloom', this)">🧶 Handloom Listing</button>
+          <button class="subj-chip" onclick="selectSubjectChip('directory', this)">🏥 Add to Directory</button>
+          <button class="subj-chip" onclick="selectSubjectChip('job', this)">💼 Post a Job</button>
+          <button class="subj-chip" onclick="selectSubjectChip('other', this)">💬 General Feedback</button>
         </div>
 
         <!-- Quick Direct Contact Preference Pills -->
@@ -802,7 +990,7 @@
       </div>
       <div>
         <h5>Explore</h5>
-        <a href="index.html#home">Home</a>
+        <a href="index.html">Home</a>
         <a href="handloom.html">Handloom Market</a>
         <a href="directory.html">Directory</a>
         <a href="jobs.html">Jobs</a>
@@ -872,6 +1060,59 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+  }
+
+  // Interactive Web Estimator Calculator
+  function calculateWebEstimate(){
+    const projType = document.getElementById('estProjectType').value;
+    const speedType = document.getElementById('estSpeedType').value;
+    
+    let days = "3–5 Days";
+    let price = "Affordable Local Budget";
+
+    if(projType === 'basic'){
+      days = (speedType === 'exp') ? "2–3 Days" : "4–5 Days";
+      price = "Transparent Local Plan";
+    } else if(projType === 'store'){
+      days = (speedType === 'exp') ? "3–4 Days" : "5–7 Days";
+      price = "Zero-Commission Setup";
+    } else if(projType === 'portal'){
+      days = (speedType === 'exp') ? "3–5 Days" : "6–8 Days";
+      price = "NGO / Church Discount Plan";
+    } else if(projType === 'app'){
+      days = (speedType === 'exp') ? "4–6 Days" : "7–10 Days";
+      price = "Tailored Custom Quote";
+    }
+
+    document.getElementById('estDaysVal').innerText = days;
+    document.getElementById('estPriceVal').innerText = price;
+  }
+
+  function applyEstimateToForm(){
+    const projSelect = document.getElementById('estProjectType');
+    const selectedText = projSelect.options[projSelect.selectedIndex].text;
+    const daysVal = document.getElementById('estDaysVal').innerText;
+    
+    const inqSelect = document.getElementById('inquiryType');
+    if(inqSelect) inqSelect.value = 'web-dev';
+
+    const msgBox = document.getElementById('msgContent');
+    if(msgBox){
+      msgBox.value = `Hello! I would like to request a website estimate for: ${selectedText} (Estimated Delivery: ${daysVal}). Please get in touch with me.`;
+    }
+
+    document.getElementById('contact-form').scrollIntoView({behavior:'smooth'});
+    showToast('Estimate request loaded into message form below! 💌', 'success');
+  }
+
+  function selectSubjectChip(val, btnEl){
+    document.querySelectorAll('.subj-chip').forEach(b => b.classList.remove('active'));
+    if(btnEl) btnEl.classList.add('active');
+
+    const inqSelect = document.getElementById('inquiryType');
+    if(inqSelect) inqSelect.value = val;
+
+    showToast('Selected inquiry category: ' + val, 'info');
   }
 
   function handleContactSubmit(e){
